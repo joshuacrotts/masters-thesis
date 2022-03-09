@@ -11,10 +11,6 @@
 \usepackage{microtype, amsmath, amsfonts, amsthm, graphicx, booktabs, syntax}
 \usepackage[colorlinks=false]{hyperref}
 
-
-
-% \usepackage{showframe} 
-% useful package to ensure margins are correct.
 %%------------------------------------------------------------------%% 
 %%--------------------------- Content ------------------------------%%
 %%------------------------------------------------------------------%%
@@ -23,36 +19,18 @@
 %% PhD students require chair plus three.
 %% The class can handle up to chair plus five.
 \chair{Stephen R. Tate}
-%\chair{Jing Deng}
 \member{Chun Jiang Zhu}
 \member{Insa R. Lawler}   
-%\member{Leonhard Euler}   
 
 %% Your name goes here.
-% \student{Firstname}{Lastname} 
-%% Some other options
 \student{Larry Joshua}{Crotts}  % a full middle name
-%\student{Joe M.}{Schmoe}       % a middle initial
- 
-%% Thesis Title
-%%    +  Capitalize first letter of important words. 
-%%    +  Use inverted pyramid shape if title spans more than one line.
-%%  Note: You can force break the title onto multiple lines using
-%%  \break instead of \\. 
 \title{Construction and Evaluation of a Gold Standard Syntax for Formal Logic Formulas and Systems}
 
 %% Degree year.    
 \degreeyear{2022}
 
-%%------------------------------------------------------------------%% 
-%%----------------------- Personal Macros --------------------------%%
-%%------------------------------------------------------------------%%
-%% A central location to add your favorite macros.  A few examples are
-%% given below.  See tips for samples.
-
-%% In order to get singlespacing, uncomment the line below.
-%\renewcommand{\doublespacing}{\singlespacing}
 \doublespacing
+
 %% Theorem, Lemma, etc. environments.  You can rename if you wish.                    
 % Theorem style and numbering convention                                              
 \theoremstyle{plain}
@@ -74,9 +52,6 @@
 \newtheorem*{notation}{Notation}
 \newcommand{\titlecaption}[2]{\caption[#1]{#1. #2}}
 
-%% Other macros
-\newcommand{\ZZ}{\mathbb{Z}}  % Integers
-\newcommand{\XX}{\mathfrak{X}}  
 %%------------------------------------------------------------------%%
 \pagestyle{plain} % Eliminates running headers 
 
@@ -243,6 +218,8 @@ The basis for this research stems from my love of teaching. When I took my first
 \chapter{Methods}
     In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
     \section{Evaluation of Natural Deduction Systems}
+    To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts are more focused on improving their current tool rather than performing direct comparisons others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic? \textbf{...continue here} 
+    \subsection{FLAT: Formal Logic Aiding Tutor}
     \section{Gold Standard for Formal Logic System Syntax}
     There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when (they) expect one syntax yet receuve something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
 
@@ -263,7 +240,7 @@ The basis for this research stems from my love of teaching. When I took my first
         
         <$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
     \end{grammar}
-    \subsubsection{Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
+    \subsubsection{Example 1.} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
     \[
         f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\}
     \]
@@ -279,7 +256,7 @@ The basis for this research stems from my love of teaching. When I took my first
     
     The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally).
 
-    \subsubsection*{Natural Deduction Extension} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
+    \subsubsection{Natural Deduction Extension.} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
 
 \begin{grammar}
 <atomic> ::= `a' (`1' | `2' | ...)
@@ -299,7 +276,7 @@ The preceding grammar states that a premise is preceded by the letter $P$ standi
 
 
 %~(C ∨ D), D ↔ (E ∨ F), ~A → (C ∨ F) ∴ A
-\subsubsection*{Example 2}
+\subsubsection{Example 2.}
 Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine the function $g$ in $\mathcal{L}$ as follows:
 
 \[
@@ -347,7 +324,9 @@ Now, similar to zeroth-order logic, we will construct the gold standard Polish n
 
     <$\alpha$---wff> ::= (<predicate> \{<literal>\}) \\| (<connective> [` '] <wff>$^{\alpha}$) \\| (<quantifier> <variable> \{<variable>\} <wff>)\\| (<identity> <literal> [` '] <literal>)
 \end{grammar}
-\subsubsection{Example 3} Let us take a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
+
+The above grammar states ...\textbf{continue here}
+\subsubsection{Example 3.} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
 
 \[
     p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\}
@@ -374,8 +353,7 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
     M(\mathcal{L},\,w) = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;v_3))))\;(D\;(L_2\;c_1\;c_2)\;(X v_3 (L_3 v_3))))
 \]
 
-\chapter{Results and Discussion}
-\chapter{Conclusion and Future Direction}
+\chapter{Discussion and Future Direction}
 
 
 %%------------------------------------------------------------------%%
@@ -388,6 +366,7 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 
 \bibliography{myreferences}
 \bibliographystyle{plain}
+\nocite{*}
 
 %%------------------------------------------------------------------%%
 %%------------------------- Appendices -----------------------------%%
