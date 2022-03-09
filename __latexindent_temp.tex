@@ -8,8 +8,11 @@
 %%------------------------- Import Packages ------------------------%%
 %%------------------------------------------------------------------%%
 %% This is where you can put other packages that you may need. 
-\usepackage{microtype, amsmath, amsfonts, amsthm, graphicx, booktabs, syntax}
+\usepackage{microtype, amsmath, amsfonts, amsthm, graphicx, booktabs}
 \usepackage[colorlinks=false]{hyperref}
+\usepackage[math]{blindtext} %Can remove this and all
+%% references to \blinddocument and \blindmathpaper
+%% to eliminate the Lorem ipsum
 
 
 
@@ -83,7 +86,6 @@
 % Section styling.
 \titleformat*{\section}{\normalsize\bfseries}
 \titleformat*{\subsection}{\normalsize\itshape}
-\DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 
 \begin{document}
 \frontmatter      % required
@@ -243,139 +245,80 @@ The basis for this research stems from my love of teaching. When I took my first
     In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
     \section{Evaluation of Natural Deduction Systems}
     \section{Gold Standard for Formal Logic System Syntax}
-    There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when (they) expect one syntax yet receuve something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
-
-    We propose a formal definition that aims to solve most of these problems. One component of this definition allows users to create their own logic language definition as they see fit for their situation. This language is then translatable into a gold standard format, which we will define syntactically and semantically.
-
-    \subsection{Zeroth-Order Logic Well-Formed Formula Representation}
-    Let $M(\mathcal{L},\,w)$ be a function that ``applies'' the zeroth-order logic language $\mathcal{L}$ to the well-formed formula $w$. Let $\mathcal{L}$ be a pair $(f,\,g)$ where $f$ is an connective mapping function, and $g$ is an atomic literal mapping function. 
-
-    The bijective function $f$ maps two sets $f:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$ is unary logical negation, $C$ is binary logical conjunction, $D$ is binary logical inclusive disjunction, $E$ is binary logical exclusive disjunction, $I$ is binary logical implication, $B$ is binary logical biconditional (if and only if), $T$ is the truth function, and $F$ is the false function. Note that the arity of any $\phi \in X$ must match the arity of its corresponding output connective in $Y$.
-
-    The bijective function $g$ maps two sets $g:\;A \to B$, where $A$ is the set of atomic literals $\psi \in A$ where $\psi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$.
-
-    We can now define the Polish (Łukasiewicz) notation grammar $G$ used to create a standardized notation for zeroth-order logic. This notation takes inspiration from Scheme-syntax with its parenthesization of connectives and operands. For this, we must extend the definition of typical Extended Backus-Naur Form to account for multiple-arity connectives. Thus, we introduce the notation \textless{$x$---R\textgreater} to indicate that $x$ is a variable used in the EBNF rule $R$, and $\{\gamma\}^{x}$ to denote $x$ applications of $\gamma$. In the grammar, $\alpha$ is the arity of a connective.
-    \begin{grammar}
-        <atomic> ::= `a' (`1' | `2' | ...)
-        
-        <connective> ::= `N' | `C' | `D' | `E' | `I' | `B' | `T' | `F' 
-        
-        <$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
-    \end{grammar}
-    \subsubsection{Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
-    \[
-        f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\}
-    \]
-    and 
-    \[
-    g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}
-    \] 
-    We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus, 
-    \[
-        M(\mathcal{L},\,w) = (I\;a_{1}\;(B\;a_{2}\;(N\;a_{3})))
-    \]
-    While this representation is not as readable as $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (f^{-1},\,g^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
-    
-    The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally).
-
-    \subsubsection*{Natural Deduction Extension} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
-
-\begin{grammar}
-<atomic> ::= `a' (`1' | `2' | ...)
-
-<connective> ::= `N' | `C' | `D' | `E' | `I' | `B' | `T' | `F' 
-
-<$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
-
-<premise> ::= (`P' <wff>)
-
-<conclusion> ::= (`H' <wff>)
-
-<proof> ::= (<conclusion> \{<premise>\})
-\end{grammar}
-
-The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).\\
-
-
-%~(C ∨ D), D ↔ (E ∨ F), ~A → (C ∨ F) ∴ A
-\subsubsection*{Example 2}
-Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine the function $g$ in $\mathcal{L}$ as follows:
-
-\[
-    g:\;\{A, C, D, E, F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
-\]
-
-\noindent Thus, 
-\begin{align*}
-    N(\mathcal{L}, P, c) &= ((H\;a_1)\;\\
-    &(P\;(N\;(D\;a_2\;a_3)))\\
-    &(P\;(B\;a_3\;(D\;a_4\;a_5)))\\
-    &(P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))\\
-\end{align*}
-
-\subsection{First-Order Logic Well-Formed Formula Representation}
-
-First-order logic is a superset of zeroth-order logic, meaning we can reuse most of our definitions from the previous section. We will, however, need to slightly redefine $\mathcal{L}$ to allow for mapping predicate definitions, constants, and variables. Further, so as to not confuse the function definitions from zeroth-order logic, we will instead use new letters to represent mapping functions.
-
-Let $\mathcal{L}$ be a quadruple $(p,\;q,\;r,\;s)$ where $p$ is a connective mapping function, $q$ is a predicate mapping function, $r$ is a constant mapping function, and $s$ is a variable mapping function. 
-
-The bijective function $p$ is identical to $f$ in the sense that it maps two sets $p:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N, C, D, E, I, B, T, F, Z, X, V\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$, $C$, $D$, $E$, $I$, $B$, $T$, and $F$ are identical in both syntactic and semantic meaning to zeroth-order logic. $Z$ is the universal quantifier, $X$ is the existential quantifier, and $V$ is the identity operator. $Z$ and $X$ have arities dependent on the formula used, so we cannot restrict it syntactically. Identity $V$, on the other hand, is a binary operator.
-
-The bijective function $q$ maps two sets $q:\;A \to B$, where $A$ is the set of predicate letters $\phi \in A$ where $\phi$ is a predicate letter used in the wff $w$, and $B$ is the set of output predicate letters $L_{i}$ where $i \in [1, |A|]$.
-
-The bijective function $r$ maps two sets $r:\;C \to D$, where $C$ is the set of constant letters $\psi \in C$ where $\psi$ is a constant identifier used in $w$, and $D$ is the set of output constant identifiers $c_{i}$ where $i \in [1, |C|]$.
-
-Lastly, the bijective function $s$ maps two sets $s:\;E \to F$, where $E$ is the set of variable letters $\rho \in E$ where $\rho$ is a variable identifier used in $w$ and $F$ is the set of output variable identifiers $v_{i}$ where $i \in [1, |E|]$.
-
-Now, similar to zeroth-order logic, we will construct the gold standard Polish notation grammar $H$ for first-order logic. Likewise, we will utilize the previously-defined notation \textless{$x$---R\textgreater} to eliminate ambiguity with operator arity. One point to note is that, because identity is a special connective in first-order logic, we restrict its syntactic definition to only constants and variables. Quantifiers also have a restriction in that they must have at least one variable following their declaration, as well as a bound well-formed formula.
-\begin{grammar}
-
-    <constant> ::= `c' (`1' | `2' | ...)
-
-    <variable> ::= `v' (`1' | `2' | ...)
-
-    <literal> ::= <constant> | <variable>
-
-    <predicate> ::= `L' (`1' | `2' | ...)
-
-    <connective> ::= `N' | `C' | `D' | `E' | `I' | `B' | `T' | `F'
-
-    <identity> ::= `V'
-
-    <quantifier> ::= `Z' | `X'
-
-    <$\alpha$---wff> ::= (<predicate> \{<literal>\}) \\| (<connective> [` '] <wff>$^{\alpha}$) \\| (<quantifier> <variable> \{<variable>\} <wff>)\\| (<identity> <literal> [` '] <literal>)
-\end{grammar}
-\subsubsection{Example 3} Let us take a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
-
-\[
-    p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\}
-\]
-
-and
-\[
-    q:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}
-\]
-
-and
-\[
-    r:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}
-\]
-
-and
-\[
-    s:\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}
-\]
-
-Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
-
-\[
-    M(\mathcal{L},\,w) = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;v_3))))\;(D\;(L_2\;c_1\;c_2)\;(X v_3 (L_3 v_3))))
-\]
-
+    There are several reason 
 \chapter{Results and Discussion}
 \chapter{Conclusion and Future Direction}
+%\chapter{Templates}
 
+% The Graduate School is fairly flexible with thesis formatting, but we do require use of our templates to help guide candidates in the right direction. The highest priorities of formatting theses and dissertations are self-consistency and disciplinary norms. Text should be formatted into a single column using US Letter paper with portrait orientation. If necessary, tables may be formatted onto a page with landscape orientation. 
+
+% \section{Acceptable types of theses and dissertations}
+
+% Three types of acceptable theses and dissertations
+% \begin{enumerate}
+% \item Traditional Thesis/Dissertation. The standard document in many disciplines contains five chapters, which may consist of an introduction, literature review, methods, results, and conclusions; however, neither the number nor the topics of these chapters are set by these guidelines. 
+% \item Article-based Thesis/Dissertation. In such a work, a collection of research articles that will be submitted, have been submitted, have been accepted, or have been published in discipline-specific academic journals or outlets comprise the main chapters. Students choosing this option should work with the publisher and must consult UNCG's policy on use of published work in a thesis or dissertation. Such work shall include uniform front matter and an introductory chapter(s) providing broader context and impact of the work. A conclusion chapter may be included.
+% \item Creative Work. Upon the recommendation of programs, the Graduate School may accept theses and dissertations in alternative formats appropriate to the discipline. Such work must include uniform front matter.
+% \end{enumerate}
+
+% \section{Organization and Required Elements}
+
+% The following items are required regardless of the format of the document.
+
+% \begin{enumerate} \item Frontmatter --- generated by template
+% \begin{enumerate}
+% 	\item Abstract (required)
+% 	\item Title page (required)
+% 	\item Copyright page (required if seeking copyright registration)
+% 	\item Dedication page (optional)
+% 	\item Approval page (required)
+% 	\item Acknowledgements (optional)
+% 	\item Preface (optional)
+% 	\item Table of contents (required, must be automatically generated and include references to chapters, subheadings, etc)
+% 	\item List of figures (optional)
+% 	\item List of tables (optional)\end{enumerate}
+% \item Body of dissertation --- must fit into one of the three styles described above.
+% \item References or Bibliography --- must indicate all works cited.
+% \begin{enumerate}
+% 	\item Student should use a commonly accepted style in the discipline.
+% 	\item For article-based dissertations, individual articles? bibliographies should be replaced with a single comprehensive list at the end.
+% \end{enumerate}
+% \item End matter --- optional
+% \begin{enumerate}
+% 	\item Appendices (grouped by category), which may include tables of data, code, forms, etc.
+% 	\item Biographical sketch.
+% \end{enumerate}\end{enumerate}
+% \blinddocument
+% \section{Some math}
+% \blindmathpaper \cite{A}
+
+% \begin{table}
+%  \caption{Meaning of Street Light Colors}   
+%  \label{tab:lights}
+% \centering
+% \begin{tabular}{c c}
+%  \toprule
+%  Colors & Meaning\\
+%  \midrule
+%  Red  & Stop \\
+%  Green & Go \\ 
+%  Yellow & Speed up\\
+%  \bottomrule
+%  \end{tabular}
+%  \end{table}
+
+% \blindmathpaper \cite{grun.book}
+
+% \begin{figure}
+% \centering
+% \includegraphics[width=0.65\textwidth]{logo}
+% \titlecaption{Spartan Logo}{The UNCG Spartan Logo is show here at 0.65
+% of the text width.}
+% \label{fig:logo}
+% \end{figure}
+% \blindmathpaper
+
+% \blinddocument
 
 %%------------------------------------------------------------------%%
 %%------------------------ Bibliography ----------------------------%%
