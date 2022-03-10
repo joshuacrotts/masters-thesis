@@ -267,13 +267,10 @@ The basis for this research stems from my love of teaching. When I took my first
         <$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
     \end{grammar}
     \subsubsection{Example 1.} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
-    \[
-        f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\}
-    \]
-    and 
-    \[
-    g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}
-    \] 
+    \begin{align*}
+        &f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\}\\
+        &g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}
+    \end{align*}
     We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus, 
     \[
         M(\mathcal{L},\,w) = (I\;a_{1}\;(B\;a_{2}\;(N\;a_{3})))
@@ -353,31 +350,18 @@ Now, similar to zeroth-order logic, we will construct the gold standard Polish n
 
 The above grammar states ...\textbf{continue here}
 \subsubsection{Example 3.} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
-
-\[
-    p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\}
-\]
-
-and
-\[
-    q:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}
-\]
-
-and
-\[
-    r:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}
-\]
-
-and
-\[
-    s:\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}
-\]
-
+\begin{align*}
+    &p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\}\\
+    &q:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}\\
+    &r:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}\\
+    &s:\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}
+\end{align*}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
 
-\[
-    M(\mathcal{L},\,w) = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;v_3))))\;(D\;(L_2\;c_1\;c_2)\;(X v_3 (L_3 v_3))))
-\]
+\begin{align*}
+    M(\mathcal{L},\,w) &= (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;v_3))))\\
+    &(D\;(L_2\;c_1\;c_2)\;(X v_3 (L_3 v_3))))\\
+\end{align*}
 
 \chapter{Discussion and Future Direction}
 
