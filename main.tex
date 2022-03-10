@@ -8,7 +8,7 @@
 %%------------------------- Import Packages ------------------------%%
 %%------------------------------------------------------------------%%
 %% This is where you can put other packages that you may need. 
-\usepackage{microtype, amsmath, amsfonts, amsthm, graphicx, booktabs, syntax}
+\usepackage{microtype, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax}
 \usepackage[colorlinks=false]{hyperref}
 
 %%------------------------------------------------------------------%% 
@@ -236,7 +236,7 @@ The basis for this research stems from my love of teaching. When I took my first
 
     \textbf{Explain teachinglogic first, in addition to its significant drawbacks}
 
-    \textbf{Then, discuss the W10 app}
+    Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics is a superset of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
 
     \textbf{Now tautlogic}
 
@@ -373,7 +373,6 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 %% can run bibtex as usual.
 %%------------------------------------------------------------------%%
 
-
 \bibliography{myreferences}
 \bibliographystyle{plain}
 \nocite{*}
@@ -388,9 +387,5 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 % \chapter{Sample appendix}
 % \blindmathpaper
 
-%%------------------------------------------------------------------%%
 \backmatter
-%%------------------------------------------------------------------%%
-%%----------------------- YOU ARE FINISHED ! -----------------------%%
-%%------------------------------------------------------------------%%
 \end{document}
