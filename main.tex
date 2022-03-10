@@ -115,7 +115,7 @@ Outside of UNCG, I thank my parents for their love and support throughout my edu
 
 It also cannot go without saying that I am forever grateful for the support from my loving fiancée Viola. You never let me down.
 
-Finally, I am deeply indebted to Mr. Tony Smith: my former Advanced Placement\footnote{https://ap.collegeboard.org/} Computer Science teacher. Without him, I would not be where I am now. Thank you for seeing (and helping me reach) my potential.
+Finally, I am deeply indebted to Mr. Tony Smith: my former Advanced Placement\footnote{https://ap.collegeboard.org/} Computer Science teacher. Without him, I would not be where I am now. Thank you for seeing (and ultimately helping me reach) my potential.
 \end{acknowledgments}
 
 %%------------------------------------------------------------------%%
@@ -247,7 +247,7 @@ The basis for this research stems from my love of teaching. When I took my first
     \textbf{Discuss challenges with inputting data... which lead to the desire for a gold standard!}
     
     \section{Gold Standard for Formal Logic System Syntax}
-    There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when (they) expect one syntax yet receuve something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
+    There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when expecting one syntax yet receive something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
 
     We propose a formal definition that aims to solve most of these problems. One component of this definition allows users to create their own logic language definition as they see fit for their situation. This language is then translatable into a gold standard format, which we will define syntactically and semantically.
 
@@ -359,8 +359,8 @@ The above grammar states ...\textbf{continue here}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
 
 \begin{align*}
-    M(\mathcal{L},\,w) &= (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;v_3))))\\
-    &(D\;(L_2\;c_1\;c_2)\;(X v_3 (L_3 v_3))))\\
+    M(\mathcal{L},\,w) &= (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1))))\\
+    &(D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))\\
 \end{align*}
 
 \chapter{Discussion and Future Direction}
