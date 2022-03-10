@@ -218,8 +218,34 @@ The basis for this research stems from my love of teaching. When I took my first
 \chapter{Methods}
     In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
     \section{Evaluation of Natural Deduction Systems}
-    To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts are more focused on improving their current tool rather than performing direct comparisons others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic? \textbf{...continue here} 
+    To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts are more focused on improving their current tool rather than performing direct comparisons others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
+
     \subsection{FLAT: Formal Logic Aiding Tutor}
+    FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas, it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
+
+    \textbf{Mention FLAT's drawbacks (e.g., can't solve some ``simple'' proofs, weak proofs by contradiction...)}
+
+    \textbf{Show table of FLAT operations from other paper?}
+
+    \textbf{Write ND solver algorithm?}
+
+    \subsection{ANDTaP: Another Natural Deduction Tutor and Prover}
+    ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules e.g., associativty and commutativity that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was majorly influenced by the desire to allow students to use it wherever they want instead of being restricted to a computer.
+
+    Now that we have thoroughly discussed FLAT and ANDTaP, we will now explain, then discuss, the methods used to investigate several natural deduction systems in head-to-head comparisons against one another.
+
+    \textbf{Explain teachinglogic first, in addition to its significant drawbacks}
+
+    \textbf{Then, discuss the W10 app}
+
+    \textbf{Now tautlogic}
+
+    \textbf{Describe the experiment, what metrics we used, how the data was collected}
+
+    \textbf{Show results of experiment}
+
+    \textbf{Discuss challenges with inputting data... which lead to the desire for a gold standard!}
+    
     \section{Gold Standard for Formal Logic System Syntax}
     There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when (they) expect one syntax yet receuve something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
 
