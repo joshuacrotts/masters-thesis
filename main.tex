@@ -213,6 +213,24 @@ The basis for this research stems from my love of teaching. When I took my first
     \subsection{FLAT: Formal Logic Aiding Tutor}
     FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas, it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
 
+    \begin{figure}
+        \centering
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{flat\_1.png}
+          \caption{A subfigure}
+          \label{fig:flat1}
+        \end{subfigure}%
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{flat\_2.png}
+          \caption{A subfigure}
+          \label{fig:flat2}
+        \end{subfigure}
+        \caption{A figure with two subfigures}
+        \label{fig:flatfigures}
+    \end{figure}
+
     \textbf{Mention FLAT's drawbacks (e.g., can't solve some ``simple'' proofs, weak proofs by contradiction...)}
 
     \textbf{Show table of FLAT operations from other paper?}
@@ -222,7 +240,7 @@ The basis for this research stems from my love of teaching. When I took my first
     \subsection{ANDTaP: Another Natural Deduction Tutor and Prover}
     ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules e.g., associativity and commutativity that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a computer.
 
-    \begin{figure}[h]
+    \begin{figure}
         \centering
         \includegraphics[width=0.9\textwidth]{andtap\_tutor.png}
         \titlecaption{ANDTaP Tutoring System}{...}
@@ -234,14 +252,14 @@ The basis for this research stems from my love of teaching. When I took my first
     \textbf{Describe the experiment, what metrics we used, how the data was collected}
 
     The first tool we analyzed was a web application for proving propositional logic natural deduction formulas by Laboratoire d'Informatique de Grenoble (LIGLAB). While their tool includes a few other argument verification tools (e.g., semantic tabuleaux solver for modal logic S4, a resolution prover for first-order logic), we focused only on its propositional logic proving ability. Users enter premises as a series of conjunctions followed by an implication to the conclusion. This syntax follows the standard proof idea which says if all premises are true, then the conclusion must be true (in other words, the premises logically imply the conclusion). For beginning students or those using an ever-so-slightly different notation may be frustrated to discover that they have to convert their entire input to this rigid standard to parse it correctly. Such restrictions mean that users must focus on formatting their input to what the system requires rather than what it outputs as a result. We did find that their prover solved every propositional logic proof in our suite, but we found that because the system has a small baseset of theorems/axioms, almost every proof is a proof by contradiction, resulting in several nested proofs which can be hard to decipher.
-    \begin{figure}[h]
+    \begin{figure}
         \centering
         \includegraphics[width=0.65\textwidth]{teachinglogic.png}
         \titlecaption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
         \label{fig:liglab}
     \end{figure} 
     Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics is a superset of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). Lastly, the system automatically converts connectives to a recognizable format e.g., \textgreater\;to $\to$, and uppercases any entered propositions. It gets confused, though, if the user enters a symbol it does not recognize (e.g., \& instead of $\land$). These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
-    \begin{figure}[h]
+    \begin{figure}
         \centering
         \begin{subfigure}{.5\textwidth}
           \centering
@@ -260,7 +278,7 @@ The basis for this research stems from my love of teaching. When I took my first
     \end{figure}
     \textbf{Now tautlogic}
     TautLogic is...... lorem ipsum  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-    \begin{figure}[h]
+    \begin{figure}
         \centering
         \includegraphics[width=0.65\textwidth]{tautlogic.png}
         \titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
@@ -269,8 +287,29 @@ The basis for this research stems from my love of teaching. When I took my first
 
     \textbf{Show results of experiment}
 
-    \textbf{Discuss challenges with inputting data... which lead to the desire for a gold standard!}
-    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{all\_proofs\_graph.png}
+        \titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+        \label{fig:allproofsgraph}
+    \end{figure} 
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{prop\_graph.png}
+        \titlecaption{Propositional Logic Natural Deduction}{Write a caption...}
+        \label{fig:propgraph}
+    \end{figure} 
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{pred\_graph.png}
+        \titlecaption{Predicate Logic Results Graph}{Write a caption...}
+        \label{fig:predgraph}
+    \end{figure} 
+
+    \textbf{Discuss challenges with inputting data... which lead to the desire for a gold standard!}    
+
     \section{Gold Standard for Formal Logic System Syntax}
     There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, the symbols used vary widely from one subject to the next e.g., notation used in computer science may ave sublte yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation, leading to an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when expecting one syntax yet receive something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
 
