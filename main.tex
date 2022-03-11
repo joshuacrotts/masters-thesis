@@ -1,6 +1,10 @@
 \documentclass[ms]{uncgdissertationexp2}
 
 \usepackage{microtype, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm}
+\usepackage{wrapfig}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{epstopdf}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
 
@@ -285,28 +289,7 @@ The basis for this research stems from my love of teaching. When I took my first
         \label{fig:tautlogic}
     \end{figure} 
 
-    \textbf{Show results of experiment}
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.9\textwidth]{all\_proofs\_graph.png}
-        \titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
-        \label{fig:allproofsgraph}
-    \end{figure} 
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.9\textwidth]{prop\_graph.png}
-        \titlecaption{Propositional Logic Natural Deduction}{Write a caption...}
-        \label{fig:propgraph}
-    \end{figure} 
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.9\textwidth]{pred\_graph.png}
-        \titlecaption{Predicate Logic Results Graph}{Write a caption...}
-        \label{fig:predgraph}
-    \end{figure} 
+    \textbf{Show results of experiment (graphs in appendix B). Link to the spreadsheet of problems, images for graphs, }
 
     \textbf{Discuss challenges with inputting data... which lead to the desire for a gold standard!}    
 
@@ -457,6 +440,29 @@ This appendix describes the algorithm we used to find a natural deduction proof 
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}
+
+\chapter{Result Graphs}
+
+\begin{sidewaysfigure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{all\_proofs\_graph.png}
+    \titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+    \label{fig:allproofsgraph}
+\end{sidewaysfigure} 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{prop\_graph.png}
+    \titlecaption{Propositional Logic Natural Deduction}{Write a caption...}
+    \label{fig:propgraph}
+\end{figure} 
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{pred\_graph.png}
+    \titlecaption{Predicate Logic Results Graph}{Write a caption...}
+    \label{fig:predgraph}
+\end{figure} 
 
 \backmatter
 \end{document}
