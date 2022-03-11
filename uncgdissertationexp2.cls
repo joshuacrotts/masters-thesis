@@ -65,6 +65,7 @@
 
 %% Modified by Larry Joshua Crotts - added roman numerals and changed format to be \large, without bold, and upper-cased words/chapter names.
 \renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
 \titleformat{\chapter}[block]{\centering\large}{CHAPTER \thechapter\\}{6pt}{\uppercase}
 
 \renewcommand{\contentsname}{Table of Contents}

@@ -1,35 +1,16 @@
-%Time-stamp: "Last modified: 2020-09-15 16:07:32 (d_yasaki)"
 \documentclass[ms]{uncgdissertationexp2}
-% default is 12pt, phd, doublespaced.
-% Masters students should use the ma on as shown below.
-% \documentclass[ma]{uncgdissertation}
 
-%%------------------------------------------------------------------%%
-%%------------------------- Import Packages ------------------------%%
-%%------------------------------------------------------------------%%
-%% This is where you can put other packages that you may need. 
 \usepackage{microtype, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
 
-\makeatletter
-\def\BState{\State\hskip-\ALG@thistlm}
-\makeatother
-
 \graphicspath{{img/}}
-%%------------------------------------------------------------------%% 
-%%--------------------------- Content ------------------------------%%
-%%------------------------------------------------------------------%%
-%% Members of committee.  Guidelines say don't use Dr.
-%% Masters students are required to have chair plus two
-%% PhD students require chair plus three.
-%% The class can handle up to chair plus five.
+
 \chair{Stephen R. Tate}
 \member{Chun Jiang Zhu}
 \member{Insa R. Lawler}   
 
-%% Your name goes here.
-\student{Larry Joshua}{Crotts}  % a full middle name
+\student{Larry Joshua}{Crotts}
 \title{Construction and Evaluation of a Gold Standard Syntax for Formal Logic Formulas and Systems}
 
 %% Degree year.    
@@ -64,7 +45,6 @@
 \titleformat*{\section}{\normalsize\bfseries}
 \titleformat*{\subsection}{\normalsize\itshape}
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
-
 \begin{document}
 \frontmatter      % required
 
@@ -225,6 +205,12 @@ The basis for this research stems from my love of teaching. When I took my first
     In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
     \section{Evaluation of Natural Deduction Systems}
     To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts focus more on improving their current tool rather than performing direct comparisons with others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
+
+    \subsection{Experiment 1: A Student-Driven Approach for Difficulty Metrics}
+
+    \textbf{Describe the student-driven approach with ANDTaP, the desire for a metric of difficulty to find where students struggle most and what subjects struggle more... potentially show the two/three results? State that the experiment was a failure due to a lack of participants}
+
+    \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
 
     \subsection{FLAT: Formal Logic Aiding Tutor}
     FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas, it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
