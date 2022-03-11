@@ -26,6 +26,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{corollary}[theorem]{Corollary}
+\renewcommand{\thetheorem}{\arabic{theorem}} % Change numbering from roman to arabic.
 
 % Definition type object style and numbering convention                               
 \theoremstyle{definition}
@@ -36,6 +37,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}  % the star makes them not numbered                      
 \newtheorem*{notation}{Notation}
+
 \newcommand{\titlecaption}[2]{\caption[#1]{#1. #2}}
 
 %%------------------------------------------------------------------%%
@@ -65,7 +67,7 @@ advisor/committee chair.
 %%---------------------------- Title page --------------------------%%
 %%------------------------------------------------------------------%%
 %% The title page is required. 
-\maketitlepage  
+\maketitlepage
 
 %%------------------------------------------------------------------%%
 %% ------------------------ Copyright page -------------------------%%
@@ -84,15 +86,11 @@ advisor/committee chair.
 %%------------------------------------------------------------------%%
 %%------------------------ Approval page  --------------------------%%
 %%------------------------------------------------------------------%%
-%% The approval page is required.  If all of your infomation is entered
-%% correctly in the contents section, this should come out correctly.
 \makeapprovalpage
 
 %%------------------------------------------------------------------%%
 %%-------------------------- Acknowledgements ----------------------%%
 %%------------------------------------------------------------------%%
-%% The acknowledgements are optional but highly recommended.  See tips
-%% for details. 
 \begin{acknowledgments}
 I would like to extend my gratitude and thanks to the esteemed Dr. Steve Tate for not only overseeing and advising this thesis, but also for being a fantastic mentor and professor throughout my time at UNC Greensboro. I sincerely appreciate Dr. Nancy Green for introducing me to the wonderful world of academic-level computer science research, as well as Dr. Insa Lawler in the Philosophy department for introducing me to the exciting adventure that is formal logic and its pedagogical impact. Their unwavering guidance, mentorship, and insight influenced me to pursue graduate school.
 
@@ -236,16 +234,13 @@ The basis for this research stems from my love of teaching. When I took my first
     \textbf{Describe the experiment, what metrics we used, how the data was collected}
 
     The first tool we analyzed was a web application for proving propositional logic natural deduction formulas by Laboratoire d'Informatique de Grenoble (LIGLAB). While their tool includes a few other argument verification tools (e.g., semantic tabuleaux solver for modal logic S4, a resolution prover for first-order logic), we focused only on its propositional logic proving ability. Users enter premises as a series of conjunctions followed by an implication to the conclusion. This syntax follows the standard proof idea which says if all premises are true, then the conclusion must be true (in other words, the premises logically imply the conclusion). For beginning students or those using an ever-so-slightly different notation may be frustrated to discover that they have to convert their entire input to this rigid standard to parse it correctly. Such restrictions mean that users must focus on formatting their input to what the system requires rather than what it outputs as a result. We did find that their prover solved every propositional logic proof in our suite, but we found that because the system has a small baseset of theorems/axioms, almost every proof is a proof by contradiction, resulting in several nested proofs which can be hard to decipher.
-    
     \begin{figure}[h]
         \centering
         \includegraphics[width=0.65\textwidth]{teachinglogic.png}
         \titlecaption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
         \label{fig:liglab}
     \end{figure} 
-
     Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics is a superset of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). Lastly, the system automatically converts connectives to a recognizable format e.g., \textgreater\;to $\to$, and uppercases any entered propositions. It gets confused, though, if the user enters a symbol it does not recognize (e.g., \& instead of $\land$). These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
-
     \begin{figure}[h]
         \centering
         \begin{subfigure}{.5\textwidth}
@@ -263,8 +258,14 @@ The basis for this research stems from my love of teaching. When I took my first
         \caption{A figure with two subfigures}
         \label{fig:test}
     \end{figure}
-
     \textbf{Now tautlogic}
+    TautLogic is...... lorem ipsum  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.65\textwidth]{tautlogic.png}
+        \titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+        \label{fig:tautlogic}
+    \end{figure} 
 
     \textbf{Show results of experiment}
 
