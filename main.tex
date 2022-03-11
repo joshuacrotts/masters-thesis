@@ -8,9 +8,9 @@
 %%------------------------- Import Packages ------------------------%%
 %%------------------------------------------------------------------%%
 %% This is where you can put other packages that you may need. 
-\usepackage{microtype, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax}
+\usepackage{microtype, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption}
 \usepackage[colorlinks=false]{hyperref}
-
+\graphicspath{{img/}}
 %%------------------------------------------------------------------%% 
 %%--------------------------- Content ------------------------------%%
 %%------------------------------------------------------------------%%
@@ -234,13 +234,38 @@ The basis for this research stems from my love of teaching. When I took my first
 
     Now that we have thoroughly discussed FLAT and ANDTaP, we will now explain, then discuss, the methods used to investigate several natural deduction systems in head-to-head comparisons against one another.
 
-    \textbf{Explain teachinglogic first, in addition to its significant drawbacks}
+    \textbf{Describe the experiment, what metrics we used, how the data was collected}
 
-    Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics is a superset of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
+    The first tool we analyzed was a web application for proving propositional logic natural deduction formulas by Laboratoire d'Informatique de Grenoble (LIGLAB). While their tool includes a few other argument verification tools (e.g., semantic tabuleaux solver for modal logic S4, a resolution prover for first-order logic), we focused only on its propositional logic proving ability. Users enter premises as a series of conjunctions followed by an implication to the conclusion. This syntax follows the standard proof idea which says if all premises are true, then the conclusion must be true (in other words, the premises logically imply the conclusion). For beginning students or those using an ever-so-slightly different notation may be frustrated to discover that they have to convert their entire input to this rigid standard to parse it correctly. Such restrictions mean that users must focus on formatting their input to what the system requires rather than what it outputs as a result. We did find that their prover solved every propositional logic proof in our suite, but we found that because the system has a small baseset of theorems/axioms, almost every proof is a proof by contradiction, resulting in several nested proofs which can be hard to decipher.
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.65\textwidth]{teachinglogic.png}
+        \titlecaption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
+        \label{fig:liglab}
+    \end{figure} 
+
+    Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics is a superset of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). Lastly, the system automatically converts connectives to a recognizable format e.g., \textgreater\;to $\to$, and uppercases any entered propositions. It gets confused, though, if the user enters a symbol it does not recognize (e.g., \& instead of $\land$). These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
+
+    \begin{figure}[h]
+        \centering
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{w10app\_01.png}
+          \caption{A subfigure}
+          \label{fig:sub1}
+        \end{subfigure}%
+        \begin{subfigure}{.5\textwidth}
+          \centering
+          \includegraphics[width=0.9\linewidth]{w10app\_02.png}
+          \caption{A subfigure}
+          \label{fig:sub2}
+        \end{subfigure}
+        \caption{A figure with two subfigures}
+        \label{fig:test}
+    \end{figure}
 
     \textbf{Now tautlogic}
-
-    \textbf{Describe the experiment, what metrics we used, how the data was collected}
 
     \textbf{Show results of experiment}
 
@@ -297,15 +322,12 @@ The basis for this research stems from my love of teaching. When I took my first
 
 The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).\\
 
-
 %~(C ∨ D), D ↔ (E ∨ F), ~A → (C ∨ F) ∴ A
 \subsubsection{Example 2.}
 Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine the function $g$ in $\mathcal{L}$ as follows:
-
 \[
     g:\;\{A, C, D, E, F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
 \]
-
 \noindent Thus, 
 \begin{align*}
     N(\mathcal{L}, P, c) &= ((H\;a_1)\;\\
@@ -313,7 +335,6 @@ Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F)
     &(P\;(B\;a_3\;(D\;a_4\;a_5)))\\
     &(P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))\\
 \end{align*}
-
 \subsection{First-Order Logic Well-Formed Formula Representation}
 
 First-order logic is a superset of zeroth-order logic, meaning we can reuse most of our definitions from the previous section. We will, however, need to slightly redefine $\mathcal{L}$ to allow for mapping predicate definitions, constants, and variables. Further, so as to not confuse the function definitions from zeroth-order logic, we will instead use new letters to represent mapping functions.
@@ -357,7 +378,6 @@ The above grammar states ...\textbf{continue here}
     &s:\;\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}
 \end{align*}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
-
 \begin{align*}
     M(\mathcal{L},\,w) &= (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1))))\\
     &(D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))\\
@@ -365,13 +385,6 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 
 \chapter{Discussion and Future Direction}
 
-
-%%------------------------------------------------------------------%%
-%%------------------------ Bibliography ----------------------------%%
-%%------------------------------------------------------------------%%
-%% Replace the myreferences with the name of your bib file.  Then you
-%% can run bibtex as usual.
-%%------------------------------------------------------------------%%
 
 \bibliography{myreferences}
 \bibliographystyle{plain}
