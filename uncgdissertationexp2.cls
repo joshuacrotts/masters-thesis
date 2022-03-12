@@ -70,6 +70,11 @@
 \renewcommand{\thetable}{\arabic{table}}
 \titleformat{\chapter}[block]{\centering\large}{CHAPTER \thechapter\\}{6pt}{\uppercase}
 
+%% Better section naming...
+\titleformat{\section}{\bfseries\normalsize}{\thesection}{1em}{}
+\titleformat{\subsection}{\itshape\normalsize}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\itshape\normalsize}{\thesubsubsection}{1em}{}
+
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\bibname}{References}
 

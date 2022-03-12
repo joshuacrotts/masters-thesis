@@ -6,6 +6,9 @@
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
 
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
 \graphicspath{{img/}}
 
 \chair{Stephen R. Tate}
@@ -46,8 +49,6 @@
 \pagestyle{plain} % Eliminates running headers 
 
 % Section styling.
-\titleformat*{\section}{\normalsize\bfseries}
-\titleformat*{\subsection}{\normalsize\itshape}
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 \begin{document}
 \frontmatter      % required
@@ -192,7 +193,7 @@ To begin, while plenty of research papers and projects on formal logic tutors, n
 
 \textbf{Give a brief overview of what we did. A longer description is provided later.}
 
-\subsection{FLAT: Formal Logic Aiding Tutor}
+\subsubsection{FLAT: Formal Logic Aiding Tutor}
 FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas, it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
 
 \begin{figure}[h!]
@@ -219,7 +220,7 @@ FLAT began as a collaborative project which extended LLAT: the Logic Learning As
 
 \textbf{Link appendix A for ND algorithm}
 
-\subsection{ANDTaP: Another Natural Deduction Tutor and Prover}
+\subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules e.g., associativity and commutativity that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a computer.
 
 \begin{figure}[h!]
