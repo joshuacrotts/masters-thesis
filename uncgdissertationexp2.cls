@@ -67,6 +67,7 @@
 \renewcommand{\thechapter}{\Roman{chapter}}
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
 \titleformat{\chapter}[block]{\centering\large}{CHAPTER \thechapter\\}{6pt}{\uppercase}
 
 \renewcommand{\contentsname}{Table of Contents}
