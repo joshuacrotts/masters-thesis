@@ -296,7 +296,7 @@ Committee Co-Chair &
     \uncg@author \par
     \vspace*{2\baselineskip}
     
-    %\singlespacing
+    \singlespacing
    A \@capthesis\ Submitted to \\
   the Faculty of The Graduate School at\\
   The University of North Carolina at Greensboro\\
