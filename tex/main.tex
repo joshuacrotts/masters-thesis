@@ -109,7 +109,7 @@
 %%------------------------------------------------------------------%%
 %% The preface is optional.
 \begin{preface}
-	The basis for this research stems from my love of teaching. When I took my first introduction to formal logic course as an undergraduate, I was taken aback by its amazing appeal and relation to computer science. From my semesters serving as a tutor/teaching assistant in the Philosophy department at UNC Greensboro, I saw many students that struggled with this material. The problems ranged from its confusing syntax, proof techniques, and esoteric notation. At that time, I thought to myself, "Why not make a tool that helps students understand it better?" Of course, that question had already been answered and deeply investigated across multiple disciplines, but I knew that there had to be more. Once I began my exploration, I quickly realized that online solvers, theorem provers, proof assistants, and similar tools do not have a ubiquitous input format, and testing their algorithms was far more cumbersome than I initially expected. This evolved into the desire for a gold standard syntax for both zeroth and first-order logic systems.
+	The basis for this research stems from my love of teaching. When I took my first introduction to formal logic course as an undergraduate, I was taken aback by its amazing appeal and relation to computer science. From my semesters serving as a tutor/teaching assistant in the Philosophy department at UNC Greensboro, I saw many students that struggled with this material. The problems ranged from its confusing syntax, proof techniques, and esoteric notation. At that time, I thought to myself, ``Why not make a tool that helps students understand it better?'' Of course, that question had already been answered and deeply investigated across multiple disciplines, but I knew that there had to be more. Once I began my exploration, I quickly realized that online solvers, theorem provers, proof assistants, and similar tools do not have a ubiquitous input format, and testing their algorithms was far more cumbersome than I initially expected. This evolved into the desire for a gold standard syntax for both zeroth and first-order logic systems.
 \end{preface}
 
 
@@ -415,7 +415,7 @@ Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F)
 	N(\mathcal{L}, P, c) & = ((H\;a_1)\;                      \\
 	                     & (P\;(N\;(D\;a_2\;a_3)))            \\
 	                     & (P\;(B\;a_3\;(D\;a_4\;a_5)))       \\
-	                     & (P\;(I\;(N\;a_1)\;(D\;a_2\;a_5)))) \\
+	                     & (P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))
 \end{align*}
 We read this as ``Hence $a_1$ if $P_1$ is true and $P_2$ is true and $P_3$ is true'', where $P_1$, $P_2$, and $P_3$ are the individual premises that comprise the argument. This style largely resembles the way we write Prolog (conditional) rules. 
 \subsection{First-Order Logic Well-Formed Formula Representation}
@@ -464,6 +464,7 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 	M(\mathcal{L},\,w) & = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1)))) \\
 	                   & (D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))         \\
 \end{align*}
+We read this as ``A conjunction of a universal quantifier that binds $v_1$, a universal quantifier binding $v_2$, bound to the negation of $L_1\,v_1\,v_2\,c_1$ and a disjunction of the following: $L_2\,c_1\,c_2$ and an existential quantifier which binds $v_3$, bound to $L_3\,v_3$.''
 
 \chapter{Discussion and Future Direction}
 
