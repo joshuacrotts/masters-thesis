@@ -1,6 +1,6 @@
 \documentclass[ms]{uncgdissertationexp2}
 
-\usepackage{microtype, booktabs, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm}
+\usepackage{microtype, booktabs, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
 \usepackage[svgnames,table]{xcolor}
 \usepackage[tableposition=above]{caption}
 \usepackage[colorlinks=false]{hyperref}
@@ -193,10 +193,13 @@ In this chapter, we explain our evaluation method and metrics for assessing thre
 To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts focus more on improving their current tool rather than performing direct comparisons with others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
 
 \subsection{Experiment 1: A Student-Driven Approach for Difficulty Metrics}
-
 All students are not unique, and a formal logic class may contain students across different disciplines. As a result, what is difficult to one student who has yet to see logic may be easier to another student who programs or otherwise works with boolean operators. Determining what exactly constitutes difficult in a logic class is tricky for the same reason. That is, it is a non-trivial job to evaluate whether one problem or topic is inherently more challenging than another.....\textbf{continue here}
 
-\textbf{Describe the student-driven approach with ANDTaP, the desire for a metric of difficulty to find where students struggle most and what subjects struggle more... potentially show the two/three results? State that the experiment was a failure due to a lack of participants}
+Given the varied opinions of students, we wanted to perform an observational study on our software to determine what kinds of proofs students find difficult, or where they potentially go astray from an expert's solution to a problem. In particular, our goal was to analyze the student's abilities to complete propositional logic natural deduction proofs, picking between two sets of premises and conclusions to say which looks harder to prove, as well as choosing a proof out of two that appears more difficult, with the hopeful outcome of finding common patterns between proofs/formula choices, then analyzing said patterns to understand why those were said to be more difficult.
+
+The study was implemented as two Qualtrics surveys. The first consisted of ten \textbf{(insert footnote)} carefully-selected pairs of premises that either prove the same conclusion, or a slightly-altered version of the conclusion. The second survey contained ten \textbf{(insert footnote)} pairs of proofs where each proof in the pair derives the same conclusion, but take different approaches to doing so. Finally, we had a third component where students would use our ANDTaP system \textbf{(described in section blah blah)} to prove ten natural deduction problems \textbf{(append footnote to problems)}. A cheat-sheet of all rules was provided. We would measure how long the student took to solve the proof (provided they were able to), what rules were utilized, and what mistakes were made. Participants who fully completed the study were entered into a drawing to win a \$50 Amazon Gift Card.
+
+Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results.
 
 \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
 
@@ -286,8 +289,8 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 \begin{table}[h!]
 	\centering
 	\caption{Data Analysis of Propositional and First-Order Logic Proofs}
-	\rowcolors{2}{}{gray!10}
-	\begin{tabular}{*4c}
+	%\rowcolors{2}{}{gray!10}
+	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct \\    
 		\midrule
@@ -296,15 +299,15 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 		NaturalDeduction & 56.60\%           & 13.50          & 3.38              \\
 		TAUT-Logic       & 73.96\%           & 13.34          & 4.46              \\
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 	\label{table:allData}
 \end{table}
 
 \begin{table}[h!]
 	\centering
 	\caption{Data Analysis of Propositional Logic Proofs}
-	\rowcolors{2}{}{gray!10}
-	\begin{tabular}{*4c}
+	%\rowcolors{2}{}{gray!10}
+	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct Rules \\    
 		\midrule
@@ -313,30 +316,30 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 		NaturalDeduction & 79.31\%           & 19.03          & 4.73                    \\
 		TAUT-Logic       & 76.35\%           & 15.59          & 4.71                    \\
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 	\label{table:propData}
 \end{table}
 
 \begin{table}[h!]
 	\centering
 	\caption{Data Analysis of Predicate Logic Proofs}
-	\rowcolors{2}{}{gray!10}
-	\begin{tabular}{*4c}
+	%\rowcolors{2}{}{gray!10}
+	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System        & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct Rules \\    
 		\midrule
 		\textbf{FLAT} & \textbf{83.53\%}  & \textbf{5.62}  & \textbf{3.05}           \\
 		TAUT-Logic    & 68.24\%           & 7.46           & 3.76                    \\
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 	\label{table:predData}
 \end{table}
 
 \begin{table}[h!]
 	\centering
 	\caption{Non-Zero Data Analysis of All Proofs}
-	\rowcolors{2}{}{gray!10}
-	\begin{tabular}{*4c}
+	%\rowcolors{2}{}{gray!10}
+	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. No. Steps & Avg. No. Distinct Rules \\    
 		\midrule
@@ -345,7 +348,7 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 		NaturalDeduction & 23.85          & 5.96                    \\
 		TAUT-Logic       & 18.04          & 6.03                    \\
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 	\label{table:nzAllData}
 \end{table}
 
@@ -371,7 +374,7 @@ We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used
 	        
 	<$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
 \end{grammar}
-\subsubsection{Example 1.} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
+\subsubsection{Zeroth-Order Logic Example} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
 \begin{align*}
 	  & f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
 	  & g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}                                   
@@ -405,7 +408,7 @@ The reason we formalize the language definition is to allow different logic syst
 The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).\\
 
 %~(C ∨ D), D ↔ (E ∨ F), ~A → (C ∨ F) ∴ A
-\subsubsection{Example 2.}
+\subsubsection{Natural Deduction Example}
 Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine the function $g$ in $\mathcal{L}$ as follows:
 \[
 	g:\;\{A, C, D, E, F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
@@ -452,7 +455,7 @@ Now, similar to zeroth-order logic, we will construct the gold standard Polish n
 	<$\alpha$---wff> ::= (<predicate> \{<literal>\}) \\| (<connective> [` '] <wff>$^{\alpha}$) \\| (<quantifier> <variable> \{<variable>\} <wff>)\\| (<identity> <literal> [` '] <literal>)
 \end{grammar}
 The above grammar states ...\textbf{continue here}
-\subsubsection{Example 3.} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
+\subsubsection{First-Order Logic Example} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
 \begin{align*}
 	  & p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\} \\
 	  & q:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}                                                                       \\
@@ -462,7 +465,7 @@ The above grammar states ...\textbf{continue here}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
 \begin{align*}
 	M(\mathcal{L},\,w) & = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1)))) \\
-	                   & (D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))         \\
+	                   & (D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))         
 \end{align*}
 We read this as ``A conjunction of a universal quantifier that binds $v_1$, a universal quantifier binding $v_2$, bound to the negation of $L_1\,v_1\,v_2\,c_1$ and a disjunction of the following: $L_2\,c_1\,c_2$ and an existential quantifier which binds $v_3$, bound to $L_3\,v_3$.''
 

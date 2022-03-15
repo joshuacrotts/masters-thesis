@@ -31,7 +31,6 @@
 \newif\if@MA  % Masters MA thesis format
 \newif\if@MS  % Masters MS thesis format
 \newif\if@PHD  % PhD dissertation format
-
 \renewcommand*\l@chapter[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
