@@ -169,26 +169,43 @@ Before we continue, we will define some terms frequently used in formal logic-re
 
 \chapter{Related Work}
 In this chapter, we will discuss the related work and prior contributions to the discipline of natural deduction pedagogy, as well as efforts to modernize and increase its effectiveness for students with a weaker background in, for example, mathematics. 
+
 Extending formal logic to a technological education is not a new idea---there exist many online solvers, provers, and programming languages designed to suit the needs of logic students, or those that use formal logic in some manner. We will also mention more powerful theorem provers that are aimed at experts/more experienced users.
+
+Many of the systems we describe below, including our own, are a type of intelligent interactive tutor. A goal of such a system is to mimic the relationship between instructors and their student(s). In particular, if a student starts to struggle with any given topic, the tutor ought to recognize the mistakes made, correct them, and then lead them down the intended path. Similarly, it should provide hints to a problem if requested, even if the student has not necessarily yet gone astray. Taking this a step further may call for dynamic generation of questions tailored to the individual student. Automatic tutors and intelligent interactive tutors have a host of benefits: reducing stress on teachers by not having to create unique content for all students (a feat almost impossible unless the class size is small), and research has demonstrated that students perform better on assessments (cite the intelligent tutors book 15 or the paper it referenced) in one-on-one tutoring sessions.
+
+Show brief examples of other tutoring systems \textbf{e.g., algebra, ...}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
 Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{hein}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. \textbf{Show a table and describe different notation by different authors?}
         
 Because of the reducible nature of propositional logic to simple structures and representations, there exist plentiful online truth table generators that provide detailed and immediate feedback for users while solving problems and well-formed formulas. Further, such generators work well not only for formal logic, but also computer science, mathematics, and electrical engineering, allowing students to enter a boolean truth value (i.e., true/false) for an operand or proposition and the computer will determine if it is valid or invalid for an arbitrary cell. 
+
+Propositional logic tutors… Abraham, Lukins, Croy,
+
+FOL: 
 %         Automatic logic tutors and theorem provers exist in many dimensions and formats, ranging from downloadable and executable software to modern and lively web applications. From our investigations, however, these systems and software often do not provide a beginner-friendly experience, nor do they provide the functionality we want students to engage with. Others like Near et al. \cite{near} introduce fast theorem provers written in functional programming languages, but their broad intention is not to teach students, particularly non-computer science students.
 
 % For starters, there exist plenty of online truth table generators that work well not only in the formal logic domain, but also electrical engineering, computer science, and (discrete) mathematics domains. Some even provide immediate feedback for the user as they attempt to derive the truth table by hand \cite{truthtablefennell}. An apparent drawback is that they require a student to have prior experience with the underlying logic or preexisting knowledge of entering values into a truth table \cite{koedinger}. Beyond this, Lukins et al. \cite{lukins} described and built the P-Logic Tutor system for propositional logic: a Java Web Start (JNLP) system. Today, their provided link is offline, so there is no way of evaluating or testing its functionality compared to its more modern counterparts. From the details the authors provide, though, students could enter their own data into the program and receive feedback on its correctness. One significant downside to the P-Logic Tutor is that it only covers/handles propositional logic across all its units and tools, as its name suggests. Moreover, its usage required students to log in for purposes of improving and personalizing the experience, a mandate that other systems lack. Requirements like this dissuade users from the tool who are not affiliated with their university. Another software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula. Cerna et al. \cite{Cerna2019AMA} developed \textbf{AX}olotl: a clean Android formal logic tutor which includes several types of proofs and tutorials for deriving examples, though its reliance on a file protocol to load examples is a bit cumbersome for the non-savvy student or instructor. Further, it appears to focus heavier on an accelerated natural deduction curriculum, whereas FLAT attempts to target absolute beginners at the material. Almost all systems we investigated only allow for propositional logic proofs or evaluation because of first-order predicate's infinite nature when applying universal quantifier rules as well as the general difficulty curve over propositional logic.
 \subsection{First-Order Logic}
+Grivokostopoulou…
 \subsection{Problem/Solution Generators}
 Ahmed et al. wrote.........
 Hladik...
 Amendola...
 LLAT... Graham defines a semantic tableau...
 \section{Specialized Logic/Theorem-Proving Programming Languages}
-Coq..., $\alpha$\textsf{lean}TAP,..., Prolog... 
+What is a theorem prover? Ultimately, it's a system that uses a combination of built-in rules, axioms, to prove a provided formula or theorem. It searches for an ordering of rules, axioms, and intermediate formulas which satisfy the theorem and show it holds true. 
+
+An early adaptation of a theorem proving logic programming language is Prolog, which uses horn clauses, or a sequence of literals separated by disjunctions, to prove goals. ……..
+
+Another form of theorem proving is known as inductive logic programming, coined by [cite Muggleton]. In summary: ……
+
+Coq..., $\alpha$\textsf{lean}TAP,...
 \section{Boolean Satisfiability Solver Input Formats} 
 \chapter{Methods}
 In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
+
 \section{Evaluation of Natural Deduction Systems}
 To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts focus more on improving their current tool rather than performing direct comparisons with others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
 
@@ -202,7 +219,6 @@ The study was implemented as two Qualtrics surveys. The first consisted of ten \
 Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results.
 
 \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
-
 \textbf{Give a brief overview of what we did. A longer description is provided later.}
 
 \subsubsection{FLAT: Formal Logic Aiding Tutor}
@@ -374,7 +390,7 @@ We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used
 	        
 	<$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
 \end{grammar}
-\subsubsection{Zeroth-Order Logic Example} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
+\subsubsection{Zeroth-Order Logic Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
 \begin{align*}
 	  & f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
 	  & g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}                                   
@@ -388,8 +404,10 @@ This representation reads naturally from left-to-right as follows: ``An implicat
 While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (f^{-1},\,g^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
     
 The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). \textbf{Another benefit of using prefix connective notation is its disambiguation of precedence. We assume the incoming formula is unambiguous according to its language grammar specification out of simplicity NOTE: We may add a precedence mapping function $\Gamma$. This is described more on paper. By enforcing prefix notation, we no longer have to deal with the inherent complexities of operator precedence present in the commonly-used infix notation.}
+\subsubsection{Zeroth-Order Logic Example 2}
+\textbf{Describe Quine's grammar from Methods of Logic.}
 
-\subsubsection{Natural Deduction Extension.} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
+\subsubsection{Natural Deduction Extension} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
 
 \begin{grammar}
 	<atomic> ::= `a' (`1' | `2' | ...)
