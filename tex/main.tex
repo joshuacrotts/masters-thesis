@@ -1,10 +1,22 @@
 \documentclass[ms]{uncgdissertationexp2}
 
-\usepackage{microtype, booktabs, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
+\usepackage{booktabs, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
 \usepackage[svgnames,table]{xcolor}
 \usepackage[tableposition=above]{caption}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
+\usepackage{microtype} % Fixes the "Missing font type" error.
+\makeatletter
+\def\MT@is@opt@char#1\iffontchar#2\char#3\else#4\fi\relax{%
+  \MT@ifempty{#1}{%
+    \iffontchar#2%
+      \expandafter\chardef
+        \csname\MT@encoding\MT@detokenize@c\@tempa\endcsname=#3\relax
+    \fi
+  }\relax
+}
+\makeatother
+
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
