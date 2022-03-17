@@ -177,7 +177,7 @@ Many of the systems we describe below, including our own, are a type of intellig
 Show brief examples of other tutoring systems \textbf{e.g., algebra, ...}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
-Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{hein}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. \textbf{Show a table and describe different notation by different authors?}
+Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. \textbf{Show a table and describe different notation by different authors?}
         
 Because of the reducible nature of propositional logic to simple structures and representations, there exist plentiful online truth table generators that provide detailed and immediate feedback for users while solving problems and well-formed formulas. Further, such generators work well not only for formal logic, but also computer science, mathematics, and electrical engineering, allowing students to enter a Boolean truth value (i.e., true/false) for an operand or proposition and the computer will determine if it is valid or invalid for an arbitrary cell. 
 
@@ -224,7 +224,7 @@ Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) an
 \subsubsection{FLAT: Formal Logic Aiding Tutor}
 FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas (see Appendix \ref{appendix:algorithm}), it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -249,7 +249,7 @@ FLAT began as a collaborative project which extended LLAT: the Logic Learning As
 \subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules, e.g., associativity and commutativity, that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a locally-installed (desktop) program.
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{andtap-tutor.png}
 	\titlecaption{ANDTaP Tutoring System}{...}
@@ -263,7 +263,7 @@ Systematically evaluating natural deduction software is complicated. For starter
 We collected and created 288 well-formed formula propositional and first-order logic proofs from various logic and computer science textbooks. We manually converted each proof to the required syntax for all four system, then recorded the number of lines in the annotated proof as well as how many axioms/rules were used. Before we reveal and explain the results, we will briefly review each investigated system.
 
 The first tool we analyzed was a web application for proving propositional logic natural deduction formulas by Laboratoire d'Informatique de Grenoble (LIGLAB). While their tool includes a few other argument verification tools (e.g., semantic tabuleaux solver for modal logic S4, a resolution prover for first-order logic), we focused only on its propositional logic proving ability. Users enter premises as a series of conjunctions followed by an implication to the conclusion. This syntax follows the standard proof idea which says if all premises are true, then the conclusion must be true (in other words, the premises logically imply the conclusion). Beginning students or those using an ever-so-slightly different notation may be frustrated to discover that they have to convert their entire input to this rigid standard to parse it correctly. Such restrictions mean that users must focus on formatting their input to what the system requires rather than what it outputs as a result. We did find that their prover solved every propositional logic proof in our suite, but we found that because the system has a small baseset of theorems/axioms, almost every proof is a proof by contradiction, resulting in several nested proofs which can be hard to decipher.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.65\textwidth]{teachinglogic.png}
 	\titlecaption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
@@ -271,7 +271,7 @@ The first tool we analyzed was a web application for proving propositional logic
 \end{figure} 
 
 Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics are a superset of those of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: it's proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). Lastly, the system automatically converts connectives to a recognizable format e.g., \textgreater\;to $\to$, and uppercases any entered propositions. It gets confused, though, if the user enters a symbol it does not recognize (e.g., \& instead of $\land$), and erroneously replaces symbols that otherwise together represent one into two separate symbols e.g., $=>$ into $\equiv\supset$. These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
 		\centering
@@ -294,7 +294,7 @@ TAUT-Logic is a web application designed by Ariel Roff\'e, and assisted by the B
 One awkward characteristic of this system is that its propositional logic application only supports lowercase letters for atoms. Additionally, similar to Natural Deduction, TAUT-Logic supports a total of nine different atoms, ranging from $o$ to $w$. Supporting only nine atoms may be enough for some problems/proofs, but this restriction seems rather arbitrary for natural deduction, whose problem complexity should not grow strictly in terms of the number of atoms. Another odd design choice is the preference of English phrases for connectives instead of symbols such as, for example, ``implies'' versus $\to$ or $\supset$. Because all other systems we tested only utilize symbols (with the exception of FLAT, as it supports both), the process of converting each formula and symbol to the appropriate format was tiresome. Lastly, for some reason, the biconditional connective is not supported, requiring students to either convert them to a conjunction of implications, or omit the proof altogether. 
     
 Regarding TAUT-Logic's performance, we discovered that it is roughly on par in terms of speed, but fails on moderately complex propositional and first-order logic proofs. We also saw a general increase in the produced proof size compared to the other systems. 
-\begin{figure}[h!]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tautlogic.png}
 	\titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
@@ -302,7 +302,7 @@ Regarding TAUT-Logic's performance, we discovered that it is roughly on par in t
 \end{figure} 
 
 Table \ref{table:allData} shows the tabulated results, including the average number of applied distinct rules compared to the base set size, the average length of all proofs, and the average success rate. Note: systems that did not support first-order logic contributed to a lower overall success rate. Consequently, we further subdivided the data into two groups: one with only propositional logic formulas ($n=203$), and another with only predicate logic formulas ($n=85$). Also note that, when a system cannot solve a proof, this, in turn, lowers the average number of steps and applied distinct rules as those count as zero towards the average. Thus, we created another table to show non-zero total averages.
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Propositional and First-Order Logic Proofs}
 	%\rowcolors{2}{}{gray!10}
@@ -319,7 +319,7 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 	\label{table:allData}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Propositional Logic Proofs}
 	%\rowcolors{2}{}{gray!10}
@@ -336,7 +336,7 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 	\label{table:propData}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Predicate Logic Proofs}
 	%\rowcolors{2}{}{gray!10}
@@ -351,7 +351,7 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 	\label{table:predData}
 \end{table}
 
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Non-Zero Data Analysis of All Proofs}
 	%\rowcolors{2}{}{gray!10}

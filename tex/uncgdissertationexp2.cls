@@ -3,7 +3,7 @@
 %fixed spacing in toc for bibliography and appendix.  07272018
 % Fixed vertical spacing on Bibliography page 0802018
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uncgdissertationexp}[2018/04/23 Experimental LaTeX
+\ProvidesClass{uncgdissertationexp2}[2018/04/23 Experimental LaTeX
   class for UNCG dissertation]
 \LoadClass[oneside, openany, 12pt, onecolumn, final]{book}
 \RequirePackage[tableposition=top, labelsep = period]{caption}
