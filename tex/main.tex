@@ -425,15 +425,6 @@ This representation reads naturally from left-to-right as follows: ``An implicat
 
 While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (f^{-1},\,g^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
     
-The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence. We assume the incoming formula is unambiguous according to its language grammar specification out of simplicity, but for completeness, we will define a precedence mapping function for the incoming formula $\Gamma$. By enforcing prefix notation in the gold standard, we no longer have to deal with the inherent complexities of operator precedence present in the commonly-used infix notation.
-
-Let $\Gamma$ be an injective function that maps the set of connectives $f$ to $\mathbb{N}$, namely $f \mapsto \mathbb{N}$. $\Gamma$ is designed to give connectives in $f$ a priority level, where the closer its mapped natural number is to zero, the higher its priority. We define priority as the precedence of a connective. When a system defines $\Gamma$, it means that any ambiguous well-formed formula in its corresponding language is parsable without parenthesization. $\Gamma$, as an algorithm, automatically adds parentheses to disambiguate the formula... \textbf{continue here}
-
-\subsubsection{Precedence Mapping Example}
-\textbf{blah blah blah}
-
-Since we consider $\Gamma$ to be optional (opting for a default precedence of logical negation, logical conjunction, logical disjunction, logical implication, then logical biconditional), a system without a defined $\Gamma$ should, optimally, output a warning when it parses an ambiguous well-formed formula.
-
 \subsubsection{Zeroth-Order Logic Example 2}
 Quine's \cite{methodsoflogic} syntax for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $f$ and $g$ where
 \begin{align*}
@@ -446,6 +437,22 @@ We will let $w = -((p\lor q)(-r\lor s)) \supset (-(p\lor q)s)$. Thus,
 					   	 &(C\;(N\;a_1\;a_2)\;a_4))
 \end{align*}
 This representation reads as ``An implication where the left-hand side is a conjunction between a negated disjunction of $a_1$ and $a_2$, and a disjunction of negated $a_3$ and $a_4$. The right-hand side of the implication is a conjunction between a negated disjunction of $a_1$ and $a_2$, and $a_4$.''
+
+The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence. We assume the incoming formula is unambiguous according to its language grammar specification out of simplicity, but for completeness, we will define a precedence mapping function for the incoming formula $\Gamma$. By enforcing prefix notation in the gold standard, we no longer have to deal with the inherent complexities of operator precedence present in the commonly-used infix notation.
+
+Let $\Gamma$ be an injective function that maps the set of connectives $f$ to $\mathbb{N}$, namely $f \mapsto \mathbb{N}$. $\Gamma$ is designed to give connectives in $f$ a priority level, where the closer its mapped natural number is to zero, the higher its priority. We define priority as the precedence of a connective. When a system defines $\Gamma$, it means that any ambiguous well-formed formula in its corresponding language is parsable without parenthesization. $\Gamma$, as an algorithm, automatically adds parentheses to disambiguate the formula... \textbf{continue here}
+
+\subsubsection{Precedence Mapping Example} We will use the same functions $f$ and $g$ from the first propositional logic example. We will also define $\Gamma$ as
+\begin{align*}
+	& f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
+	& g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\} \\
+	& \Gamma:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto\{3,\,1,\,2,\,4,\,0\}                              
+\end{align*}
+Now, suppose $w = A \to \lnot B \to C \land \lnot A$. The precedence function parenthesizes/disambiguates $w$ to $((A \to \lnot B) \to (C \land \lnot A))$, which is then converted into the gold standard as
+\[	
+	M(\mathcal{L},\,w) =\;(I\;(I\;a_{1}\;(N\;a_{2}))\;(C\;a_{3}\;(N\;a_{1})))
+\]
+Since we consider $\Gamma$ to be optional (opting for a default precedence of logical negation, logical conjunction, logical disjunction, logical implication, then logical biconditional), a system without a defined $\Gamma$ should, optimally, output a warning when it parses an ambiguous well-formed formula. Defining $\Gamma$ allows for any ambiguous formula to be converted into one that is unambiguous, as we previously stated, and also allows for ``custom precedence'' levels (i.e., if we want to bind logical disjunction higher than logical conjunction, it is trivial to do so). Finally, some may question the associativity of connectives. We assume that all operators are left-associative, similar to traditional addition, subtraction, multiplication, and division. Though, it would be easy to define a separate associativity function similar to $\Gamma$.
 
 \subsubsection{Natural Deduction Extension} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
 \begin{grammar}
@@ -493,7 +500,6 @@ Lastly, the bijective function $s$ maps two sets $s:\;E \to F$, where $E$ is the
 
 Now, similar to zeroth-order logic, we will construct the gold standard Polish notation grammar $H$ for first-order logic. Likewise, we will utilize the previously-defined notation \textless{$x$---R\textgreater} to eliminate ambiguity with operator arity. Two points to note are that, because identity is a special connective in first-order logic, we restrict its syntactic definition to only constants and variables. Additionally, quantifiers have a restriction in that they must have at least one variable following their declaration, as well as a bound well-formed formula.
 \begin{grammar}
-	
 	<constant> ::= `c' (`1' | `2' | ...)
 	
 	<variable> ::= `v' (`1' | `2' | ...)
