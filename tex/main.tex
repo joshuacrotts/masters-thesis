@@ -65,9 +65,6 @@
 \begin{document}
 \frontmatter      % required
 
-%%------------------------------------------------------------------%%
-%% -------------------------- Abstract -----------------------------%%
-%%------------------------------------------------------------------%%
 \begin{abstract}
 	The abstract page is a required component of the thesis/dissertation.
 	The abstract should be a brief summary of the paper, stating only the
@@ -78,34 +75,18 @@
 	advisor/committee chair. 
 \end{abstract}
 
-%%------------------------------------------------------------------%%
-%%---------------------------- Title page --------------------------%%
-%%------------------------------------------------------------------%%
-%% The title page is required. 
 \maketitlepage
 
-%%------------------------------------------------------------------%%
-%% ------------------------ Copyright page -------------------------%%
-%%------------------------------------------------------------------%%
 %% This page is required if you opt for a copyright.  Otherwise, don't
 % include it.  To omit, just comment out the line below.
 \makecopyrightpage
 
-%%------------------------------------------------------------------%%
-%%---------------------------- Dedication --------------------------%%
-%%------------------------------------------------------------------%%
 \begin{dedication}
 	To my Viola.
 \end{dedication}
 
-%%------------------------------------------------------------------%%
-%%------------------------ Approval page  --------------------------%%
-%%------------------------------------------------------------------%%
 \makeapprovalpage
 
-%%------------------------------------------------------------------%%
-%%-------------------------- Acknowledgements ----------------------%%
-%%------------------------------------------------------------------%%
 \begin{acknowledgments}
 	I would like to extend my gratitude and thanks to the esteemed Dr. Steve Tate for not only overseeing and advising this thesis, but also for being a fantastic mentor and professor throughout my time at UNC Greensboro. I sincerely appreciate Dr. Nancy Green for introducing me to the wonderful world of academic-level computer science research, as well as Dr. Insa Lawler in the Philosophy department for introducing me to the exciting adventure that is formal logic and its pedagogical impact. Their unwavering guidance, mentorship, and insight influenced me to pursue graduate school.
 	
@@ -113,40 +94,16 @@
 	
 	It also cannot go without saying that I am forever grateful for the support from my loving wife Viola. You never let me down.
 	
-	Finally, I am deeply indebted to Mr. Tony Smith: my former Advanced Placement\footnote{https://ap.collegeboard.org/} Computer Science teacher. Without him, I would not be where I am now. Thank you for seeing (and ultimately helping me reach) my potential.
+	Finally, I am deeply indebted to Mr. Tony Smith: my former Advanced Placement\footnote{\url{https://ap.collegeboard.org/}} Computer Science teacher. Without him, I would not be where I am now. Thank you for seeing (and ultimately helping me reach) my potential.
 \end{acknowledgments}
 
-%%------------------------------------------------------------------%%
-%%----------------------------- Preface ----------------------------%%
-%%------------------------------------------------------------------%%
-%% The preface is optional.
 \begin{preface}
 	The basis for this research stems from my love of teaching. When I took my first introduction to formal logic course as an undergraduate, I was taken aback by its amazing appeal and relation to computer science. From my semesters serving as a tutor/teaching assistant in the Philosophy department at UNC Greensboro, I saw many students that struggled with this material. The problems ranged from its confusing syntax, proof techniques, and esoteric notation. At that time, I thought to myself, ``Why not make a tool that helps students understand it better?'' Of course, that question had already been answered and deeply investigated across multiple disciplines, but I knew that there had to be more. Once I began my exploration, I quickly realized that online solvers, theorem provers, proof assistants, and similar tools do not have a de jure input format, and testing their algorithms was far more cumbersome than I initially expected. This evolved into the desire for a gold standard syntax for both zeroth and first-order logic systems.
 \end{preface}
 
-
-%%------------------------------------------------------------------%%
-%%---------------------- Table of Contents -------------------------%%
-%%------------------------------------------------------------------%%
-%% The table of contents is required.  
 \tableofcontents 
-
-
-%%------------------------------------------------------------------%%
-%%---------------------- List of Tables ----------------------------%%
-%%------------------------------------------------------------------%%
-% Recommended if you have tables.  Comment out if you don't have
-% tables. 
 %\listoftables   
-
-
-%%------------------------------------------------------------------%%
-%%---------------------- List of Figures ---------------------------%%
-%%------------------------------------------------------------------%%
-% Recommended if you have figures.  Comment out if you don't have
-% figures. 
 \listoffigures   
-
 
 %%------------------------------------------------------------------%%
 %% This signifies that you are done with the frontmatter and ready to
@@ -195,15 +152,16 @@ Because of the reducible nature of propositional logic to simple structures and 
 
 \textbf{Propositional logic tutors… Abraham, Lukins, Croy, ...}
 
-Lukins et al. \cite{lukins} developed the P-Logic Tutor: a propositional logic tutor with several key functions including a truth table generator, parse tree viewer, tautology/satisfiability determiners, a built-in theorem prover, all of which are supplemented with learning adaptability that generates feedback for students. It was developed as a Java Web Start (JNLP) applet. In their report, they describe an experiment where students across two discrete mathematics courses evaluated its performance, where they received generally positive reviews with some small limitations that students found cumbersome. Unfortunately, their provided link is offline, meaning there is no way to investigate either the source code or even use the application in attempt to test it against modern alternatives. One other significant downside to the P-Logic Tutor is that while it covers propositional logic well as its name suggest, it completely lacks support for first-order logic. Additionally, the system had the requirement where students (or any user) had to log in for performance monitoring purposes. This, in turn, severely limits the testability to only those at, in this instance, Wake Forest University. Another software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula.
+Lukins et al. \cite{lukins} developed the P-Logic Tutor: a propositional logic tutor with several key functions including a truth table generator, parse tree viewer, tautology/satisfiability determiners, a built-in theorem prover, all of which are supplemented with learning adaptability that generates feedback for students. It was developed as a Java Web Start (JNLP) applet. In their report, they describe an experiment where students across two discrete mathematics courses evaluated its performance, where they received generally positive reviews with some small limitations that students found cumbersome. Unfortunately, their provided link is offline, meaning there is no way to investigate either the source code or even use the application in attempt to test it against modern alternatives. One other significant downside to the P-Logic Tutor is that while it covers propositional logic well as its name suggest, it completely lacks support for first-order logic. Additionally, the system had the requirement where students (or any user) had to log in for performance monitoring purposes. This, in turn, severely limits the testability to only those at, in this instance, Wake Forest University. 
+
+Another software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula.
 
 Lodder et al. \cite{lodder} created LOGAX, which is a tool for students to learn and construct axiomatic proofs with feedback and hints. While useful in its specific domain, we focus on natural deduction proofs instead of axiomatic proofs for simplicity and approachability for non-computer science students.
 
-\textbf{FOL:} 
-Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AXolotl} includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
-
 \subsection{First-Order Logic}
-Grivokostopoulou…
+Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AX}olotl includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
+
+Mauco \cite{mauco}, Grivokostopoulou… \cite{grivokostopoulou}
 \subsection{Problem/Solution Generators}
 Ahmed et al. wrote.........
 Hladik...
@@ -230,14 +188,14 @@ All students are not unique, and a formal logic class may contain students acros
 
 Given the varied opinions of students, we wanted to perform an observational study on our software to determine what kinds of proofs students find difficult, or where they potentially go astray from an expert's solution to a problem. In particular, our goal was to analyze the student's abilities to complete propositional logic natural deduction proofs, picking between two sets of premises and conclusions to say which looks harder to prove, as well as choosing a proof out of two that appears more difficult, with the hopeful outcome of finding common patterns between proofs/formula choices, then analyzing said patterns to understand why those were said to be more difficult.
 
-The study was implemented as two Qualtrics surveys. The first consisted of ten \textbf{(insert footnote)} carefully-selected pairs of premises that either prove the same conclusion, or a slightly-altered version of the conclusion. The second survey contained ten \textbf{(insert footnote)} pairs of proofs where each proof in the pair derives the same conclusion, but take different approaches to doing so. Finally, we had a third component where students would use our ANDTaP system \textbf{(described in section blah blah)} to prove ten natural deduction problems \textbf{(append footnote to problems)}. A cheat-sheet of all rules was provided. We would measure how long the student took to solve the proof (provided they were able to), what rules were utilized, and what mistakes were made. Participants who fully completed the study were entered into a drawing to win a \$50 Amazon Gift Card.
+The study was implemented as two Qualtrics surveys. The first consisted of ten\footnote{\url{https://github.com/JoshuaCrotts/MastersThesis/data/qualtrics\_survey\_1.txt}} carefully-selected pairs of premises that either prove the same conclusion, or a slightly-altered version of the conclusion. The second survey contained ten\footnote{\url{https://github.com/JoshuaCrotts/MastersThesis/data/qualtrics\_survey\_2.txt}} pairs of proofs where each proof in the pair derives the same conclusion, but take different approaches to doing so. Finally, we had a third component where students would use our ANDTaP system (see section \ref{section:andtap}) to prove ten natural deduction problems\footnote{\url{https://github.com/JoshuaCrotts/MastersThesis/data/andtap\_questions.txt}}. A cheat-sheet of all rules was provided. We would measure how long the student took to solve the proof (provided they were able to), what rules were utilized, and what mistakes were made. Participants who fully completed the study were entered into a drawing to win a \$50 Amazon Gift Card.
 
 Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results.
 
 \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
 \textbf{Give a brief overview of what we did. A longer description is provided later.}
 
-\subsubsection{FLAT: Formal Logic Aiding Tutor}
+\subsubsection{FLAT: Formal Logic Aiding Tutor} \label{section:flat}
 FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas (see Appendix \ref{appendix:algorithm}), it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
 
 \begin{figure}[!ht]
@@ -262,7 +220,7 @@ FLAT began as a collaborative project which extended LLAT: the Logic Learning As
 
 \textbf{Show table of FLAT operations from other paper?}
 
-\subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}
+\subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}\label{section:andtap}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules, e.g., associativity and commutativity, that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a locally-installed (desktop) program.
 
 \begin{figure}[!ht]
