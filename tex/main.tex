@@ -378,8 +378,19 @@ This representation reads naturally from left-to-right as follows: ``An implicat
 While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (f^{-1},\,g^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
     
 The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). \textbf{Another benefit of using prefix connective notation is its disambiguation of precedence. We assume the incoming formula is unambiguous according to its language grammar specification out of simplicity NOTE: We may add a precedence mapping function $\Gamma$. This is described more on paper. By enforcing prefix notation, we no longer have to deal with the inherent complexities of operator precedence present in the commonly-used infix notation.}
+
 \subsubsection{Zeroth-Order Logic Example 2}
-\textbf{Describe Quine's grammar from Methods of Logic.}
+Quine's \cite{methodsoflogic} syntax for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $f$ and $g$ where
+\begin{align*}
+	& f:\;\{\supset,\,\varepsilon,\,\lor,\,\equiv,\,-\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
+	& g:\;\{p,\,q,\,r,\,s\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,a_{4}\}  
+\end{align*}
+We will let $w = -((p\lor q)(-r\lor s)) \supset (-(p\lor q)s)$. Thus,
+\begin{align*}
+	M(\mathcal{L},\,w) =\;&(I\;(C\;(N\;(D\;a_1\;a_2))\;(D\;(N\;a_3)\;a_4))\\
+					   	 &(C\;(N\;a_1\;a_2)\;a_4))
+\end{align*}
+This representation reads as ``An implication where the left-hand side is a conjunction between a negated disjunction of $a_1$ and $a_2$, and a disjunction of negated $a_3$ and $a_4$. The right-hand side of the implication is a conjunction between a negated disjunction of $a_1$ and $a_2$, and $a_4$.''
 
 \subsubsection{Natural Deduction Extension} It is simple to extend $G$ to support premises and conclusions using the same syntax. We can define a new function $N(\mathcal{L},\,P,\,c)$, where $\mathcal{L}$ is the same definition as before, $P$ is a set of well-formed formula acting as the premises of the proof, and $c$ is the well-formed formula acting as the conclusion of the proof. Our new grammar $G'$ is as follows:
 
