@@ -56,7 +56,7 @@
 \newtheorem*{notation}{Notation}
 
 \newcommand{\titlecaption}[2]{\caption[#1]{#1. #2}}
-
+\newcommand{\varlnot}{\mbox{-}}
 %%------------------------------------------------------------------%%
 \pagestyle{plain} % Eliminates running headers 
 
@@ -158,7 +158,7 @@ Propositional logic, also known as zeroth-order logic (or in other disciplines a
 	  \midrule
 	  Logical Conjunction&$\land$, \&, $\cdot$, ``and''\\
 	  Logical Disjunction&$\lor$, $\vert$, $\parallel$, $+$, ``or''\\
-	  Logical Implication&$\supset$, $\to$, $\Rightarrow$, ``if'', ``then''\\
+	  Logical Implication&$\supset$, $\to$, $\Rightarrow$, $>$, ``if'', ``then''\\
 	  Logical Biconditonal&$\leftrightarrow$, $\equiv$, $\Leftrightarrow$, ``iff''\\
 	  Logical Negation&$\lnot$, $-$, $!$, $\sim$, ``not''\\
 	\bottomrule
@@ -322,11 +322,11 @@ Regarding TAUT-Logic's performance, we discovered that it is roughly on par in t
 	\label{fig:tautlogic}
 \end{figure} 
 
+\subsubsection{System Comparison Results}
 Table \ref{table:allData} shows the tabulated results, including the average number of applied distinct rules compared to the base set size, the average length of all proofs, and the average success rate. Note: systems that did not support first-order logic contributed to a lower overall success rate. Consequently, we further subdivided the data into two groups: one with only propositional logic formulas ($n=203$), and another with only predicate logic formulas ($n=85$). Also note that, when a system cannot solve a proof, this, in turn, lowers the average number of steps and applied distinct rules as those count as zero towards the average. Thus, we created another table to show non-zero total averages.
 \begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Propositional and First-Order Logic Proofs}
-	%\rowcolors{2}{}{gray!10}
 	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct \\    
@@ -343,7 +343,6 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 \begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Propositional Logic Proofs}
-	%\rowcolors{2}{}{gray!10}
 	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct Rules \\    
@@ -360,7 +359,6 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 \begin{table}[!ht]
 	\centering
 	\caption{Data Analysis of Predicate Logic Proofs}
-	%\rowcolors{2}{}{gray!10}
 	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System        & Avg. Success Rate & Avg. No. Steps & Avg. No. Distinct Rules \\    
@@ -375,7 +373,6 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 \begin{table}[!ht]
 	\centering
 	\caption{Non-Zero Data Analysis of All Proofs}
-	%\rowcolors{2}{}{gray!10}
 	\begin{tabularx}{\textwidth}{*4c}
 		\toprule
 		System           & Avg. No. Steps & Avg. No. Distinct Rules \\    
@@ -392,14 +389,51 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 \textbf{Discuss the general findings, then the challenges with inputting data... which lead to the desire for a gold standard!}    
 
 \section{Gold Standard for Formal Logic System Syntax}
-There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, symbol usage varies widely from one subject to the next e.g., notation used in computer science may contain subtle yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation (i.e., they use what they think is correct, what they were taught, or what is otherwise preferred in their respective discipline), providing an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when expecting one syntax yet receive something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
+There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, symbol usage varies widely from one subject to the next. Case in point, notation used in computer science may contain subtle yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation (i.e., they use what they think is correct, what they were taught, or what is otherwise preferred in their respective discipline), providing an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when expecting one syntax yet receive something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
 
 We propose a formal definition that aims to solve most of these problems. One component of this definition allows users to create their own logic language definition as they see fit for their situation. This language is then translatable into a gold standard format, which we will define syntactically and semantically.
 
 \subsection{Zeroth-Order Logic Well-Formed Formula Representation}
+We will start with a small example and then generalize the approach to achieve a well-defined representation. Suppose we have a set of premises $P = \{(A \leftrightarrow B),\,\lnot (C \land D),\,C,\,\lnot B\}$ with the conclusion $c = (\lnot A \land D)$. Converting this proof into the three systems we tested is laborious at best and is increasingly tiresome the more systems we wish to evaluate. Table \ref{table:requiredsyntax} displays the required syntax to parse an equivalent representation of $w$. The desire for a uniform standard to rapidly test multiple systems without manual intervention is readily apparent.
+\begin{table}[!ht]
+	\caption{Required Syntax to Parse Proof $(P,\,c)$}
+	\label{table:requiredsyntax}
+	\small
+	\centering
+	\begin{tabular}{lr}
+	  \toprule
+	  \thead{Natural Deduction System}&\thead{Syntax}\\
+	  \midrule
+	  TeachingLogic&$(p\,<=>\,q)\;\&\;\varlnot(r\,\&\,s)\;\&\;r\;\&\;\varlnot{q}\;=>\;(\varlnot{p}\,\&\,\varlnot{s})$\\
+	  NaturalDeduction&$(A\,\equiv\,B),\,\lnot(C\,\land\,D),\,C,\,\lnot{B}\,\therefore\,(\lnot A \land \lnot D)$\\
+	  TAUT-Logic&$(A\,\text{implies}\,B)\,\text{and}\,(B\,\text{implies}\,A),\,\text{not}(C\,\text{and}\,D),$\\
+	  			&$\text{not}\,B\,\therefore\,(\text{not}\,A\,\text{and}\,\text{not}\,D)$\\
+	\bottomrule
+  \end{tabular}
+\end{table}
+
 Let $M(\mathcal{L},\,w)$ be a function that ``applies'' the zeroth-order logic language $\mathcal{L}$ to the well-formed formula $w$. Let $\mathcal{L}$ be a pair $(f,\,g)$ where $f$ is an connective mapping function, and $g$ is an atomic literal mapping function. 
 
-The bijective function $f$ maps two sets $f:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$ is unary logical negation, $C$ is binary logical conjunction, $D$ is binary logical inclusive disjunction, $E$ is binary logical exclusive disjunction, $I$ is binary logical implication, $B$ is binary logical biconditional (if and only if), $T$ is the truth function, and $F$ is the false function. Note that the arity of any $\phi \in X$ must match the arity of its corresponding output connective in $Y$.
+The bijective function $f$ maps two sets $f:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. Table \ref{table:zerothlogicconnectives} shows the meaning of each connective in $Y$. Note that the arity of any $\phi \in X$ must match the arity of its corresponding output connective in $Y$.
+\begin{table}[!ht]
+	\caption{Connective Symbols for Zeroth-Order Logic Gold Standard}
+	\label{table:zerothlogicconnectives}
+	\centering
+	\begin{tabular}{lr}
+	  \toprule
+	  \thead{Semantic Meaning}&\thead{Connective Symbol}\\
+	  \midrule
+	  Logical Negation&$N$\\
+	  Logical Conjunction&$C$\\
+	  Logical (Inclusive) Disjunction&$D$\\
+	  Logical Exclusive Disjunction&$E$\\
+	  Logical Implication&$I$\\
+	  Logical Biconditonal&$B$\\
+	  Logical Tautology&$T$\\
+	  Logical Falsehood&$F$\\
+	\bottomrule
+  \end{tabular}
+\end{table}
 
 The bijective function $g$ maps two sets $g:\;A \to B$, where $A$ is the set of atomic literals $\psi \in A$ where $\psi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$.
 
@@ -489,7 +523,21 @@ First-order logic is a superset of zeroth-order logic, meaning we can reuse most
 
 Let $\mathcal{L}$ be a quadruple $(p,\;q,\;r,\;s)$ where $p$ is a connective mapping function, $q$ is a predicate mapping function, $r$ is a constant mapping function, and $s$ is a variable mapping function. 
 
-The bijective function $p$ is identical to $f$ in the sense that it maps two sets $p:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N, C, D, E, I, B, T, F, Z, X, V\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$, $C$, $D$, $E$, $I$, $B$, $T$, and $F$ are identical in both syntactic and semantic meaning to zeroth-order logic. $Z$ is the universal quantifier, $X$ is the existential quantifier, and $V$ is the identity operator. $Z$ and $X$ have arities dependent on the formula used, so we cannot restrict it syntactically. Identity $V$, on the other hand, is a binary operator.
+The bijective function $p$ is identical to $f$ in the sense that it maps two sets $p:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N, C, D, E, I, B, T, F, Z, X, V\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$, $C$, $D$, $E$, $I$, $B$, $T$, and $F$ are identical in both syntactic and semantic meaning to zeroth-order logic as referenced in table \ref{table:zerothlogicconnectives}. Table \ref{table:firstlogicconnectives} shows the new operators added by first-order logic. Note that $Z$ and $X$ have arities dependent on the formula used, so we cannot restrict it syntactically. Identity $V$, on the other hand, is a binary operator.
+\begin{table}[!ht]
+	\caption{Connective Symbols for First-Order Logic Gold Standard}
+	\label{table:firstlogicconnectives}
+	\centering
+	\begin{tabular}{lr}
+	  \toprule
+	  \thead{Semantic Meaning}&\thead{Connective Symbol}\\
+	  \midrule
+	  Universal Quantifier&$Z$\\
+	  Existential Quantifier&$X$\\
+	  Identity&$V$\\
+	\bottomrule
+  \end{tabular}
+\end{table}
 
 The bijective function $q$ maps two sets $q:\;A \to B$, where $A$ is the set of predicate letters $\phi \in A$ where $\phi$ is a predicate letter used in the wff $w$, and $B$ is the set of output predicate letters $L_{i}$ where $i \in [1, |A|]$.
 
