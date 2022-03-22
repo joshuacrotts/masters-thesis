@@ -148,8 +148,9 @@ Show brief examples of other tutoring systems \textbf{e.g., algebra, ...}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
 Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. 
-\begin{table}[H]\label{table:commonnotation}
+\begin{table}[H]
 	\caption{Common Notation in Propositional Logic}
+	\label{table:commonnotation}
 	\small
 	\centering
 	\begin{tabular}{lr}
@@ -167,24 +168,30 @@ Propositional logic, also known as zeroth-order logic (or in other disciplines a
 
 Because of the reducible nature of propositional logic to simple structures and representations, there exist plentiful online truth table generators that provide detailed and immediate feedback for users while solving problems and well-formed formulas. Further, such generators work well not only for formal logic, but also computer science, mathematics, and electrical engineering, allowing students to enter a Boolean truth value (i.e., true/false) for an operand or proposition and the computer will determine if it is valid or invalid for an arbitrary cell \cite{truthtablefennell}. An apparent drawback is that they require a student to have prior experience with the underlying logic or preexisting knowledge of entering values into a truth table \cite{koedinger}, a sometimes undesired prerequisite. The problem is that many systems are not aimed at teaching, but rather serve as a solution or complementary aid to students or others who have a full understanding of the material.
 
-\textbf{Propositional logic tutors…, ORGANON (have to be on uncg proxy), Croy, ...}
-
 Lukins et al. \cite{lukins} developed the P-Logic Tutor: a propositional logic tutor with several key functions including a truth table generator, parse tree viewer, tautology/satisfiability determiners, a built-in theorem prover, all of which are supplemented with learning adaptability that generates feedback for students. It was developed as a Java Web Start (JNLP) applet. In their report, they describe an experiment where students across two discrete mathematics courses evaluated its performance, where they received generally positive reviews with some small limitations that students found cumbersome. Unfortunately, their provided link is offline, meaning there is no way to investigate either the source code or even use the application in attempt to test it against modern alternatives. One other significant downside to the P-Logic Tutor is that while it covers propositional logic well as its name suggest, it completely lacks support for first-order logic. Additionally, the system had the requirement where students (or any user) had to log in for performance monitoring purposes. This, in turn, severely limits the testability to only those at, in this instance, Wake Forest University. 
 
 Another software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula.
 
 Lodder et al. \cite{lodder} created LOGAX, which is a tool for students to learn and construct axiomatic proofs with feedback and hints. While useful in its specific domain, we focus on natural deduction proofs instead of axiomatic proofs for simplicity and approachability for non-computer science students.
 
+Mostafavi et al. \cite{mostafavi}...
+
+Siev et al. \cite{apros}...
+
 \subsection{First-Order Logic}
 Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AX}olotl includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
 
-Mauco \cite{mauco}, Grivokostopoulou… \cite{grivokostopoulou}
+Mauco \cite{mauco}...
+
+Grivokostopoulou \cite{grivokostopoulou}...
+
+Dost\'alov\'a et al. \cite{organon}...
 
 \subsection{Problem/Solution Generators}
 Ahmed et al. wrote.........
 Hladik...
 Amendola...
-LLAT... Graham defines a semantic tableau...
+FLAT/LLAT... Graham defines a semantic tableau...
 
 \section{Specialized Logic/Theorem-Proving Programming Languages}
 What is a theorem prover? Ultimately, it's a system that uses a combination of built-in rules, axioms, to prove a provided formula or theorem. It searches for an ordering of rules, axioms, and intermediate formulas which satisfy the theorem and show it holds true. 
@@ -237,10 +244,15 @@ FLAT began as a collaborative project which extended LLAT: the Logic Learning As
 	\label{fig:flatfigures}
 \end{figure}
 
-\textbf{Mention FLAT's drawbacks (e.g., can't solve some ``simple'' proofs, weak proofs by contradiction...)}
+We will briefly explain some algorithms/subsystems, as well as other unique features of FLAT. For starters, students can export truth tables, truth trees (semantic tableaux) \cite{priest2008}, and natural deduction proofs as .pdf and .tex source files. This allows for easy submission and modification of, for instance, practice problems.
 
-\begin{table}\label{table:flat}
+FLAT is translatable into a number of languages other than English via a Google Translate API to ease students into the world of the new language of formal logic without having to strictly learn English (note: this feature is highly experimentable and does not always produce optimal translations). 
+
+Table \ref{table:flat} provides a list of a subset of the FLAT algorithms/subsystems that students can use to practice.
+
+\begin{table}
 	\caption{Subset of Implemented Algorithms in FLAT}
+	\label{table:flat}
 	\small
 	\begin{tabular}{p{3cm}p{11cm}}
 	  \toprule
@@ -266,6 +278,8 @@ FLAT began as a collaborative project which extended LLAT: the Logic Learning As
 	\bottomrule
   \end{tabular}
 \end{table}
+
+Like many existing systems, FLAT has its share of drawbacks. One of those is its tutoring system is rather primitive compared to others---while it has a ``tutoring mode" for almost all supported algorithms and subsystems, it does not generate exercises nor learn from an individual student's mistakes, which deems it non-intelligent according to the standard definition of an intelligent tutor \cite{intelligenttutor}. Also, there is no rhyme or reason why some first-order logic well-formed formulas infinitely loop whereas others do not (we suspect this is due in part to how it selects steps to complete a proof). Furthermore, the natural deduction system in FLAT is missing several key axioms e.g., commutativity and associativity as explained in section \ref{section:andtap}, which largely limits the set of solvable proofs. Moreover, when it cannot solve a proof, the system tries to perform a proof by contradiction, which sometimes leads it astray. We plan to drastically improve all features in future editions of FLAT.
 
 \subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}\label{section:andtap}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules, e.g., associativity and commutativity, that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a locally-installed (desktop) program.
@@ -580,7 +594,6 @@ We read this as ``A conjunction of a universal quantifier that binds $v_1$, a un
 
 \chapter{Discussion and Future Direction}
 
-
 \bibliographystyle{acm}
 \bibliography{myreferences}
 \nocite{*}
@@ -592,13 +605,14 @@ We read this as ``A conjunction of a universal quantifier that binds $v_1$, a un
 %% line and the chapters below.
 %%------------------------------------------------------------------%%
 \appendix
-\label{appendix:algorithm}
+
 \chapter{Propositional Logic Natural Deduction Algorithm}
 
 This appendix describes the algorithm we used to find a natural deduction proof for propositional logic. The idea is to use a ``satisfiability'' algorithm (not to be confused with the Boolean satisfiability problem SAT... \textbf{is this needed? Probably not}). A wff $w$ is satisfied when it is used in the reduction or expansion of another well-formed formula $w'$. In essence, if $w$ is used to construct $w'$, then $w$ is satisfied. At a high level, we recursively compute goals for each premise, and if we can satisfy each goal, then the premise is satisfied. The procedure \textsc{Satisfy} uses rules for each axiom to determine if a premise can be either simplified or if, as a goal, it can be constructed using other premises. For example, suppose we have two premises $A$ and $B$ and we want to satisfy $A \land B$. \textsc{Satisfy} will recursively search through the well-formed formula (i.e., attempt to satisfy its operands from left-to-right) to determine if either have been previously satisfied. Given that $A$ and $B$ are already premises, and premises are, by default, satisfied, we can conlude that $A \land B$ is satisfiable. As another example, let us take the argument $P = \{A \supset (B \land \lnot C),\;\lnot (B \land \lnot C)\}$ and $c = \lnot A$. It is trivial to see that we can conclude $c$ from the premises in $P$ via a modus tollens rule. \textsc{Satisfy} works slightly different when this type of situation occurs. Because there is no way to individually solve intermediate formulas e.g., $B$, $\lnot C$, the algorithm searches for transformations and elimination rules e.g., modus ponens, modus tollens, disjunctive syllogism, transposition, material implication, etc., that may be applied to premises. In our provided example, we can apply modus tollens to the two premises and consequently satisfy $\lnot{A}$. $\lnot{A}$ is, therefore, added to $P$. The terminating condition is when $c$ is satisfied, or equivalently, $c \in P$. Because there are numerous transformations that may be applied to premises, we will omit their direct inclusion in favor of a broad description of behaviors. To prevent unnecessary premises, once a premise is satisfied, it can never be ``unsatisfied''. Moreover, if a premise was constructed, it cannot be redundantly destructed or vice versa. For instance, suppose we have premises $A$ and $B$. We can use a conjunction introduction $\land{I}$ rule to satisfy $A \land B$. The algorithm could, in theory, use a conjunction elimination $\land{E}$ rule to break $A \land B$ back down into its original components. Since such repeated applications blows up the size of $P$ (leading to a potentially infinitely long proof), we heuristically prevent its occurrence. \textbf{Now explain how it finds a path to a solution with that cool arrow diagram.}
 
 \begin{algorithm}
 	\caption{Propositional Natural Deduction Satisfaction Algorithm}\label{euclid}
+	\label{appendix:algorithm}
 	\begin{algorithmic}[1]
 		\Procedure{Prove}{$P,\;c$}\Comment{$P$ is a list of premises, $c$ is conclusion}
 		\While{$c$ is not satisfied}
