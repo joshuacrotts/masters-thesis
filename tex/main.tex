@@ -8,6 +8,7 @@
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
 \usepackage{microtype} % Fixes the "Missing font type" error.
+% \usepackage{times}
 \makeatletter
 \def\MT@is@opt@char#1\iffontchar#2\char#3\else#4\fi\relax{%
   \MT@ifempty{#1}{%
@@ -55,7 +56,6 @@
 \newtheorem*{remark}{Remark}  % the star makes them not numbered                      
 \newtheorem*{notation}{Notation}
 
-\newcommand{\titlecaption}[2]{\caption[#1]{#1. #2}}
 \newcommand{\varlnot}{\mbox{-}}
 %%------------------------------------------------------------------%%
 \pagestyle{plain} % Eliminates running headers 
@@ -119,6 +119,10 @@ Formal logic, otherwise known as classical formal logic, is a subset of philosop
 This thesis is broken up into three primary components. Chapter 1 introduces definitions, background, and our problem definitions. Chapter 2 reviews the related literature for prior work in this area. Chapter 3 discusses the primary two methods of research, being our natural deduction and formal logic tutoring system: FLAT (Formal Logic Aiding Tutor), as well as the creation of a gold standard for formal logic syntax and semantics (i.e., the creation of a standardized grammar for logic language evaluation).
 \section{Terminology}
 Before we continue, we will define some terms frequently used in formal logic-related work.
+\begin{definition}[Logic]
+
+\end{definition}
+
 \begin{definition}[Well-Formed Formula]
 	A \textit{well-formed formula}, according to \cite{encyclopedia} is a string (formula) of syntactically-correct characters which conform (well-formed) to a language grammar.
 \end{definition}
@@ -137,6 +141,12 @@ Before we continue, we will define some terms frequently used in formal logic-re
 	\textbf{Begin with a general definition, then the history}
 \end{definition}
 
+\begin{definition}[Syntax]
+\end{definition}
+
+\begin{definition}[Grammar]
+\end{definition}
+
 \chapter{Related Work}
 In this chapter, we will discuss the related work and prior contributions to the discipline of natural deduction pedagogy, as well as efforts to modernize and increase its effectiveness for students with a weaker background in, for example, mathematics. 
 
@@ -148,7 +158,7 @@ Show brief examples of other tutoring systems \textbf{e.g., algebra, ...}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
 Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. 
-\begin{table}[H]
+\begin{table}[!ht]
 	\caption{Common Notation in Propositional Logic}
 	\label{table:commonnotation}
 	\small
@@ -195,7 +205,7 @@ Dost\'alov\'a et al. \cite{organon}...
 Ahmed et al. wrote.........
 Hladik...
 Amendola...
-FLAT/LLAT... Graham defines a semantic tableau...
+FLAT/LLAT...
 
 \section{Specialized Logic/Theorem-Proving Programming Languages}
 What is a theorem prover? Ultimately, it's a system that uses a combination of built-in rules, axioms, to prove a provided formula or theorem. It searches for an ordering of rules, axioms, and intermediate formulas which satisfy the theorem and show it holds true. 
@@ -222,10 +232,10 @@ Given the varied opinions of students, we wanted to perform an observational stu
 
 The study was implemented as two Qualtrics surveys. The first consisted of ten\footnote{\url{https://tinyurl.com/QualtricsSurvey-1}} carefully-selected pairs of premises that either prove the same conclusion, or a slightly-altered version of the conclusion. The second survey contained ten\footnote{\url{https://tinyurl.com/QualtricsSurvey-2}} pairs of proofs where each proof in the pair derives the same conclusion, but take different approaches to doing so. Finally, we had a third component where students would use our ANDTaP system (see section \ref{section:andtap}) to prove ten natural deduction problems\footnote{\url{https://tinyurl.com/ANDTaP-Questions}}. A cheat-sheet of all rules was provided. We would measure how long the student took to solve the proof (provided they were able to), what rules were utilized, and what mistakes were made. Participants who fully completed the study were entered into a drawing to win a \$50 Amazon Gift Card.
 
-Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results.
+Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results. We will, however, analyze and discuss the data received from the two Qualtrics survey participants. \textbf{continue here}
 
 \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
-\textbf{Give a brief overview of what we did. A longer description is provided later.}
+Experimenting between systems that perform related tasks appears easy at first glance, but quickly diverges into chaos if a consensus of differentiation is not reached. In this section, we describe the two systems we created, aimed at improving the pedagogy of introductory formal logic. With this, we also thought about testing the algorithms and subsystems against other available options to students and teachers. Of course, as we have mentioned, without students to assess, such a task is quite challenging because an expert's opinion on what ``is better'' may reflect their own implicit bias and not that of ``common users'' of the software. Due to this dilemma, our metric evolved into the complexity of a generated natural deduction proof. But, then again, what is complexity to an expert versus a beginning, or even intermediate, student? Is it fair to say that a proof which uses more axioms from its base set is less complex than another (system)? Should we consider a proof in comparison to what other systems generate; namely, if one system generates a proof that wildly diverges from an ``expert solution'', ought we see this as a negative? In our analysis, we will answer several of these questions.  
 
 \subsubsection{FLAT: Formal Logic Aiding Tutor} \label{section:flat}
 FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool \cite{llat}. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas (see Appendix \ref{appendix:algorithm}), it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
@@ -285,13 +295,13 @@ Table \ref{table:flat} provides a list of a subset of the FLAT algorithms/subsys
 
 Like many existing systems, FLAT has its share of drawbacks. One of those is its tutoring system is rather primitive compared to others---while it has a ``tutoring mode" for almost all supported algorithms and subsystems, it does not generate exercises nor learn from an individual student's mistakes, which deems it non-intelligent according to the standard definition of an intelligent tutor \cite{intelligenttutor}. Also, there is no rhyme or reason why some first-order logic well-formed formulas infinitely loop whereas others do not (we suspect this is due in part to how it selects steps to complete a proof). Furthermore, the natural deduction system in FLAT is missing several key axioms e.g., commutativity and associativity as explained in section \ref{section:andtap}, which largely limits the set of solvable proofs. Moreover, when it cannot solve a proof, the system tries to perform a proof by contradiction, which sometimes leads it astray. We plan to drastically improve all features in future editions of FLAT.
 
-\subsubsection{ANDTaP: Another Natural Deduction Tutor and Prover}\label{section:andtap}
+\subsubsection{ANDTaP: Automatic Natural Deduction Tutor and Prover}\label{section:andtap}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules, e.g., associativity and commutativity, that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a locally-installed (desktop) program.
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{andtap-tutor.png}
-	\titlecaption{ANDTaP Tutoring System}{...}
+	\caption{ANDTaP Tutoring System}{...}
 	\label{fig:andtap}
 \end{figure} 
 
@@ -305,27 +315,27 @@ The first tool we analyzed was a web application for proving propositional logic
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.65\textwidth]{teachinglogic.png}
-	\titlecaption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
+	\caption{LIGLAB's Natural Deduction}{Example proof showing the user interface and proof annotations.}
 	\label{fig:liglab}
 \end{figure} 
 
 Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and is the second natural deduction software we investigated. This system includes both a proof generator and a proof checker. While it primarily focuses on modal logic (specifically, the modal logic system S5), it has a propositional logic prover because modal logic natural deduction semantics are a superset of those of propositional logic. We noted that its interface is clean and very elegant to use. Likewise, its ability to prove both theorems and premise-conclusion style proofs is helpful. We also found its performance on par, if not faster than other similar software. However, Natural Deduction has a severe drawback: its proof generation capabilities, or somewhat of a lack thereof. While it generates short and simple proofs for a subset of our test suite, for others, the proofs were unmanageably long and so cumbersome that a student would, realistically, never look through them. In addition to this significant issue, we discovered that the system places an arbitrary limit on the length of a premise set and its corresponding conclusion. Along a similar vein, the system refuses any proof that contains more than seven propositions/atoms, even if the proof contains no connectives - only atoms (e.g., $A$, $B$, $C$, $D$, $E$, $F$, $G$, $H$, $\therefore$ $H$). Lastly, the system automatically converts connectives to a recognizable format e.g., \textgreater\;to $\to$, and uppercases any entered propositions. It gets confused, though, if the user enters a symbol it does not recognize (e.g., \& instead of $\land$), and erroneously replaces symbols that otherwise together represent one into two separate symbols e.g., $=>$ into $\equiv\supset$. These restrictions do not entirely detract students from the application; however, they exemplify the types of downfalls that other systems do not have.
 \begin{figure}[!ht]
 	\centering
+	\caption{NaturalDeduction Windows Application Solving a Proof}
+	\label{fig:test}
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.9\linewidth]{w10app-1.png}
-		\caption{A subfigure}
+		\caption{Proof Input to System}
 		\label{fig:sub1}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=0.9\linewidth]{w10app-2.png}
-		\caption{A subfigure}
+		\caption{Proof Output Solution with Annotations}
 		\label{fig:sub2}
 	\end{subfigure}
-	\caption{A figure with two subfigures}
-	\label{fig:test}
 \end{figure}
 
 TAUT-Logic is a web application designed by Ariel Roff\'e, and assisted by the Buenos Aires Logic Group. Unlike the first two, TAUT-Logic supports first-order predicate logic, and is the only easy-to-use system of its kind that we found which is not out of commission nor abandoned. In addition to its natural deduction toolset, it supports basic set theory,  truth table generation, and model truth. 
@@ -336,7 +346,7 @@ Regarding TAUT-Logic's performance, we discovered that it is roughly on par in t
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tautlogic.png}
-	\titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+	\caption{TautLogic's Predicate Natural Deduction}{Write a caption...}
 	\label{fig:tautlogic}
 \end{figure} 
 
@@ -425,7 +435,7 @@ We will start with a small example and then generalize the approach to achieve a
 	  TeachingLogic&$(p\,<=>\,q)\;\&\;\varlnot(r\,\&\,s)\;\&\;r\;\&\;\varlnot{q}\;=>\;(\varlnot{p}\,\&\,\varlnot{s})$\\
 	  NaturalDeduction&$(A\,\equiv\,B),\,\lnot(C\,\land\,D),\,C,\,\lnot{B}\,\therefore\,(\lnot A \land \lnot D)$\\
 	  TAUT-Logic&$(A\,\text{implies}\,B)\,\text{and}\,(B\,\text{implies}\,A),\,\text{not}(C\,\text{and}\,D),$\\
-	  			&$\text{not}\,B\,\therefore\,(\text{not}\,A\,\text{and}\,\text{not}\,D)$\\
+	  			&$C,\,\text{not}\,B\,\therefore\,(\text{not}\,A\,\text{and}\,\text{not}\,D)$\\
 	\bottomrule
   \end{tabular}
 \end{table}
@@ -638,21 +648,21 @@ This appendix describes the algorithm we used to find a natural deduction proof 
 \begin{sidewaysfigure}[ht]
 	\centering
 	\includegraphics[width=1\textwidth]{all-proofs-graph.png}
-	\titlecaption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+	\caption{TautLogic's Predicate Natural Deduction}{Write a caption...}
 	\label{fig:allproofsgraph}
 \end{sidewaysfigure} 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{prop-graph.png}
-	\titlecaption{Propositional Logic Natural Deduction}{Write a caption...}
+	\caption{Propositional Logic Natural Deduction}{Write a caption...}
 	\label{fig:propgraph}
 \end{figure} 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{pred-graph.png}
-	\titlecaption{Predicate Logic Results Graph}{Write a caption...}
+	\caption{Predicate Logic Results Graph}{Write a caption...}
 	\label{fig:predgraph}
 \end{figure} 
 
