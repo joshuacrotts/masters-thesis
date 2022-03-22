@@ -178,6 +178,10 @@ Mostafavi et al. \cite{mostafavi}...
 
 Siev et al. \cite{apros}...
 
+Verwer et al... \cite{verwer}
+
+Croy et al... \cite{croy}
+
 \subsection{First-Order Logic}
 Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AX}olotl includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
 
@@ -426,9 +430,9 @@ We will start with a small example and then generalize the approach to achieve a
   \end{tabular}
 \end{table}
 
-Let $M(\mathcal{L},\,w)$ be a function that ``applies'' the zeroth-order logic language $\mathcal{L}$ to the well-formed formula $w$. Let $\mathcal{L}$ be a pair $(f,\,g)$ where $f$ is an connective mapping function, and $g$ is an atomic literal mapping function. 
+Let $M(\mathcal{L},\,w)$ be a function that ``applies'' the zeroth-order logic language $\mathcal{L}$ to the well-formed formula $w$. Let $\mathcal{L}$ be a pair $(\delta,\,\zeta)$ where $delta$ is an connective mapping function, and $\zeta$ is an atomic literal mapping function. 
 
-The bijective function $f$ maps two sets $f:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. Table \ref{table:zerothlogicconnectives} shows the meaning of each connective in $Y$. Note that the arity of any $\phi \in X$ must match the arity of its corresponding output connective in $Y$.
+The bijective function $\delta$ maps two sets $\delta:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. Table \ref{table:zerothlogicconnectives} shows the meaning of each connective in $Y$. Note that the arity of any connective $\phi \in X$ must match the arity of its corresponding output connective $\psi \in Y$.
 \begin{table}[!ht]
 	\caption{Connective Symbols for Zeroth-Order Logic Gold Standard}
 	\label{table:zerothlogicconnectives}
@@ -449,7 +453,7 @@ The bijective function $f$ maps two sets $f:\;X \to Y$, where $X$ is the set of 
   \end{tabular}
 \end{table}
 
-The bijective function $g$ maps two sets $g:\;A \to B$, where $A$ is the set of atomic literals $\psi \in A$ where $\psi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$.
+The bijective function $\zeta$ maps two sets $\zeta:\;A \to B$, where $A$ is the set of atomic literals $\phi \in A$ where $\phi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$.
 
 We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used to create a standardized notation for zeroth-order logic. This notation takes inspiration from Scheme-syntax with its parenthesization of connectives and operands. For this, we must extend the definition of typical Extended Backus-Naur Form to account for multiple-arity connectives. Thus, we introduce the notation \textless{$x$---R\textgreater} to indicate that $x$ is a variable used in the EBNF rule $R$, and $\{\gamma\}^{x}$ to denote $x$ applications of $\gamma$. In the grammar, $\alpha$ is the arity of a connective.
 \begin{grammar}
@@ -459,10 +463,10 @@ We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used
 	        
 	<$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
 \end{grammar}
-\subsubsection{Zeroth-Order Logic Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $f$ and $g$ where
+\subsubsection{Zeroth-Order Logic Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $\delta$ and $\zeta$ where
 \begin{align*}
-	  & f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	  & g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}                                   
+	  & \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
+	  & \zeta:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}                                   
 \end{align*}
 We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus, 
 \[
@@ -470,13 +474,13 @@ We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus,
 \]
 This representation reads naturally from left-to-right as follows: ``An implication of $a_1$ and a biconditional of $a_2$ and negated $a_3$''. We consider all connectives as first-class functions in our definition.
 
-While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (f^{-1},\,g^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
+While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (\delta^{-1},\,\zeta^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
     
 \subsubsection{Zeroth-Order Logic Example 2}
-Quine's \cite{methodsoflogic} syntax for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $f$ and $g$ where
+Quine's \cite{methodsoflogic} syntax for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $\delta$ and $\zeta$ where
 \begin{align*}
-	& f:\;\{\supset,\,\varepsilon,\,\lor,\,\equiv,\,-\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	& g:\;\{p,\,q,\,r,\,s\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,a_{4}\}  
+	& \delta:\;\{\supset,\,\varepsilon,\,\lor,\,\equiv,\,-\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
+	& \zeta:\;\{p,\,q,\,r,\,s\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,a_{4}\}  
 \end{align*}
 We will let $w = -((p\lor q)(-r\lor s)) \supset (-(p\lor q)s)$. Thus,
 \begin{align*}
@@ -487,12 +491,12 @@ This representation reads as ``An implication where the left-hand side is a conj
 
 The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence. We assume the incoming formula is unambiguous according to its language grammar specification out of simplicity, but for completeness, we will define a precedence mapping function for the incoming formula $\Gamma$. By enforcing prefix notation in the gold standard, we no longer have to deal with the inherent complexities of operator precedence present in the commonly-used infix notation.
 
-Let $\Gamma$ be an injective function that maps the set of connectives $f$ to $\mathbb{N}$, namely $f \mapsto \mathbb{N}$. $\Gamma$ is designed to give connectives in $f$ a priority level, where the closer its mapped natural number is to zero, the higher its priority. We define priority as the precedence of a connective. When a system defines $\Gamma$, it means that any ambiguous well-formed formula in its corresponding language is parsable without parenthesization. $\Gamma$, as an algorithm, automatically adds parentheses to disambiguate the formula... \textbf{continue here}
+Let $\Gamma$ be an injective function that maps the set of connectives $\delta$ to $\mathbb{N}$, namely $\delta \mapsto \mathbb{N}$. $\Gamma$ is designed to give connectives in $\delta$ a priority level, where the closer its mapped natural number is to zero, the higher its priority. We define priority as the precedence of a connective. When a system defines $\Gamma$, it means that any ambiguous well-formed formula in its corresponding language is parsable without parenthesization. $\Gamma$, as an algorithm, automatically adds parentheses to disambiguate the formula... \textbf{continue here}
 
-\subsubsection{Precedence Mapping Example} We will use the same functions $f$ and $g$ from the first propositional logic example. We will also define $\Gamma$ as
+\subsubsection{Precedence Mapping Example} We will use the same functions $\delta$ and $\zeta$ from the first propositional logic example. We will also define $\Gamma$ as
 \begin{align*}
-	& f:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	& g:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\} \\
+	& \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
+	& \zeta:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\} \\
 	& \Gamma:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto\{3,\,1,\,2,\,4,\,0\}                              
 \end{align*}
 Now, suppose $w = A \to \lnot B \to C \land \lnot A$. The precedence function parenthesizes/disambiguates $w$ to $((A \to \lnot B) \to (C \land \lnot A))$, which is then converted into the gold standard as
@@ -519,13 +523,13 @@ Since we consider $\Gamma$ to be optional (opting for a default precedence of lo
 The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).\\
 %~(C ∨ D), D ↔ (E ∨ F), ~A → (C ∨ F) ∴ A
 \subsubsection{Natural Deduction Example}
-Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine the function $g$ in $\mathcal{L}$ as follows:
+Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine $\zeta$ in $\mathcal{L}$ as follows:
 \[
-	g:\;\{A, C, D, E, F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
+	\zeta:\;\{A,\,C,\,D,\,E,\,F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
 \]
 \noindent Therefore, 
 \begin{align*}
-	N(\mathcal{L}, P, c) & = ((H\;a_1)\;                      \\
+	N(\mathcal{L},\,P,\,c) & = ((H\;a_1)\;                      \\
 	                     & (P\;(N\;(D\;a_2\;a_3)))            \\
 	                     & (P\;(B\;a_3\;(D\;a_4\;a_5)))       \\
 	                     & (P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))
@@ -533,11 +537,11 @@ Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F)
 We read this as ``Hence $a_1$ if $P_1$ is true and $P_2$ is true and $P_3$ is true'', where $P_1$, $P_2$, and $P_3$ are the individual premises that comprise the argument. This style largely resembles the way we write Prolog (conditional) rules. 
 \subsection{First-Order Logic Well-Formed Formula Representation}
 
-First-order logic is a superset of zeroth-order logic, meaning we can reuse most of our definitions from the previous section. We will, however, need to slightly redefine $\mathcal{L}$ to allow for mapping predicate definitions, constants, and variables. Further, so as to not confuse the function definitions from zeroth-order logic, we will instead use new letters to represent mapping functions.
+First-order logic is a superset of zeroth-order logic, meaning we can reuse most of our definitions from the previous section. We will, however, need to slightly redefine $\mathcal{L}$ to allow for mapping predicate definitions, constants, and variables. Further, so as to not confuse the function definitions from zeroth-order logic, we will instead use new letters to represent mapping functions unique to first-order logic semantics.
 
-Let $\mathcal{L}$ be a quadruple $(p,\;q,\;r,\;s)$ where $p$ is a connective mapping function, $q$ is a predicate mapping function, $r$ is a constant mapping function, and $s$ is a variable mapping function. 
+Let $\mathcal{L}$ be a quadruple $(\delta,\;\varsigma,\;\chi,\;\eta)$ where $\delta$ is a connective mapping function, $\varsigma$ is a predicate mapping function, $\chi$ is a constant mapping function, and $\eta$ is a variable mapping function. 
 
-The bijective function $p$ is identical to $f$ in the sense that it maps two sets $p:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N, C, D, E, I, B, T, F, Z, X, V\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$, $C$, $D$, $E$, $I$, $B$, $T$, and $F$ are identical in both syntactic and semantic meaning to zeroth-order logic as referenced in table \ref{table:zerothlogicconnectives}. Table \ref{table:firstlogicconnectives} shows the new operators added by first-order logic. Note that $Z$ and $X$ have arities dependent on the formula used, so we cannot restrict it syntactically. Identity $V$, on the other hand, is a binary operator.
+For first-order logic, we slightly modify $\delta$ from its zeroth-order definition in the sense that it now maps two sets $\delta:\;X \to Y$, where $X$ is the set of input connectives defined by $\mathcal{L}$, and $Y \subseteq \{N,\,C,\,D,\,E,\,I,\,B,\,T,\,F,\,Z,\,X,\,V\}$ is the set of output connectives defined by our grammar, where $|X| = |Y|$. $N$, $C$, $D$, $E$, $I$, $B$, $T$, and $F$ are identical in both syntactic and semantic meaning to zeroth-order logic as referenced in table \ref{table:zerothlogicconnectives}. Table \ref{table:firstlogicconnectives} shows the new operators added by first-order logic. Note that $Z$ and $X$ have arities dependent on the formula used, so we cannot restrict it syntactically. Identity $V$, on the other hand, is a binary operator.
 \begin{table}[!ht]
 	\caption{Connective Symbols for First-Order Logic Gold Standard}
 	\label{table:firstlogicconnectives}
@@ -553,13 +557,13 @@ The bijective function $p$ is identical to $f$ in the sense that it maps two set
   \end{tabular}
 \end{table}
 
-The bijective function $q$ maps two sets $q:\;A \to B$, where $A$ is the set of predicate letters $\phi \in A$ where $\phi$ is a predicate letter used in the wff $w$, and $B$ is the set of output predicate letters $L_{i}$ where $i \in [1, |A|]$.
+The bijective function $\varsigma$ maps two sets $\varsigma:\;A \to B$, where $A$ is the set of predicate letters $\phi \in A$ where $\phi$ is a predicate letter used in the wff $w$, and $B$ is the set of output predicate letters $L_{i}$ where $i \in [1, |A|]$.
 
-The bijective function $r$ maps two sets $r:\;C \to D$, where $C$ is the set of constant letters $\psi \in C$ where $\psi$ is a constant identifier used in $w$, and $D$ is the set of output constant identifiers $c_{i}$ where $i \in [1, |C|]$.
+The bijective function $\chi$ maps two sets $\chi:\;C \to D$, where $C$ is the set of constant letters $\psi \in C$ where $\psi$ is a constant identifier used in $w$, and $D$ is the set of output constant identifiers $c_{i}$ where $i \in [1, |C|]$.
 
-Lastly, the bijective function $s$ maps two sets $s:\;E \to F$, where $E$ is the set of variable letters $\rho \in E$ where $\rho$ is a variable identifier used in $w$ and $F$ is the set of output variable identifiers $v_{i}$ where $i \in [1, |E|]$.
+Lastly, the bijective function $\eta$ maps two sets $\eta:\;E \to F$, where $E$ is the set of variable letters $\rho \in E$ where $\rho$ is a variable identifier used in $w$ and $F$ is the set of output variable identifiers $v_{i}$ where $i \in [1, |E|]$.
 
-Now, similar to zeroth-order logic, we will construct the gold standard Polish notation grammar $H$ for first-order logic. Likewise, we will utilize the previously-defined notation \textless{$x$---R\textgreater} to eliminate ambiguity with operator arity. Two points to note are that, because identity is a special connective in first-order logic, we restrict its syntactic definition to only constants and variables. Additionally, quantifiers have a restriction in that they must have at least one variable following their declaration, as well as a bound well-formed formula.
+Now, similar to zeroth-order logic, we will construct the gold standard Polish notation grammar $\mathcal{M}$ for first-order logic. Likewise, we will utilize the previously-defined notation \textless{$x$---R\textgreater} to eliminate ambiguity with operator arity. Two points to note are that, because identity is a special connective in first-order logic, we restrict its syntactic definition to only constants and variables. Additionally, quantifiers have a restriction in that they must have at least one variable following their declaration, as well as a bound well-formed formula.
 \begin{grammar}
 	<constant> ::= `c' (`1' | `2' | ...)
 	
@@ -578,16 +582,16 @@ Now, similar to zeroth-order logic, we will construct the gold standard Polish n
 	<$\alpha$---wff> ::= (<predicate> \{<literal>\}) \\| (<connective> [` '] <wff>$^{\alpha}$) \\| (<quantifier> <variable> \{<variable>\} <wff>)\\| (<identity> <literal> [` '] <literal>)
 \end{grammar}
 The above grammar states ...\textbf{continue here}
-\subsubsection{First-Order Logic Example} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of the four functions $p$, $q$, $r$, and $s$ where
+\subsubsection{First-Order Logic Example} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ has a quadruple of the four functions $\delta$, $\varsigma$, $\chi$, and $\eta$ where
 \begin{align*}
-	  & p:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\} \\
-	  & q:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}                                                                       \\
-	  & r:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}                                                                                       \\
-	  & s:\;\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}                                                                             
+	  & \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\} \\
+	  & \varsigma:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}                                                                       \\
+	  & \chi:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}                                                                                       \\
+	  & \eta:\;\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}                                                                             
 \end{align*}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
 \begin{align*}
-	M(\mathcal{L},\,w) & = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1)))) \\
+	\mathcal{M}(\mathcal{L},\,w) & = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1)))) \\
 	                   & (D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))         
 \end{align*}
 We read this as ``A conjunction of a universal quantifier that binds $v_1$, a universal quantifier binding $v_2$, bound to the negation of $L_1\,v_1\,v_2\,c_1$ and a disjunction of the following: $L_2\,c_1\,c_2$ and an existential quantifier which binds $v_3$, bound to $L_3\,v_3$.''
