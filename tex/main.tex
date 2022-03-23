@@ -60,7 +60,7 @@
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 \begin{document}
 \frontmatter      % required
-
+\doublespacing
 \begin{abstract}
 	The abstract page is a required component of the thesis/dissertation.
 	The abstract should be a brief summary of the paper, stating only the
@@ -94,13 +94,13 @@
 \end{acknowledgments}
 
 \begin{preface}
-	The basis for this research stems from my love of teaching. When I took my first introduction to formal logic course as an undergraduate, I was taken aback by its amazing appeal and relation to computer science. From my semesters serving as a tutor/teaching assistant in the Philosophy department at UNC Greensboro, I saw many students that struggled with this material. The problems ranged from its confusing syntax, proof techniques, and esoteric notation. At that time, I thought to myself, ``Why not make a tool that helps students understand it better?'' Of course, that question had already been answered and deeply investigated across multiple disciplines, but I knew that there had to be more. Once I began my exploration, I quickly realized that online solvers, theorem provers, proof assistants, and similar tools do not have a de jure input format, and testing their algorithms was far more cumbersome than I initially expected. This evolved into the desire for a gold standard syntax for both zeroth and first-order logic systems.
+	The basis for this research stems from my love of teaching. When I took my first introduction to formal logic course as an undergraduate, I was taken aback by its amazing appeal and relation to computer science. From my semesters serving as a tutor/teaching assistant in the Philosophy department at UNC Greensboro, I saw many students that struggled with this material. The problems ranged from its confusing syntax, proof techniques, and esoteric notation. At that time, I thought to myself, ``Why not make a tool that helps students understand it better?'' Of course, that question had already been answered and deeply investigated across multiple disciplines, but I knew that there had to be more. Once I began my exploration, I quickly realized that online solvers, theorem provers, proof assistants, and similar tools do not have a systematized input format, and testing their algorithms was far more cumbersome than I initially expected and anticipated. This evolved into the desire for a gold standard syntax for both zeroth and first-order logic systems.
 \end{preface}
 
 \tableofcontents 
 \listoftables   
 \listoffigures   
-\doublespacing
+%\doublespacing
 
 %%------------------------------------------------------------------%%
 %% This signifies that you are done with the frontmatter and ready to
@@ -150,7 +150,7 @@ Extending formal logic to a technological education is not a new idea---there ex
 
 Many of the systems we describe below, including our own, are a type of intelligent interactive tutor. A goal of such a system is to mimic the relationship between instructors and their student(s). In particular, if a student starts to struggle with any given topic, the tutor ought to recognize the mistakes made, correct them, and then lead them down the intended path. Similarly, it should provide hints to a problem if requested, even if the student has not necessarily yet gone astray. Taking this a step further may call for dynamic generation of questions tailored to the individual student. Automatic tutors and intelligent interactive tutors have a host of benefits: reducing stress on teachers by not having to create unique content for all students (a feat almost impossible unless the class size is small), and research has demonstrated that students perform better on assessments (cite the intelligent tutors book 15 or the paper it referenced) in one-on-one tutoring sessions.
 
-Show brief examples of other tutoring systems \textbf{e.g., algebra, ...}
+Show brief examples of other tutoring systems \textbf{e.g., algebra, ..., \cite{autexier}}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
 Propositional logic, also known as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. 
@@ -180,18 +180,16 @@ Another software-based solution (i.e., executable outside the browser) is LEGEND
 
 Lodder et al. \cite{lodder} created LOGAX, which is a tool for students to learn and construct axiomatic proofs with feedback and hints. While useful in its specific domain, we focus on natural deduction proofs instead of axiomatic proofs for simplicity and approachability for non-computer science students.
 
-Mostafavi et al. \cite{mostafavi}...
+Mostafavi et al. \cite{mostafavi} have written several papers on their Deep Thought tool with several iterations of improvement ranging from on-demand step hint generation to data-driven approaches to problem generation. Their work largely aims to improve the pedagogy of deductive logic via mastery learning leveling components which dynamically change based on student performance, with higher proficiency in problem solving leading to harder problems e.g., longer proofs, different axioms, etc. Their system also modifies the difficulty of problems to fit a student's mastery level (e.g., if a student has trouble answering a particular proof, they are given an easier alternative). An eventual conclusion reached was as the ``intelligence'' of a tutor increased, the number of successful students likewise increased. 
 
-Siev et al. \cite{apros}...
+In \cite{apros}, Siev describes the Automated Proof Search system AProS: a proof generation system which works in tandem with their proof tutor. It is used in their Open Learning Initiative\footnote{\url{https://oli.cmu.edu/}} project at Carnegie Mellon University. Though, their system and pedagogical pipeline strays away from only propositional and first-order logic in favor of theory of computing topics such as Turing machines, computability, set theory, and others. In addition, the links provided on their website are either out of date or incorrect, because when trying to access their course \textit{Logic \& Proofs}, it redirects users to the OLI website instead. Plus, the fully-featured tool is not provided, and their Java Web Start version is not easily accessible in the modern web, where Java in the browser is, to a great extent, deprecated.
 
-Verwer et al... \cite{verwer}
-
-Croy et al... \cite{croy}
+In \cite{verwer}, Verwer et al. briefly describe their propositional logic tutor Bop: a Fitch-style proving system. Like many other systems, their provided link is offline, so we had no way of assessing its performance.
 
 \subsection{First-Order Logic}
 Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AX}olotl includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
 
-Mauco \cite{mauco}...
+In \cite{mauco} and \cite{felice}, Mauco and Felice et al. show educational software for increasing the appeal of first-order logic to introductory students. With this idea, they developed FOLST and LogicChess. The former, FOLST, is a graphical application that shows an illustrated scene with predicates that define said scene e.g., isSleeping(x), isOnTheGrass(x) when referring to a farm. Students must enter facts that describe the illustration using these given predicates. LogicChess is similar in that students are provided predicates to describe a scene, but with the difference that it uses a chess board with chess pieces. According to their reports, students may modify the model which updates the underlying logic formulas, which may then be checked for validity and satisfiability. 
 
 Grivokostopoulou \cite{grivokostopoulou}...
 
@@ -199,9 +197,7 @@ Dost\'alov\'a et al. \cite{organon}...
 
 \subsection{Problem/Solution Generators}
 Ahmed et al. wrote.........
-Hladik...
-Amendola...
-FLAT/LLAT...
+Amendola... \cite{hardrandom}
 
 \section{Specialized Logic/Theorem-Proving Programming Languages}
 What is a theorem prover? Ultimately, it's a system that uses a combination of built-in rules, axioms, to prove a provided formula or theorem. It searches for an ordering of rules, axioms, and intermediate formulas which satisfy the theorem and show it holds true. 
@@ -719,7 +715,7 @@ This appendix describes the algorithm we used to find a natural deduction proof 
 	\end{algorithmic}
 \end{algorithm}
 
-We have described how the algorithm generates a proof, but there lies the issue that unnecessary premises may have been generated as part of the path to said proof. Each step in the proof has parent steps which generate the child. For example, if $A$ and $B$ are steps to generate $A \land B$, we denote $A$ and $B$ as its parent steps. These are used in a backwards path walk from the conclusion to find a solution to the proof. Note that there may be more than one solution to a proof; our algorithm simply picks the path which explores all parent steps until the original assumptions are reached. We denote an original assumption as the premises which were provided as part of the proof... \textbf{continue here. I may want to rewrite this later but the basic idea/structure is here}
+We have described how the algorithm generates a proof, but there lies the issue that unnecessary premises may have been generated as part of the path to said proof. In other words, there may be steps that contributed to a later step, but ultimately do not contribute to the proof path which derived the conclusion, deeming them as superfluous steps. Each step in the proof has parent steps which generate the child. For example, if $A$ and $B$ are steps to generate $A \land B$, we denote $A$ and $B$ as its parent steps. These are used in a backwards path walk from the conclusion to find a solution to the proof. Note that there may be more than one solution to a proof; our algorithm simply picks the path which explores all parent steps until the original assumptions are reached. We denote an original assumption as the premises which were provided as part of the proof... \textbf{continue here. I may want to rewrite this later but the basic idea/structure is here}
 \begin{figure}[!ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
