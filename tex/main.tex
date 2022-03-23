@@ -1,13 +1,9 @@
 \documentclass[ms]{uncgdissertationexp2}
 
-\usepackage{booktabs, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
-\usepackage{siunitx}
-\usepackage{makecell, booktabs, caption}
-\usepackage[svgnames,table]{xcolor}
+\usepackage{booktabs, siunitx, makecell, booktabs, colortbl, prooftrees, microtype, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
 \usepackage[tableposition=above]{caption}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
-\usepackage{microtype} % Fixes the "Missing font type" error.
 % \usepackage{times}
 \makeatletter
 \def\MT@is@opt@char#1\iffontchar#2\char#3\else#4\fi\relax{%
@@ -111,7 +107,7 @@
 %% proceed to the main part.  The rest of your document goes below.
 \mainmatter % required
 %%------------------------------------------------------------------%%
-\chapter{Introduction}
+\chapter{Introduction}\label{chapter:1}
 \section{Overview}
 Formal logic, otherwise known as classical formal logic, is a subset of philosophy that branches into related disciplines such as computer science, statistics, mathematics, and similar sciences. Logic, however, is taught in non-science fields like communicative studies to reinforce critical thinking and improve deductive skills for argumentation. Per Stanford's Encyclopedia on Classical Logic \cite{stanfordencyclopedia}, logic is a tool used for studying correct reasoning in both formal and informal languages. Its existence spawned questions ranging from its use in mathematics as an aid to disambiguate problems and proofs to considering it as an extension to natural language \cite{stanfordencyclopedia}. As Hatcher \cite{hatcher} states, due to an increased viewing of rhetoric and opinion versus factual knowledge in modern social media, the need for strong logical thinking abilities is crucial for evaluating, analyzing, and debating against arguments and claims. Hatcher, likewise, mentions that standard logical deductive forms such as methods of inference and syllogisms serve as critical components for a student's ability to determine the validity of an argument and the relation (or lack thereof) of premises to conclusions. A desire for valid and sound arguments from students constitutes and contributes to wider adoption of formal logic classes in universities, or at the very least, the pedagogy of invalid arguments with how to refute incorrect and, sometimes egregious, contentions.  Formal logic's relation to computer science, in particular, ... \textbf{talk about how we can use formal logic for mathematical proofs, Boolean logic for circuitry, set theory, reasoning about program correctness (Hoare logic) etc.}
 \section{Contribution}
@@ -147,7 +143,7 @@ Before we continue, we will define some terms frequently used in formal logic-re
 \begin{definition}[Grammar]
 \end{definition}
 
-\chapter{Related Work}
+\chapter{Related Work}\label{chapter:2}
 In this chapter, we will discuss the related work and prior contributions to the discipline of natural deduction pedagogy, as well as efforts to modernize and increase its effectiveness for students with a weaker background in, for example, mathematics. 
 
 Extending formal logic to a technological education is not a new idea---there exist many online solvers, provers, and programming languages designed to suit the needs of logic students, or those that use formal logic in some manner. We will also mention more powerful theorem provers that are aimed at experts/more experienced users.
@@ -219,7 +215,7 @@ Coq..., $\alpha$\textsf{lean}TAP,..., Hoare logic, ...
 \section{Boolean Satisfiability Solver Input Formats} 
 Cook proved that the Boolean satisfiability problem SAT is $\mathcal{NP}$-Complete \cite{cook}, providing the Cook-Levin theorem used in computational complexity reduction proofs. Boolean satisfiability answers the question, ``Given a Boolean logic formula $F$, is there an assignment of truth values to that makes $F$ true?''. Because this problem is $\mathcal{NP}$-Complete, there exists no (efficient) polynomial-time solution. Because of the usefulness of SAT with program verification, graph coloring, constraint satisfaction, artificial intelligence, electronic circuitry correctness verification, and more, the need for heuristically-fast SAT solvers was evident. A lecture by Heule and Martins \cite{satsolvers} describes several SAT solvers including DIMACS, CaDiCaL, SAT4J, UBCSAT, and PySAT. Though, having a plethora of SAT solvers to choose from is rather meaningless to those who need them--rather, they want to know which one is the fastest. To test SAT solvers against one another, SAT Competitions came to light, as did the benchmark submission guidelines detailing the required input format... \textbf{use this source \cite{satbenchmark}}
 
-\chapter{Methods}
+\chapter{Methods}\label{chapter:3}
 In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
 
 \section{Evaluation of Natural Deduction Systems}
@@ -232,7 +228,7 @@ Given the varied opinions of students, we wanted to perform an observational stu
 
 The study was implemented as two Qualtrics surveys. The first consisted of ten\footnote{\url{https://tinyurl.com/QualtricsSurvey-1}} carefully-selected pairs of premises that either prove the same conclusion, or a slightly-altered version of the conclusion. The second survey contained ten\footnote{\url{https://tinyurl.com/QualtricsSurvey-2}} pairs of proofs where each proof in the pair derives the same conclusion, but take different approaches to doing so. Finally, we had a third component where students would use our ANDTaP system (see section \ref{section:andtap}) to prove ten natural deduction problems\footnote{\url{https://tinyurl.com/ANDTaP-Questions}}. A cheat-sheet of all rules was provided. We would measure how long the student took to solve the proof (provided they were able to), what rules were utilized, and what mistakes were made. Participants who fully completed the study were entered into a drawing to win a \$50 Amazon Gift Card.
 
-Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results. We will, however, analyze and discuss the data received from the two Qualtrics survey participants. \textbf{continue here}
+Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) and ANDTaP ($n=0$), we were unable to perform any significant analysis of the results. It is unclear why the survey was unsuccessful, but the lack of an incentive or requirement via a class grade is almost certainly a suspect. Perhaps integrating one of our tools into a course, similar to other previous experiments, could yield improved participation results. We will, however, analyze and discuss the data received from the two Qualtrics survey participants in chapter \ref{chapter:4}.
 
 \subsection{Experiment 2: Determining the Efficacy of Natural Deduction Software}
 Experimenting between systems that perform related tasks appears easy at first glance, but quickly diverges into chaos if a consensus of differentiation is not reached. In this section, we describe the two systems we created, aimed at improving the pedagogy of introductory formal logic. With this, we also thought about testing the algorithms and subsystems against other available options to students and teachers. Of course, as we have mentioned, without students to assess, such a task is quite challenging because an expert's opinion on what ``is better'' may reflect their own implicit bias and not that of ``common users'' of the software. Due to this dilemma, our metric evolved into the complexity of a generated natural deduction proof. But, then again, what is complexity to an expert versus a beginning, or even intermediate, student? Is it fair to say that a proof which uses more axioms from its base set is less complex than another (system)? Should we consider a proof in comparison to what other systems generate; namely, if one system generates a proof that wildly diverges from an ``expert solution'', ought we see this as a negative? In our analysis, we will answer several of these questions.  
@@ -262,7 +258,7 @@ We will briefly explain some algorithms/subsystems, as well as other unique feat
 
 FLAT is translatable into a number of languages other than English via a Google Translate API to ease students into the world of the new language of formal logic without having to strictly learn English (note: this feature is highly experimentable and does not always produce optimal translations). 
 
-Table \ref{table:flat} provides a list of a subset of the FLAT algorithms/subsystems that students can use to practice.
+Table \ref{table:flat} provides a list of a subset of the FLAT algorithms/subsystems that students can use to practice. Table \ref{table:flataxioms} shows the axiom base set for natural deduction proofs in FLAT.
 
 \begin{table}
 	\caption{Subset of Implemented Algorithms in FLAT}
@@ -292,8 +288,42 @@ Table \ref{table:flat} provides a list of a subset of the FLAT algorithms/subsys
 	\bottomrule
   \end{tabular}
 \end{table}
+\begin{table}[!ht]
+	\caption{FLAT Natural Deduction Axioms}
+	\label{table:flataxioms}
+	\centering
+	\begin{tabular}{lr}
+	  	\toprule
+	  	\thead{Axiom Name}&\thead{Definition}\\
+	  	\midrule
+	  	Modus Ponens (MP)&$(\phi \to \psi) \land \phi \therefore \psi$\\
+	  	Modus Tollens (MT)&$(\phi \to \psi) \land \lnot{\psi} \therefore \lnot{\phi}$\\
+	  	Hypothetical Syllogism (HS)&$(\phi \to \psi)\land(\psi \to \gamma)\therefore(\phi \to \gamma)$\\
+	  	Disjunctive Syllogism (DS)&($(\phi \lor \psi) \land \lnot\phi \therefore \psi$\\
+		Disjunction Introduction ($\lor${I})&$\phi \therefore (\phi \lor \psi)$\\
+		Conjunction Elimination ($\land${E})&$(\phi \land \psi) \therefore \phi$\\
+		Conjunction Introduction ($\land${I})&$\phi \land \psi \therefore (\phi \land \psi)$\\
+		Material Implication (MI)&$(\phi \to \psi) \leftrightarrow (\lnot\phi \lor \psi)$\\
+		Biconditional Breakdown (BCB)&$(\phi \leftrightarrow \psi) \therefore (\phi \to \psi) \land (\psi \to \phi)$\\
+		Biconditional Introduction (BCI)&$(\phi \to \psi) \land (\psi \to \phi) \therefore (\phi \leftrightarrow \psi)$\\
+		Double Negation Introduction (DNI)&$(\phi \therefore \lnot\lnot\phi)$\\
+		Double Negation Elimination (DNE)&$(\lnot\lnot\phi \therefore \phi)$\\
+		Transposition (TP)&$(\phi \to \psi) \leftrightarrow (\lnot\psi \to \lnot \phi)$\\
+		Constructive Dilemma (CD)&$(\phi \lor \psi) \land (\phi \to \gamma) \land (\psi \to \omega) \therefore (\gamma \lor \omega)$\\
+		Destructive Dilemma (DD)&$(\lnot\gamma \lor \lnot\omega) \land (\phi \to \gamma) \land (\psi \to \omega) \therefore (\lnot\phi \lor \lnot\psi)$\\
+		DeMorgan's Law (DeM)&$\lnot(\phi \land \psi) \leftrightarrow (\lnot\phi \lor \lnot\psi)$\\
+							&$\lnot(\phi \lor \psi) \leftrightarrow (\lnot\phi \land \lnot\psi)$\\
+							&$\lnot(\phi \leftrightarrow \psi) \leftrightarrow \lnot((\phi \to \psi) \land (\psi \to \phi))$\\
+							&$\lnot\exists\phi \leftrightarrow \forall\lnot\phi$\\
+							&$\lnot\forall\phi \leftrightarrow \exists\lnot\phi$\\
+		Existential Elimination ($\exists$E)&$\exists{x}Px \therefore P\alpha$ where $\alpha$ is not previously-used\\
+		Existential Introduction ($\exists$I)&$P\alpha \therefore \exists{x}Px$\\
+		Universal Elimination ($\forall$E)&$\forall{x}Px \therefore P\alpha$ where $\alpha$ is previously-used\\
+	\bottomrule
+  \end{tabular}
+\end{table}
 
-Like many existing systems, FLAT has its share of drawbacks. One of those is its tutoring system is rather primitive compared to others---while it has a ``tutoring mode" for almost all supported algorithms and subsystems, it does not generate exercises nor learn from an individual student's mistakes, which deems it non-intelligent according to the standard definition of an intelligent tutor \cite{intelligenttutor}. Also, there is no rhyme or reason why some first-order logic well-formed formulas infinitely loop whereas others do not (we suspect this is due in part to how it selects steps to complete a proof). Furthermore, the natural deduction system in FLAT is missing several key axioms e.g., commutativity and associativity as explained in section \ref{section:andtap}, which largely limits the set of solvable proofs. Moreover, when it cannot solve a proof, the system tries to perform a proof by contradiction, which sometimes leads it astray. We plan to drastically improve all features in future editions of FLAT.
+Like many existing systems, FLAT has its share of drawbacks. One of those is its tutoring system is rather primitive compared to others---while it has a ``tutoring mode" for almost all supported algorithms and subsystems, it does not generate exercises nor learn from an individual student's mistakes, which deems it non-intelligent according to the standard definition of an intelligent tutor \cite{woolf}. Also, there is no rhyme or reason why some first-order logic well-formed formulas infinitely loop whereas others do not (we suspect this is due in part to how it selects steps to complete a proof). Furthermore, the natural deduction system in FLAT is missing several key axioms e.g., commutativity and associativity as explained in section \ref{section:andtap}, which largely limits the set of solvable proofs. Moreover, when it cannot solve a proof, the system tries to perform a proof by contradiction, which sometimes leads it astray. We plan to drastically improve all features in future editions of FLAT.
 
 \subsubsection{ANDTaP: Automatic Natural Deduction Tutor and Prover}\label{section:andtap}
 ANDTaP is a smaller, web-based version of FLAT's natural deduction implementation. It supports a subset of its proving capabilities, but a superset of the tutoring functionality. Some natural deduction rules, e.g., associativity and commutativity, that are not present in FLAT work as intended in ANDTaP. The choice to use a web-based client for ANDTaP rather than a desktop application was highly influenced by the desire to allow students to use it wherever they want instead of being restricted to a locally-installed (desktop) program.
@@ -301,7 +331,7 @@ ANDTaP is a smaller, web-based version of FLAT's natural deduction implementatio
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{andtap-tutor.png}
-	\caption{ANDTaP Tutoring System}{...}
+	\caption{ANDTaP Tutoring System}
 	\label{fig:andtap}
 \end{figure} 
 
@@ -413,8 +443,7 @@ Table \ref{table:allData} shows the tabulated results, including the average num
 	\end{tabularx}
 	\label{table:nzAllData}
 \end{table}
-
-\textbf{Discuss the general findings, then the challenges with inputting data... which lead to the desire for a gold standard!}    
+In chapter \ref{chapter:4} we will discuss the findings to our experiment, as well as the challenges we encountered when formatting and inputting the formulas from our dataset.
 
 \section{Gold Standard for Formal Logic System Syntax}
 There are several reasons why a standardized grammar does not necessarily already exist for formal logic. Firstly, symbol usage varies widely from one subject to the next. Case in point, notation used in computer science may contain subtle yet important differences from philosophy-esque logics. Secondly, preexisting sources such as textbooks, websites, professors, and others all use preferential notation (i.e., they use what they think is correct, what they were taught, or what is otherwise preferred in their respective discipline), providing an amalgamation of symbols for students to use and reference which, therefore, leads students and automatic systems astray when expecting one syntax yet receive something completely different. Thirdly, propositional logic learning platforms may or may not include certain operators. For example, because it is trivial to represent the biconditional (if and only if) binary operator as a conjunction of implications, it is certainly possible, albeit rather rare, to omit its symbolic representation from a language. Such omissions cause problems when evaluating formulas either automatically or by hand..... \textbf{continue here}
@@ -456,7 +485,7 @@ The bijective function $\delta$ maps two sets $\delta:\;X \to Y$, where $X$ is t
 	  Logical (Inclusive) Disjunction&$D$\\
 	  Logical Exclusive Disjunction&$E$\\
 	  Logical Implication&$I$\\
-	  Logical Biconditonal&$B$\\
+	  Logical Biconditional&$B$\\
 	  Logical Tautology&$T$\\
 	  Logical Falsehood&$F$\\
 	\bottomrule
@@ -539,7 +568,7 @@ Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F)
 \]
 \noindent Therefore, 
 \begin{align*}
-	N(\mathcal{L},\,P,\,c) & = ((H\;a_1)\;                      \\
+	N(\mathcal{L},\,P,\,c) & = ((H\;a_1)\;                    \\
 	                     & (P\;(N\;(D\;a_2\;a_3)))            \\
 	                     & (P\;(B\;a_3\;(D\;a_4\;a_5)))       \\
 	                     & (P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))
@@ -606,7 +635,54 @@ Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thu
 \end{align*}
 We read this as ``A conjunction of a universal quantifier that binds $v_1$, a universal quantifier binding $v_2$, bound to the negation of $L_1\,v_1\,v_2\,c_1$ and a disjunction of the following: $L_2\,c_1\,c_2$ and an existential quantifier which binds $v_3$, bound to $L_3\,v_3$.''
 
-\chapter{Discussion and Future Direction}
+\chapter{Discussion and Future Direction}\label{chapter:4}
+In chapter \ref{chapter:3}, we detailed our methods of experimentation, including a survey-focused and student-driven methodology, a head-to-head comparison of publicly-available natural deduction proving software, and a gold standard syntax definition for both zeroth and first-order logics. In this chapter, we will discuss our general findings, and analyze future research potential.
+
+\textbf{Describe the $n=2$ survey results...}
+
+\textbf{Describe what we found from analyzing the ND software and why that led to a desire for a gold standard}
+As Tables \ref{table:allData}, \ref{table:propData}, \ref{table:predData}, \ref{table:nzAllData}, and graphs \ref{fig:allproofsgraph}, \ref{fig:propgraph}, \ref{fig:predgraph} show, our system, FLAT, has a higher percentage of proofs that are what we consider digestable for a beginning logic student. It is desirable for a natural deduction proof to be understandable, comprehensible, and condensed enough where details are not omitted, but rather are fleshed out to provide a clear path to the solution. 
+
+While TeachingLogic's system has a greater percentage of solved proofs than FLAT, NaturalDeduction, and TAUTLogic, we found its user interface to be unintuitive particularly when entering a formula with unrecognizable syntax according to their language grammar. This odd requirement strongly deters those who wish to use a natural deduction proving software, but perhaps focus more time modifying their input to fit the system specifications than that spent understanding the generated proof(s). Moreover, its limited axiom base set upper-bounds the kinds of proofs it can generate---resulting in several nested subproofs and proofs by contradiction. Importantly, the generated proofs are syntactically and semantically correct, but to someone with little prior experience in formal logic or mathematical proofs, it may come across as overwhelming. 
+
+A severe problem with NaturalDeduction, as we previously mentioned, is its unnecessary inconsistency---the generated proofs range from perfect (in that they match the intended expert solution) to absolutely out of control nose dives into confusion. As an illustration, suppose we want to prove $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$. FLAT's solution, which we consider the optimal solution under our axiom set, has twelve lines including the premises and conclusion (see figure \ref{fig:long-ass-proof}). NaturalDeduction, on the contrary, has 247 lines. The absurd length we discovered is not exclusive to this proof; we found several other sets of premises and conclusions which caused the system to generate unimaginably long and incomprehensible proofs. Furthermore, its input requirements are unreasonably restrictive... \textbf{continue here}
+\begin{figure}[!ht]
+	\caption{Proof of $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$}
+	\label{fig:long-ass-proof}
+	\begin{center}
+	\renewcommand*\linenumberstyle[1]{#1.}
+		\begin{prooftree}
+			{
+			close with={\ensuremath{\ast}},
+			}
+			[(A \leftrightarrow B), just=P
+				[(B \leftrightarrow C), just=P
+					[(A \to B) \land (B \to A), just=\text{1 BCB} %3
+						[A \to B, just=\text{3 $\land$E}. %4
+							[B \to A, just=\text{3 $\land$E}. %5
+								[(B \to C) \land (C \to B), just=\text{2 BCB} %6
+									[B \to C, just=\text{6 $\land$E} %7
+										[C \to B, just=\text{6 $\land$E} %8
+											[A \to C, just=\text{4, 7 HS} %9
+												[C \to A, just=\text{3, 8 HS} %10
+													[(A \to C) \land (C \to A), just=\text{9, 10 $\land$I} %11
+														[(A \leftrightarrow C), just=\text{11 BCI}] %12
+													]
+												]
+											]
+										]
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+		\end{prooftree}
+	\end{center}
+\end{figure}
+
+\textbf{Explain the gold standard and... why it's a good alternative to the current state-of-the-art?}
 
 \bibliographystyle{acm}
 \bibliography{myreferences}
@@ -643,26 +719,45 @@ This appendix describes the algorithm we used to find a natural deduction proof 
 	\end{algorithmic}
 \end{algorithm}
 
+We have described how the algorithm generates a proof, but there lies the issue that unnecessary premises may have been generated as part of the path to said proof. Each step in the proof has parent steps which generate the child. For example, if $A$ and $B$ are steps to generate $A \land B$, we denote $A$ and $B$ as its parent steps. These are used in a backwards path walk from the conclusion to find a solution to the proof. Note that there may be more than one solution to a proof; our algorithm simply picks the path which explores all parent steps until the original assumptions are reached. We denote an original assumption as the premises which were provided as part of the proof... \textbf{continue here. I may want to rewrite this later but the basic idea/structure is here}
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{algorithmexample.png}
+		\caption{Write a caption...}
+		\label{fig:algorithmexample}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.35\textwidth]{algorithmpath.png}
+		\caption{Write a caption...}
+		\label{fig:algorithmpath}
+	\end{subfigure}
+	\caption{Write a big caption!}
+	\label{fig:togetheralgorithm}
+\end{figure}
+
 \chapter{Result Graphs}
 
 \begin{sidewaysfigure}[ht]
 	\centering
 	\includegraphics[width=1\textwidth]{all-proofs-graph.png}
-	\caption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+	\caption{All Systems Natural Deduction Proof Line Count}
 	\label{fig:allproofsgraph}
 \end{sidewaysfigure} 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{prop-graph.png}
-	\caption{Propositional Logic Natural Deduction}{Write a caption...}
+	\caption{Propositional Logic Natural Deduction Line Count}
 	\label{fig:propgraph}
 \end{figure} 
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=0.9\textwidth]{pred-graph.png}
-	\caption{Predicate Logic Results Graph}{Write a caption...}
+	\caption{Predicate Logic Line Count}
 	\label{fig:predgraph}
 \end{figure} 
 
