@@ -16,9 +16,12 @@
 }
 \makeatother
 
-
+% Configures the figure and table numbers.
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
 
 \graphicspath{{../img/}}
 
@@ -92,8 +95,11 @@
 \end{preface}
 
 \tableofcontents 
-\listoftables   
-\listoffigures   
+\let\origaddvspace\addvspace
+\renewcommand{\addvspace}[1]{}
+\listoffigures
+\listoftables
+\renewcommand{\addvspace}[1]{\origaddvspace{#1}}
 \doublespacing
 
 %%------------------------------------------------------------------%%
@@ -260,7 +266,7 @@ In this chapter, we explain our evaluation method and metrics for assessing thre
 To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist, they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts focus more on improving their current tool rather than performing direct comparisons with others. The issue with head-to-head comparisons is the metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
 
 \subsection{Experiment 1: A Student-Driven Approach for Difficulty Metrics}
-All students are not unique, and a formal logic class may contain students across different disciplines. As a result, what is difficult to one student who has yet to see logic may be easier to another student who programs or otherwise works with Boolean operators. Determining what exactly constitutes difficult in a logic class is tricky for the same reason. That is, it is a non-trivial job to evaluate whether one problem or topic is inherently more challenging than another.....\textbf{continue here}
+All students are not unique, and a formal logic class may contain students across different disciplines. As a result, what is difficult to one student who has yet to see logic may be easier to another student who programs or otherwise works with Boolean operators. Determining what exactly constitutes difficult in a logic class is tricky for the same reason. That is, it is a non-trivial job to evaluate whether one problem or topic is inherently more challenging than another.
 
 Given the varied opinions of students, we wanted to perform an observational study on our software to determine what kinds of proofs students find difficult, or where they potentially go astray from an expert's solution to a problem. In particular, our goal was to analyze the student's abilities to complete propositional logic natural deduction proofs, picking between two sets of premises and conclusions to say which looks harder to prove, as well as choosing a proof out of two that appears more difficult, with the hopeful outcome of finding common patterns between proofs/formula choices, then analyzing said patterns to understand why those were said to be more difficult.
 
@@ -272,7 +278,7 @@ Unfortunately, due to a lack of participants in the Qualtrics surveys ($n=2$) an
 Experimenting between systems that perform related tasks appears easy at first glance, but quickly diverges into chaos if a consensus of differentiation is not reached. In this section, we describe the two systems we created, aimed at improving the pedagogy of introductory formal logic. With this, we also thought about testing the algorithms and subsystems against other available options to students and teachers. Of course, as we have mentioned, without students to assess, such a task is quite challenging because an expert's opinion on what ``is better'' may reflect their own implicit bias and not that of ``common users'' of the software. Due to this dilemma, our metric evolved into the complexity of a generated natural deduction proof. But, then again, what is complexity to an expert versus a beginning, or even intermediate, student? Is it fair to say that a proof which uses more axioms from its base set is less complex than another (system)? Should we consider a proof in comparison to what other systems generate; namely, if one system generates a proof that wildly diverges from an ``expert solution'', ought we see this as a negative? In our analysis, we will answer several of these questions.  
 
 \subsubsection{FLAT: Formal Logic Aiding Tutor} \label{section:flat}
-FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool \cite{llat}. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas (see Appendix \ref{appendix:algorithm}), it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic (cite G\"odel?).
+FLAT began as a collaborative project which extended LLAT: the Logic Learning Assistance Tool \cite{llat}. This extension brought along a core component to formal logic proofs: the ability to prove or disprove a proposition via natural deduction. Not only does the system have an algorithm for automatically proving a clause of formulas (see Appendix \ref{appendix:algorithm}), it also includes a tutoring system allowing students to, step-by-step, write a proof. FLAT supports both zeroth and first-order logics, with heuristics to prevent infinite proofs that comes with the semidecidability of first-order logic \textbf{(cite G\"odel?)}.
 
 \begin{figure}[!ht]
 	\centering
@@ -490,7 +496,7 @@ We propose a formal definition that aims to solve most of these problems. One co
 
 The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence, which we will supplement with further discussion at the end of the next section.
 
-\subsection{Zeroth-Order Logic Well-Formed Formula Representation}
+\subsection{Zeroth-Order Logic Well-Formed Formula Representation}\label{section:zerothorderlogic}
 We will start with a small example and then generalize the approach to achieve a well-defined representation. Suppose we have a set of premises $P = \{(A \leftrightarrow B),\,\lnot (C \land D),\,C,\,\lnot B\}$ with the conclusion $c = (\lnot A \land D)$. Converting this proof into the three systems we tested is laborious at best and is increasingly tiresome the more systems we wish to evaluate. Table \ref{table:requiredsyntax} displays the required syntax to parse an equivalent representation of $w$. The desire for a uniform standard to rapidly test multiple systems without manual intervention is readily apparent.
 \begin{table}[!ht]
 	\caption{Required Syntax to Parse Proof $(P,\,c)$}
@@ -614,7 +620,7 @@ Where $\forall{C}\in{X_B}$, $\gamma{(C)} = L$ (i.e., every binary connective is 
 	
 	<proof> ::= (<conclusion> \{<premise>\})
 \end{grammar}
-The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).\\
+The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).
 
 \subsubsection{Natural Deduction Example}
 Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine $\zeta$ in $\mathcal{L}$ as follows:
@@ -694,14 +700,15 @@ We read this as ``A conjunction of a universal quantifier that binds $v_1$, a un
 \chapter{Discussion and Future Direction}\label{chapter:4}
 In chapter \ref{chapter:3}, we detailed our methods of experimentation, including a survey-focused and student-driven methodology, a head-to-head comparison of publicly-available natural deduction proving software, and a gold standard syntax definition for both zeroth and first-order logics. In this chapter, we will discuss our general findings, and analyze future research potential.
 
+\section{Experiment 1}
 \textbf{Describe the $n=2$ survey results...}
 
-\textbf{Describe what we found from analyzing the ND software and why that led to a desire for a gold standard}
+\section{Experiment 2}
 As Tables \ref{table:allData}, \ref{table:propData}, \ref{table:predData}, \ref{table:nzAllData}, and graphs \ref{fig:allproofsgraph}, \ref{fig:propgraph}, \ref{fig:predgraph} show, our system, FLAT, has a higher percentage of proofs that are what we consider digestable for a beginning logic student. It is desirable for a natural deduction proof to be understandable, comprehensible, and condensed enough where details are not omitted, but rather are fleshed out to provide a clear path to the solution. 
 
 While TeachingLogic's system has a greater percentage of solved proofs than FLAT, NaturalDeduction, and TAUTLogic, we found its user interface to be unintuitive particularly when entering a formula with unrecognizable syntax according to their language grammar. This odd requirement strongly deters those who wish to use a natural deduction proving software, but perhaps focus more time modifying their input to fit the system specifications than that spent understanding the generated proof(s). Moreover, its limited axiom base set upper-bounds the kinds of proofs it can generate---resulting in several nested subproofs and proofs by contradiction. Importantly, the generated proofs are syntactically and semantically correct, but to someone with little prior experience in formal logic or mathematical proofs, it may come across as overwhelming. 
 
-A severe problem with NaturalDeduction, as we previously mentioned, is its unnecessary inconsistency---the generated proofs range from perfect (in that they match the intended expert solution) to absolutely out of control nose dives into confusion. As an illustration, suppose we want to prove $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$. FLAT's solution, which we consider the optimal solution under our axiom set, has twelve lines including the premises and conclusion (see figure \ref{fig:long-ass-proof}). NaturalDeduction, on the contrary, has 247 lines. The absurd length we discovered is not exclusive to this proof; we found several other sets of premises and conclusions which caused the system to generate unimaginably long and incomprehensible proofs. Furthermore, its input requirements are unreasonably restrictive... \textbf{continue here}
+A severe problem with NaturalDeduction, as we previously mentioned, is its unnecessary inconsistency---the generated proofs range from perfect (in that they match the intended expert solution) to absolutely out of control nose dives into confusion. As an illustration, suppose we want to prove $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$. FLAT's solution, which we consider the optimal solution under our axiom set, has twelve lines including the premises and conclusion (see figure \ref{fig:long-ass-proof}). NaturalDeduction, on the contrary, has 247 lines. The absurd length we discovered is not exclusive to this proof; we found several other sets of premises and conclusions which caused the system to generate unimaginably long and incomprehensible proofs. 
 \begin{figure}[!ht]
 	\caption{Proof of $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$}
 	\label{fig:long-ass-proof}
@@ -737,8 +744,23 @@ A severe problem with NaturalDeduction, as we previously mentioned, is its unnec
 		\end{prooftree}
 	\end{center}
 \end{figure}
+Furthermore, its input requirements are unreasonably restrictive: only allowing eight unique atoms and fourteen identical atoms combined via binary connectives e.g., $A\land A\land ... \land A$. We are unsure if these limitations are due to the proof generation system that NaturalDeduction uses, but because the instructions do not provide this information, we can, at best, only speculate. One additional problem we discovered is that NaturalDeduction omits premises that do not impact the final proof (i.e., premises that it deems are unnecessary), even if they were listed as premises in the original premise set $P$. We feel that this omission is problematic due to the relative importance of initial premises to an argument. Plus, this can lead to confusion and thoughts of ``What happened to premise X?'' from students.
 
-\textbf{Explain the gold standard and... why it's a good alternative to the current state-of-the-art?}
+Moreover, while not a huge downside, neither NaturalDeduction or TeachingLogic support first-order predicate logic. Oddly enough, NaturalDeduction, instead, supports S5 Modal Logic. 
+
+Lastly, TAUT-Logic was, as mentioned before, the only system that we tested which supports both zeroth and first-order logics. It too, though, comes with its share of cons. We provided an example of a logic system in section \ref{section:zerothorderlogic} which does not support the biconditional operator, requiring instead to write it as a conjunction of implications (see table \ref{table:requiredsyntax}). Its performance is similar in that to FLAT, but we found it times out on both zeroth and first-order logic proofs for sometimes no apparent reason with an error stating that it simply could not solve the proof. 
+
+While each system that we evaluated has its share of advantages and disadvantages, the most profound problem was the inconsistency in entering proofs and well-formed formulas. Each system uses a slight variation of logic syntax which in turn means we had to convert each formula from the original format into four separate standards (FLAT, TeachingLogic, NaturalDeduction, TAUT-Logic). Our gold standard as detailed in chapter \ref{chapter:3} aims to rectify these issues with long-term goals of systems either adopting the gold standard, or creating the language pipeline for formulas to be converted from the gold standard into their syntax, so as to be an automatic process rather than manual. While it is relatively unrealistic to expect current state-of-the-art systems to rewrite their input pipeline to only support the gold standard, this is not necessarily our goal. Instead, we aspire to have the gold standard be an intermediate representation for formulas which are fed, or piped, to and from testable systems. Such an increase in standardization will undoubtedly raise the automatic testability and evaluation of logic systems.
+
+\section{Future Work}
+\subsection{Gold Standard Extendability via Non-Classical Logic Systems}
+This thesis is only concerned with classical logic: zeroth and first-order logics. Though, we propose that creating a gold standard for other logics which are, perhaps, supersets of classical logic (e.g., modal) is relatively straightforward with our provided groundwork. Modal logic, however, is different from classical logics in that its necessity and possibility unary connective extensions (i.e., $\Box$ and $\Diamond$ respectively) are the dominant standard.
+
+\subsection{Intelligent Tutors}
+Circling back to formal logic tutors, there is still a significant amount of work to be had on the intelligence of logic tutoring systems (see chapter \ref{chapter:2}). We, in particular, would like to completely move FLAT \ref{section:flat} into the browser so students do not have to download an application on their computer. This transition is in-progress via ANDTaP \ref{section:andtap}, but has much room for improvement. A responsive and clean UI is all but mandatory in today's world of web and mobile applications, and while ANDTaP is clean, it does not scale well to the mobile platform (e.g., sizing issues, button clicks). Further, we wish to improve the tutoring system by supplementing the user with hints similar to other tutoring systems across different disciplines. Unlike many other systems which specialize in one area of logic e.g., natural deduction, however, FLAT has several tools (see table \ref{table:flat}) where in each could use a pedagogical upgrade via hints, automatic (satisfiable) problem generation, and classroom integration. We plan to continuously update and upgrade both systems, as well as research into improved methods of teaching logic with special emphasis on non-computer science or mathematics students.
+
+\section{Conclusion}
+In this thesis, we discussed FLAT: the Formal Logic Aiding Tutor, and ANDTaP (Automatic Natural Deduction Tutor and Prover). With this, we performed a head-to-head experiment comparing the efficacy of other publicly-available natural deduction systems against FLAT. We described our proposed experiment to uncover a metric of difficulty for natural deduction proofs via student intervention. Most importantly, we transitioned this discussion into the desire for a gold standard for classical logic syntax to ease logic system automated testing and evaluation. We explained a systematic method of defining the gold standard for differing logic languages as well as its associated customizability and flexibility. Both logic and, more broadly, mathematical notation serve the purpose of easy expressing ideas. Pushing efforts towards a gold standard syntax to reduce the time spent wondering about what symbols ought to be used when enhances said expressibility.
 
 \bibliographystyle{acm}
 \bibliography{myreferences}
