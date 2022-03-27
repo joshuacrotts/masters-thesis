@@ -60,7 +60,7 @@
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 \begin{document}
 \frontmatter      % required
-\doublespacing
+%\doublespacing
 \begin{abstract}
 	Classical logic plays a significant role in computer science where formal proofs eventually make their way into a student's curriculum via discrete mathematics, philosophy logic, or some other medium. We traditionally see propositional logic in Boolean algebra, conditional statements, program and data structure definitions and invariants, and much more. First-order logic likewise exists throughout the world of mathematics, but more prominently in everyday language. Accordingly, a solid understanding of classical logic is paramount. Natural deduction, as the name suggests, is a method of reasoning about an argument using natural intuition, and as a result, it appears quite frequently as a topic of study in introductory logic courses. Due to its relevance, natural deduction intelligent tutors and solvers are widespread on the internet and in the classroom to improve the pedagogical appeal of logic. In this thesis, we present and solve two questions. The first is an open and proposed research question where in we evaluate the efficacy of publicly-available natural deduction tutors/solvers with the prospect of determining what inherently defines understandability and difficulty in natural deduction proofs. In the second question, we investigate the problem of various logic syntaxes that unnecessarily intermingle. With this, we propose a gold standard language for zeroth and first-order logic with the goal and hope of tutor/proof systems adapting to said language to ease the currently laborious task of system evaluation. 
 \end{abstract}
@@ -94,7 +94,7 @@
 \tableofcontents 
 \listoftables   
 \listoffigures   
-%\doublespacing
+\doublespacing
 
 %%------------------------------------------------------------------%%
 %% This signifies that you are done with the frontmatter and ready to
@@ -159,8 +159,8 @@ Propositional logic, also known as zeroth-order logic (or in other disciplines a
 	  \midrule
 	  Logical Conjunction&$\land$, \&, $\cdot$, ``and''\\
 	  Logical Disjunction&$\lor$, $\vert$, $\parallel$, $+$, ``or''\\
-	  Logical Implication&$\supset$, $\to$, $\Rightarrow$, $>$, ``if'', ``then''\\
-	  Logical Biconditonal&$\leftrightarrow$, $\equiv$, $\Leftrightarrow$, ``iff''\\
+	  Logical Implication&$\supset$, $\to$, $\Rightarrow$, $>$, $\implies$``if'', ``then''\\
+	  Logical Biconditonal&$\leftrightarrow$, $\iff$, $\equiv$, $\Leftrightarrow$, ``iff'', ``if and only if''\\
 	  Logical Negation&$\lnot$, $-$, $!$, $\sim$, ``not''\\
 	\bottomrule
   \end{tabular}
@@ -209,7 +209,27 @@ Floyd-Hoare logic is a system of reasoning used to prove statements about progra
 In summary, there are several other theorem provers which all serve similar purposes \cite{twelf}, \cite{acl2}, \cite{pvs}, \cite{alphaleantap} for program/software verification, hardware verification, formal logic/higher-order logic proofs, type theory, mathematics with set theory, and other topics related to automated reasoning due to the impracticality of and error-potential human proofs. Because this thesis is limited to natural deduction and introductory formal logic pedagogy, we will omit the remaining discussion of these tools.
 
 \section{Standardizing Logic Syntax}
-We could only find one attempt at formally standardizing propositional and first-order logic syntax, and it was for a classroom mathematics setting. In \cite{dougherty}, Dougherty attempts to standardize logic symbols for his calculus courses. He noted that several symbols are used, sometimes erroneously, and other times in an understating context (i.e., using an implication when a biconditional is better suited). He proposes that the connectives $\to$ and $\leftrightarrow$ ought to be used when making a small claim that returns true or false, whereas $\implies$ and $\iff$ are for tautological statements. Dougherty also dislikes implicit precedence, in favor of brackets and parentheses for grouping binary connectives so as to not unnecessarily confuse students. Importantly, the premise of his paper is that standardizing logic syntax helps students clarify their arguments and better illustrate the intended idea behind a proof. The downsides are that students may often worry about what symbol to use when rather than focusing on the concepts (we present a similar argument in chapter \ref{chapter:3} with our experimentation of natural deduction software). Additionally, standardizing logic syntax usage in one class is helpful for that individual class, but without a universal formalization, the practicality and portability is thereby limited.
+Interestingly, the International Organization of Standards has section dedicated to logic symbol syntax in their quantities and units for mathematics standard \cite{iso}. Though, it only addresses a very small subset of widely-used connectives as shown in table \ref{table:iso}. Plus, even though many other mathematical symbols are standardized and adopted in practice, logic notation never received the same level of attention from its audience.
+\begin{table}[!ht]
+	\caption{ISO Logic Symbols}
+	\label{table:iso}
+	\small
+	\centering
+	\begin{tabular}{lr}
+	  \toprule
+	  \thead{Semantic Meaning}&\thead{Operator}\\
+	  \midrule
+	  Logical Conjunction&$\land$\\
+	  Logical Disjunction&$\lor$\\
+	  Logical Negation&$\lnot$\\
+	  Logical Implication&$\Rightarrow$\\
+	  Logical Equivalence&$\Leftrightarrow$\\
+	  Universal Quantifier&$\forall$\\
+	  Existential Quantifier&$\exists$\\
+	  \midrule
+	\end{tabular}
+\end{table}
+We could only find one attempt outside the ISO at formally standardizing propositional and first-order logic syntax, and it was for a classroom mathematics setting. In \cite{dougherty}, Dougherty attempts to standardize logic symbols for his calculus courses. He noted that several symbols are used, sometimes erroneously, and other times in an understating context (i.e., using an implication when a biconditional is better suited). He proposes that the connectives $\to$ and $\leftrightarrow$ ought to be used when making a small claim that returns true or false, whereas $\implies$ and $\iff$ are for tautological statements. Dougherty also dislikes implicit precedence, in favor of brackets and parentheses for grouping binary connectives so as to not unnecessarily confuse students. Importantly, the premise of his paper is that standardizing logic syntax helps students clarify their arguments and better illustrate the intended idea behind a proof. The downsides are that students may often worry about what symbol to use when rather than focusing on the concepts (we present a similar argument in chapter \ref{chapter:3} with our experimentation of natural deduction software). Additionally, standardizing logic syntax usage in one class is helpful for that individual class, but without a universal formalization, the practicality and portability is thereby limited.
 
 \section{Boolean Satisfiability Solver Input Formats} 
 Cook proved that the Boolean satisfiability problem SAT is $\mathcal{NP}$-Complete \cite{cook}, providing the Cook-Levin theorem used in computational complexity reduction proofs. Boolean satisfiability answers the question, ``Given a Boolean logic formula $F$, is there an assignment of truth values to that makes $F$ true?''. Because this problem is $\mathcal{NP}$-Complete, there exists no (efficient) polynomial-time solution. Because of the usefulness of SAT with program verification, graph coloring, constraint satisfaction, artificial intelligence, electronic circuitry correctness verification, and more, the need for heuristically-fast SAT solvers was evident. A lecture by Heule and Martins \cite{satsolvers} describes several SAT solvers including DIMACS, CaDiCaL, SAT4J, UBCSAT, and PySAT. Though, having a plethora of SAT solvers to choose from is rather meaningless to those who need them--rather, they want to know which one is the fastest. To test SAT solvers against one another, SAT Competitions came to light, as did the benchmark submission guidelines detailing the required input format \cite{satbenchmark}. For fair and consistent evaluation, SAT solvers that participate in this competition must use the standardized DIMACS format. Formulas are entered in conjunctive normal form where numbers represent literals/atoms. Each line designates a clause in the formula. Figure \ref{fig:dimacsexample} shows an example of the DIMACS format alongside its logic (well-formed formula) representation. As reported by the SAT solver Varisat\footnote{\url{https://jix.github.io/varisat/manual/0.2.0/formats/dimacs.html}}, there are several extensions and variants of DIMACS, but the SAT competitions website\footnote{\url{http://www.satcompetition.org/}} strictly states that any deviation from the required input and output formats is unacceptable. 
