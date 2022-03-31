@@ -578,7 +578,7 @@ We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus,
 \]
 This representation reads naturally from left-to-right as follows: ``An implication of $a_1$ and a biconditional of $a_2$ and negated $a_3$''. We consider all connectives as first-class functions in our definition.
 
-While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What's more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (\delta^{-1},\,\zeta^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
+While prefix notation is not as readable as the infix $w$, it creates a uniform standard for testing zeroth-order logic systems. What is more is that this application process is reversible; given $M^{-1}(\mathcal{L}',\,w')$ where $\mathcal{L}' = (\delta^{-1},\,\zeta^{-1})$ and $w' = M(\mathcal{L},\,w)$, we can reproduce $w$ using a simple stack-and-pop parsing evaluation approach (deterministic push-down automaton).
     
 \subsubsection{Zeroth-Order Logic Example 2}
 Quine's syntax in \cite{methodsoflogic} for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $\delta$ and $\zeta$ where
@@ -639,7 +639,7 @@ Where $\forall{C}\in{X_B}$, $\gamma{(C)} = L$ (i.e., every binary connective is 
 The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).
 
 \subsubsection{Natural Deduction Example}
-Let's create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine $\zeta$ in $\mathcal{L}$ as follows:
+Let us create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine $\zeta$ in $\mathcal{L}$ as follows:
 \[
 	\zeta:\;\{A,\,C,\,D,\,E,\,F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
 \]
