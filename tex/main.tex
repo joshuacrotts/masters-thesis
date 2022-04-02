@@ -1,6 +1,6 @@
 \documentclass[ms]{uncgdissertationexp2}
 
-\usepackage{booktabs, siunitx, makecell, booktabs, colortbl, prooftrees, microtype, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx}
+\usepackage{booktabs, siunitx, makecell, booktabs, colortbl, prooftrees, microtype, pifont, wrapfig, lscape, float, rotating, epstopdf, amsmath, amssymb, amsfonts, amsthm, graphicx, booktabs, syntax, subcaption, algorithm, tabularx, xurl}
 \usepackage[tableposition=above]{caption}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
@@ -63,9 +63,8 @@
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 \begin{document}
 \frontmatter      % required
-%\doublespacing
 \begin{abstract}
-	Classical logic plays a significant role in computer science where formal proofs eventually make their way into a student's curriculum via discrete mathematics, philosophy logic, or some other medium. We traditionally see propositional logic in Boolean algebra, conditional statements, program and data structure definitions and invariants, and much more. First-order logic likewise exists throughout the world of mathematics, but more prominently in everyday language. Accordingly, a solid understanding of classical logic is paramount. Natural deduction, as the name suggests, is a method of reasoning about an argument using natural intuition, and as a result, it appears quite frequently as a topic of study in introductory logic courses. Due to its relevance, natural deduction intelligent tutors and solvers are widespread on the internet and in the classroom to improve the pedagogical appeal of logic. In this thesis, we present and solve two questions. The first is an open and proposed research question where in we evaluate the efficacy of publicly-available natural deduction tutors/solvers with the prospect of determining what inherently defines understandability and difficulty in natural deduction proofs. In the second question, we investigate the problem of various logic syntaxes that unnecessarily intermingle. With this, we propose a gold standard language for zeroth and first-order logic with the goal and hope of tutor/proof systems adapting to said language to ease the currently laborious task of system evaluation. 
+	Classical logic plays a significant role in computer science where formal proofs eventually make their way into a student's curriculum via discrete mathematics, philosophy logic, or some other medium. We traditionally see propositional logic in Boolean algebra, conditional statements, program and data structure definitions and invariants, and much more. First-order logic likewise exists throughout the world of mathematics, but more prominently in everyday language. Accordingly, a solid understanding of classical logic is paramount. Natural deduction, as the name suggests, is a method of reasoning about an argument using natural intuition, and as a result, it appears quite frequently as a topic of study in introductory logic courses. Due to its relevance, natural deduction intelligent tutors and solvers are widespread on the internet and in the classroom to improve the pedagogical appeal of logic. In this thesis, we present and solve two questions. The first is a proposed research question where in we evaluate the efficacy of publicly-available natural deduction tutors/solvers with the prospect of determining what inherently defines understandability and difficulty in natural deduction proofs. In the second question, we investigate the problem of various logic syntaxes that unnecessarily intermingle. With this, we propose a gold standard language for zeroth and first-order logic with the goal and hope of tutor/proof systems adapting to said language to ease the currently laborious task of system evaluation and comparison. 
 \end{abstract}
 
 \maketitlepage
@@ -113,7 +112,7 @@ Classical formal logic is a subset of philosophy that branches into related disc
 \section{Contribution}
 We produce several key contributions in this thesis, including:
 \begin{itemize}
-    \item FLAT: Formal Logic Aiding Tutor, a software for formal logic pedagogy.
+    \item FLAT: Formal Logic Aiding Tutor, a tool for formal logic pedagogy.
     \item ANDTaP: Automatic Natural Deduction Tutor and Prover, a web-based natural deduction tutor.
     \item Comparison and evaluation of three publicly-available natural deduction proof tools.
     \item Creation of a gold standard syntax for zeroth and first-order logics.
@@ -151,21 +150,19 @@ Before we continue, we will define some terms frequently used in formal logic-re
 \end{definition}
 
 \begin{definition}[Grammar]
-	A \textit{grammar} is the definition of syntax rules of a language. Largely in computer science contexts, grammars determine whether a string of characters belongs to a language.
+	A \textit{grammar} is the definition of syntax rules of a language. Largely in computer science contexts, grammars determine whether a string of characters belongs to a language. \textit{Context-free grammars} are used to describe natural language, which were later adapted to structurally define programming languages \cite{dragonbook}.
 \end{definition}
 
 \chapter{Related Work}\label{chapter:2}
 In this chapter, we will discuss the related work and prior contributions to the discipline of natural deduction pedagogy, as well as efforts to modernize and increase its effectiveness for students with less background in, for example, mathematics. 
 
-Extending formal logic to a technological education is not a new idea---there exist many online solvers, provers, and programming languages designed to suit the needs of logic students, or those that use formal logic in some manner. In addition to these, we will also mention more powerful theorem provers that are aimed at experts/more experienced users.
+Extending formal logic to a technological education is not a new idea --- there exist many online solvers, provers, and programming languages designed to suit the needs of logic students, or those that use formal logic in some manner. In addition to these, we will also mention more powerful theorem provers that are aimed at experts/more experienced users.
 
-Many of the systems we describe below, including our own, are a type of intelligent interactive tutor. A goal of such a system is to mimic the relationship between instructors and their student(s). Correspondingly, if a student starts to struggle with any given topic, the tutor ought to recognize the mistakes made, correct them, and then lead them down the intended path. Similarly, it should provide accurate and customized hints to a problem when requested, even if the student has not necessarily yet gone astray. Taking this a step further may call for dynamic generation of questions tailored to the individual student based on current progress. Automatic tutors and more so intelligent interactive tutors have a host of benefits: reduced stress on teachers by not having to create unique content for all students (a feat almost impossible unless the class size is appropriately small), and research has demonstrated that students perform better on assessments in one-on-one tutoring sessions \cite{woolf}.
+Many of the systems we describe below, including our own, are a type of intelligent interactive tutor. A goal of such a system is to mimic the relationship between instructors and their student(s). Correspondingly, if a student starts to struggle with any given topic, the tutor ought to recognize the mistakes made, correct them, and then lead them down the intended path. Similarly, it should provide accurate and customized hints to a problem when requested, even if the student has not necessarily yet gone astray. Taking this a step further may call for dynamic generation of questions tailored to the individual student based on current progress. Automatic tutors and more so intelligent interactive tutors have a host of benefits, including reduced stress on teachers by not having to create unique content for all students (a feat almost impossible unless the class size is appropriately small), and research has demonstrated that students perform better on assessments in one-on-one tutoring sessions \cite{woolf}.
 
-% Before we discuss formal logic tutors, we will mention automated tutors for other subjects.
-% Show brief examples of other tutoring systems \textbf{e.g., algebra, ..., \cite{autexier}}
 \section{Formal Logic Tutors}
 \subsection{Propositional Logic}
-Propositional logic, which we will interchangably refer to as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2---it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. 
+Propositional logic, which we will interchangeably refer to as zeroth-order logic (or in other disciplines as sentence logic, sentential logic, Boolean logic, combinatorial logic, or propositional calculus), according to Hein \cite{heinbook}, is a language of propositions that conform to rules. Propositional logic is comparatively simpler than first-order predicate logic described in section II.1.2 --- it does not use variables, constants, or quantifiers of any kind. Rather, in this language, there are four binary (two-place/two-arity) connectives: logical conjunction, logical disjunction, logical implication, and the biconditional, as well as one unary (one-place/one-arity) operator: logical negation. While connective semantics are standard, a variety of notations exist to represent them, as shown in table \ref{table:commonnotation}.
 \begin{table}[!ht]
 	\caption{Common Notation in Propositional Logic}
 	\label{table:commonnotation}
@@ -188,7 +185,7 @@ Because of the reducible nature of propositional logic to simple structures and 
 
 Lukins et al. \cite{lukins} developed the P-Logic Tutor: a propositional logic tutor with several key functions including a truth table generator, parse tree viewer, tautology/satisfiability determiners, a built-in theorem prover, all of which are supplemented with learning adaptability that generates feedback for students. It was developed as a Java Web Start (JNLP) applet. In their report, they describe an experiment where students across two discrete mathematics courses evaluated its performance, where they received generally positive reviews with some small limitations that students found cumbersome. Unfortunately, their provided link is now offline, meaning there is no way to investigate either the source code or even use the application in attempt to test it against modern alternatives. One other significant downside to the P-Logic Tutor is that while it covers propositional logic well as its name suggest, it completely lacks support for first-order logic. Additionally, the system had the requirement where students (or any user) had to log in for performance monitoring purposes. This, in turn, severely limits the testability to only those at, in this instance, Wake Forest University. 
 
-Another software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula.
+Another stand-alone software-based solution (i.e., executable outside the browser) is LEGEND by Vlist \cite{vlist}. LEGEND is untestable as it is closed-source and unavailable to the public, but it allows the user to prove and generate proofs from a (simple) given propositional formula.
 
 Lodder et al. \cite{lodder} created LOGAX, which is a tool for students to learn and construct axiomatic proofs with feedback and hints. While useful in its specific domain, we focus on natural deduction proofs instead of axiomatic proofs for simplicity and approachability for non-computer science students.
 
@@ -196,19 +193,19 @@ Mostafavi et al. \cite{mostafavi} have written several papers on their Deep Thou
 
 In \cite{apros}, Siev describes the Automated Proof Search system AProS: a proof generation system which works in tandem with their proof tutor. It is used in their Open Learning Initiative\footnote{\url{https://oli.cmu.edu/}} project at Carnegie Mellon University. Though, their system and pedagogical pipeline strays away from only propositional and first-order logic in favor of theory of computing topics such as Turing machines, computability, set theory, and others. In addition, the links provided on their website are either out of date or incorrect, because when trying to access their \textit{Logic \& Proofs} course, it redirects users to the OLI website instead. Plus, the fully-featured tool is not provided, and their Java Web Start version is not easily accessible in the modern web, where Java in the browser is, to a great extent, deprecated.
 
-In \cite{verwer}, Verwer et al. briefly describe their propositional logic tutor Bop: a Fitch-style proving system. Like many other systems, their provided link is also offline, so we had no way of assessing its performance.
+In \cite{verwer}, Verwer et al. briefly describe their propositional logic tutor Bop: a Fitch-style proving system. As an aside, Fitch-style calculus is a common method of proof for natural deduction, using lines to separate premises, derivations, and sub-derivations \cite{fitch}. Like many other systems, their provided link is also offline, so we had no way of assessing its performance.
 
 \subsection{First-Order Logic}
 Cerna et al. \cite{cerna} developed \textbf{AX}olotl: a unique tutor due to its Android implementation. \textbf{AX}olotl includes several types of proofs and tutorials, though its reliance on a file protocol to load problem sets or questions is a bit cumbersome for the non-savvy student or instructor as they describe. Plus, its curriculum is aimed at computer scientists with what appears to be a strong background in logic, lambda calculus, and type theory.
 
-In \cite{mauco} and \cite{felice}, Mauco and Felice et al. show educational software for increasing the appeal of first-order logic to introductory students. With this idea, they developed FOLST and LogicChess. The former, FOLST, is a graphical application that shows an illustrated scene with predicates that define said scene e.g., isSleeping(x), isOnTheGrass(x) when referring to a farm. Students must enter facts that describe the illustration using these given predicates. LogicChess is similar in that students are provided predicates to describe a scene, but with the difference that it the scene is modeled as a chess board with chess pieces. According to their reports, students may modify the model which updates the underlying logic formulas, which may then be checked for validity and satisfiability. 
+In \cite{felice} and \cite{mauco}, Mauco and Felice et al. show educational software for increasing the appeal of first-order logic to introductory students. With this idea, they developed FOLST and LogicChess. The former, FOLST, is a graphical application that shows an illustrated scene with predicates that define said scene e.g., isSleeping(x), isOnTheGrass(x) when referring to a farm. Students must enter facts that describe the illustration using these given predicates. LogicChess is similar in that students are provided predicates to describe a scene, but with the difference that it the scene is modeled as a chess board with chess pieces. According to their reports, students may modify the model which updates the underlying logic formulas, which may then be checked for validity and satisfiability. 
 
-Perikos et al. in \cite{perikos} developed a web-based system to help students translate sentences from natural language to first-order logic. Specifically, their approach is to ask students to find verbs, adjectives, and nouns from the text. Then, find connectives, predicates, and quantifiers. Finally, create groups of related predicates and repeatedly connect them until a final formula is achieved. They conclude with a suggestion to the research community that announces the problem of dynamically-generated hints as manually analyzing all possible outcomes of a formula is far too laborious and impractical. 
+Perikos et al. in \cite{perikos} developed a web-based system to help students translate sentences from natural language to first-order logic. Specifically, their approach is to ask students to find verbs, adjectives, and nouns from the text. Then, find connectives, predicates, and quantifiers. Finally, create groups of related predicates and repeatedly connect them until a final formula is achieved. They conclude with a suggestion to the broader research community that announces the problem of dynamically-generated hints. Creating static hints for an individual formula by analyzing all possible comes is far too laborious to be practical and beneficial for students.
 
 Dost\'alov\'a et al. \cite{organon} describe ORGANON: a web-based tutoring system for both propositional and predicate logic with randomly-generated mutations from a database of problems. Unfortunately, from the time that their paper was written, the system had very limited functionality, only supporting conjunctive/disjunctive/prenex normal form conversion exercises, with others in the works. We could not find any current information about ORGANON.
 
 \subsection{Problem/Solution Generators}
-In this section, we will briefly mention work related to automated problem generation (i.e., automatic creation of problems for students to solve). Practice makes perfect with logic, and textbooks often only provide final answers; not the complete answer with shown work. As such, unmotivated students may merely copy the the answer without retaining any relevant information, an undesired outcome. A tool, or algorithm, that dynamically generates problems and solutions there of serves as excellent remediation or recitation.
+In this section, we will briefly mention work related to automated problem generation (i.e., automatic creation of problems for students to solve). Practice makes perfect with logic, and textbooks often only provide final answers; not the complete answer with shown work. As such, unmotivated students may merely copy the the answer without retaining any relevant information, an undesired outcome. A tool, or algorithm, that dynamically generates problems and solutions thereof serves as excellent remediation or recitation.
 
 In \cite{ahmed}, Ahmed et al. created a framework and tool for automatically generated natural deduction problems and solutions. They explain the significance of problem generation on the grounds that it prevents rampant plagiarism, and copyright infringment from publishers. Plus, they reiterate the idea that not only does practice help, but practice tailored to the student satisfies that role to a greater extent.
 
@@ -217,17 +214,17 @@ Other work has gone into generating algebra practice problems (see \cite{singh})
 \section{Specialized Logic/Theorem-Proving Programming Languages}
 What is a theorem prover? Characteristically, it is a system that uses a combination of built-in rules, axioms, to prove a provided formula or theorem. It searches for an ordering of rules, axioms, and intermediate formulas which satisfy the theorem and show it holds true. 
 
-A historical theorem-proving logic programming language is Prolog, which uses Horn clauses, or a sequence of literals separated by disjunctions, to deductively prove goals. It was popularized behind the belief that logic programming ought not to be restricted to human intellect and architecture, but rather be structured around solving provided problems and assumptions that a human may easily understand when reading. Execution of a Prolog program, as hinted above, instructs the system to, satisfy a goal, given relevant background information i.e., facts and rules \cite{theartofprolog}.
+A historical theorem-proving logic programming language is Prolog, which uses Horn clauses, or a sequence of literals separated by disjunctions, to deductively prove goals. It was popularized behind the belief that logic programming ought not to be restricted to human intellect and architecture, but rather be structured around solving provided problems and assumptions that a human may easily understand when reading. Execution of a Prolog program, as hinted above, instructs the system to, satisfy a goal, given relevant background information, i.e., facts and rules \cite{theartofprolog}.
 
 Another form of theorem proving which is affiliated with artificial intelligence is inductive logic programming, coined by Muggleton in \cite{muggleton}. In summary, with inductive logic programming, we are provided with a data set of facts and hypotheses to inductively prove an general observation from the specific. A commonly-presented equation is, we have a set of positive examples $E^+$, a set of negative examples $E^-$, background knowledge $B$, and we wish to find a hypothesis $H$ such that $B \land H \vdash E^+$ and $B \land H \nvdash E^-$ \cite{bratko}.
 
 Coq is a functional programming language that at its core is a proof assistant \cite{softwarefoundations}. It has been historically used for program verification in compiler optimization with LLVM (Low-Level Virtual Machine) and C, cryptographic security environment reasoning, and even fundamental breakthroughs in group theory and the famous four-color theorem \cite{fourcolortheorem}. As it is a functional language, it is trivial to reason about the consequences of a function or a segment of code. That is, functions should not, for example, produce side effects, and thus have the sole purpose of computing a result.
 
-Isabelle \cite{isabelle} is a proof assistant with built-in functional programming that predominately focuses on higher-order logic via induction proofs, lists, and natural numbers. It also allows for inductively-defined sets, and logic proofs similar to those we describe in our report. Finally, it supports lambda calculus expressions, recursion, and proofs there of which parallel to type theory paradigms. As a consequence, it bears resemblance to functional languages e.g., ML, F\#, and OCaml. While it is a powerful language and tool, we find it to be bulky, similar to that of Coq's presentation for introductory logic students. Villadsen et al. \cite{villadsen} created NaDeA: a natural deduction system which integrates with Isabelle to generate and verify theorems. Their premise states that students should be provided with a background to formally verify the correctness of software, and NaDeA helps build these prerequisite skills.
+Isabelle \cite{isabelle} is a proof assistant with built-in functional programming that predominately focuses on higher-order logic via induction proofs, lists, and natural numbers. It also allows for inductively-defined sets, and logic proofs similar to those we describe in our report. Finally, it supports lambda calculus expressions, recursion, and proofs thereof which parallel to type theory paradigms. As a consequence, it bears resemblance to functional languages e.g., ML, F\#, and OCaml. While it is a powerful language and tool, we find it to be bulky, similar to that of Coq's presentation for introductory logic students. Villadsen et al. \cite{villadsen} created NaDeA: a natural deduction system which integrates with Isabelle to generate and verify theorems. Their premise states that students should be provided with a background to formally verify the correctness of software, and NaDeA helps build these prerequisite skills.
 
 Floyd-Hoare logic is a system of reasoning used to prove statements about programs, and otherwise verify the correctness of software. With Hoare logic, we state pre-conditions and post-conditions of an arbitrary segment of code, then prove those conditions. In \cite{softwarefoundations}, Pierce et al. implement Hoare logic in Coq, but it originates back to the mid-20th century in \cite{hoare}.
 
-In summary, there are several other theorem provers which all serve similar purposes \cite{twelf}, \cite{acl2}, \cite{pvs}, \cite{alphaleantap} for program/software verification, hardware verification, formal logic/higher-order logic proofs, type theory, mathematics with set theory, and other topics related to automated reasoning due to the impracticality of and error-potential human proofs. Because this thesis is limited to natural deduction and introductory formal logic pedagogy, we will omit the remaining discussion of these tools.
+In summary, there are several other theorem provers which all serve similar purposes (see \cite{acl2}, \cite{alphaleantap}, \cite{pvs}, \cite{twelf}) for program/software verification, hardware verification, formal logic/higher-order logic proofs, type theory, mathematics with set theory, and other topics related to automated reasoning due to the impracticality of and error-potential human proofs. Because this thesis is limited to natural deduction and introductory formal logic pedagogy, we will omit the remaining discussion of these tools.
 
 \section{Standardizing Logic Syntax}
 Interestingly, the International Organization of Standards has a dedicated section to logic symbol syntax in their quantities and units for mathematics standard \cite{iso}. Alas, it only addresses a very small subset of widely-used connectives as shown in Table \ref{table:iso}. Plus, even though many other mathematical symbols are standardized and adopted in practice (e.g., set notation), logic notation never received the same level of attention from its audience.
@@ -254,7 +251,7 @@ Interestingly, the International Organization of Standards has a dedicated secti
 We could only find one attempt outside the ISO at formally standardizing propositional and first-order logic syntax, and it was for a classroom mathematics setting. In \cite{dougherty}, Dougherty attempts to standardize logic symbols for his calculus courses. He noted that several symbols are used, sometimes erroneously, and other times in an understating context (i.e., using an implication when a biconditional is better suited). He proposes that the connectives $\to$ and $\leftrightarrow$ ought to be used when making a small claim that returns true or false, whereas $\implies$ and $\iff$ are for tautological statements. Dougherty also dislikes implicit precedence, in favor of brackets and parentheses for grouping binary connectives so as to not unnecessarily confuse students, a shared sentiment. Importantly, the premise of his paper is that standardizing logic syntax helps students clarify their arguments and better illustrate the intended idea behind a proof. The downsides are that students may often worry about what symbol to use when rather than focusing on the concepts (we present a similar argument in chapter \ref{chapter:3} with our experimentation of natural deduction software). Additionally, standardizing logic syntax usage in one class is helpful for that individual class, but without a universal formalization, the practicality and portability is thereby limited.
 
 \section{Boolean Satisfiability Solver Input Formats} 
-Cook proved that the Boolean satisfiability problem SAT is $\mathcal{NP}$-Complete \cite{cook}, providing the Cook-Levin theorem used in computational complexity reduction proofs. Boolean satisfiability answers the question, ``Given a Boolean logic formula $F$, is there an assignment of truth values that makes $F$ true?''. Because this problem is $\mathcal{NP}$-Complete, there exists no (efficient) polynomial-time solution. Because of the usefulness of SAT with program verification, graph coloring, constraint satisfaction, artificial intelligence, electronic circuitry correctness verification, and more, the need for heuristically-fast SAT solvers was evident. A lecture by Heule and Martins \cite{satsolvers} describes several SAT solvers including DIMACS, CaDiCaL, SAT4J, UBCSAT, and PySAT. Though, having a plethora of SAT solvers to choose from is rather meaningless to those who need them--rather, they want to know which one is the fastest. To test SAT solvers against one another, SAT Competitions came to light, as did the benchmark submission guidelines detailing the required input format \cite{satbenchmark}. For fair and consistent evaluation, SAT solvers that participate in this competition must use the standardized DIMACS format. Formulas are entered in conjunctive normal form where numbers represent literals/atoms. Each line designates a clause in the formula. Figure \ref{fig:dimacsexample} shows an example of the DIMACS format alongside its logic (well-formed formula) representation. As reported by the SAT solver Varisat\footnote{\url{https://jix.github.io/varisat/manual/0.2.0/formats/dimacs.html}}, there are several extensions and variants of DIMACS, but the SAT competitions website\footnote{\url{http://www.satcompetition.org/}} strictly states that any deviation from the required input and output formats is unacceptable. 
+Cook proved that the Boolean satisfiability problem SAT is $\mathcal{NP}$-Complete \cite{cook}, providing the Cook-Levin theorem used in computational complexity reduction proofs. Boolean satisfiability answers the question, ``Given a Boolean logic formula $F$, is there an assignment of truth values that makes $F$ true?''. Because this problem is $\mathcal{NP}$-Complete, there exists no known (efficient) polynomial-time solution. Because of the usefulness of SAT with program verification, graph coloring, constraint satisfaction, artificial intelligence, electronic circuitry correctness verification, and more, the need for heuristically-fast SAT solvers was evident. A lecture by Heule and Martins \cite{satsolvers} describes several SAT solvers including DIMACS, CaDiCaL, SAT4J, UBCSAT, and PySAT. Though, having a plethora of SAT solvers to choose from is rather meaningless to those who need them --- rather, they want to know which one is the fastest. To test SAT solvers against one another, SAT Competitions came to light, as did the benchmark submission guidelines detailing the required input format \cite{satbenchmark}. For fair and consistent evaluation, SAT solvers that participate in this competition must use the standardized DIMACS format. Formulas are entered in conjunctive normal form where numbers represent literals/atoms. Each line designates a clause in the formula. Figure \ref{fig:dimacsexample} shows an example of the DIMACS format alongside its logic (well-formed formula) representation. As reported by the SAT solver Varisat\footnote{\url{https://jix.github.io/varisat/manual/0.2.0/formats/dimacs.html}}, there are several extensions and variants of DIMACS, but the SAT competitions website\footnote{\url{http://www.satcompetition.org/}} strictly states that any deviation from the required input and output formats is unacceptable. 
 \begin{figure}[!ht]
 	\centering
 	\begin{subfigure}{.5\textwidth}
@@ -273,7 +270,9 @@ Cook proved that the Boolean satisfiability problem SAT is $\mathcal{NP}$-Comple
 	\end{subfigure}
 	\caption{DIMACS Format Example Input}
 	\label{fig:dimacsexample}
-\end{figure}  
+\end{figure}
+
+The standard DIMACS format allows for head-to-head comparison of SAT solvers, while nothing similar exists for logic tutors and theorem provers. So, as contribution of this thesis, we present a gold standard syntax for zeroth and first-order logics starting in section \ref{section:zerothorderlogic}.
 
 \chapter{Methods}\label{chapter:3}
 In this chapter, we explain our evaluation method and metrics for assessing three publicly-available natural deduction systems against our prover. Additionally, we construct a formal definition for a standardized and uniform syntax for writing and, more importantly, testing differing logic systems and algorithms.
@@ -282,7 +281,7 @@ In this chapter, we explain our evaluation method and metrics for assessing thre
 To begin, while plenty of research papers and projects on formal logic tutors, natural deduction proving systems, and proof assistants exist (see chapter \ref{chapter:2}), they are few and far between when viewed from the public, non-academic eye. That is, many only remain relevant in their academic research circle, and have either little purpose or minimal exposure outside to a ``real audience''. Further, current research efforts focus more on improving their current tool rather than performing direct comparisons with others. The issue with head-to-head comparisons is the mystery of a reliable metric: how do we measure ``success'' in a formal logic tutor without user evaluation? In other words, what metric is viable for determining the efficiency, or effectiveness, of a tutoring/proving/assistant system for formal logic?
 
 \subsection{Experiment 1: A Student-Driven Approach for Difficulty Metrics}
-All students are not unique, and a formal logic class may contain students across different disciplines. As a result, what is difficult to one student who has yet to see logic may be easier to another student who programs or otherwise works with Boolean operators on a daily basis. Determining what exactly constitutes difficult in a logic class is tricky for the same reason. In other words, it is a non-trivial job to evaluate whether one problem or topic is inherently more challenging than another.
+All students are not the same, and a formal logic class may contain students across different disciplines. As a result, what is difficult to one student who has yet to see logic may be easier to another student who programs or otherwise works with Boolean operators on a daily basis. Determining what exactly constitutes difficult in a logic class is tricky for the same reason. In other words, it is a non-trivial job to evaluate whether one problem or topic is inherently more challenging than another.
 
 Given the varied opinions of students, we wanted to perform an observational study on our software to determine what kinds of proofs students find difficult, or where they potentially go astray from an expert's solution to a problem. In particular, our goal was to analyze a student's abilities to complete propositional logic natural deduction proofs, picking between two sets of premises and conclusions to say which looks harder to prove, as well as choosing a proof out of two that appears more difficult, with the hopeful outcome of finding common patterns between proofs/formula choices, then analyzing said patterns to understand why those were said to be more difficult.
 
@@ -428,7 +427,7 @@ Natural Deduction is a Windows 10 application designed by Jukka H\"akkinen, and 
 	\end{subfigure}
 \end{figure}
 
-TAUT-Logic is a web application designed by Ariel Roff\'e, and assisted by the Buenos Aires Logic Group \cite{taut}. Unlike the first two, TAUT-Logic supports first-order predicate logic, and is the only easy-to-use system of its kind that we found which is not out of commission nor abandoned. In addition to its natural deduction toolset, it supports basic set theory,  truth table generation, and model truth. 
+TAUT-Logic is a web application designed by Ariel Roff\'e, and assisted by the Buenos Aires Logic Group \cite{taut}. Unlike the first two, TAUT-Logic supports first-order predicate logic, and is the only easy-to-use system of its kind that we found which is not out of commission or abandoned. In addition to its natural deduction toolset, it supports basic set theory,  truth table generation, and model truth. 
 
 One awkward characteristic of this system is that its propositional logic application only supports lowercase letters for atoms. Additionally, similar to Natural Deduction, TAUT-Logic supports a total of nine different atoms, ranging from $o$ to $w$. Supporting only nine atoms may be enough for some problems/proofs, but this restriction seems rather arbitrary for natural deduction, whose problem complexity should not grow strictly in terms of the number of atoms. Another odd design choice is the preference of English phrases for connectives instead of symbols such as, for example, ``implies'' versus $\to$ or $\supset$. Because all other systems we tested only utilize symbols (with the exception of FLAT, as it supports both), the process of converting each formula and symbol to the appropriate format was tiresome. Lastly, for some reason, the biconditional connective is not supported, requiring students to either convert them to a conjunction of implications, or omit the proof altogether. 
     
@@ -436,7 +435,7 @@ Regarding TAUT-Logic's performance, we discovered that it is roughly on par in t
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tautlogic.png}
-	\caption{TautLogic's Predicate Natural Deduction}{Write a caption...}
+	\caption{TautLogic's Predicate Natural Deduction}
 	\label{fig:tautlogic}
 \end{figure} 
 
@@ -510,7 +509,7 @@ There are several reasons why a standardized grammar does not necessarily alread
 
 We propose a formal definition that aims to solve most of these problems. One component of this definition allows users to create their own logic language definition as they see fit for their situation. This language is then translatable into a gold standard format, which we will define syntactically and semantically.
 
-The reason we formalize the language definition is to allow different logic systems with varying syntax---some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence, which we will supplement with further discussion at the end of the next section.
+The reason we formalize the language definition is to allow different logic systems with varying syntax --- some use lower-case atomic formulas, while others may restrict the alphabet to a subset. This definition allows different connective alphabets to map to the same symbol in the gold standard which provides a seamless translation to and from various host logic languages (i.e., the language of the implementing systems, assuming it does not, by default, use the gold standard internally). Another benefit of using prefix connective notation is its disambiguation of precedence, which we will supplement with further discussion at the end of the next section.
 
 \subsection{Zeroth-Order Logic Well-Formed Formula Representation}\label{section:zerothorderlogic}
 We will start with a small example and then generalize the approach to achieve a well-defined representation. Suppose we have a set of premises $P = \{(A \leftrightarrow B),\,\lnot (C \land D),\,C,\,\lnot B\}$ with the conclusion $c = (\lnot A \land D)$. Converting this proof into the three systems we tested is laborious at best and is increasingly tiresome the more systems we wish to evaluate. Table \ref{table:requiredsyntax} displays the required syntax to parse an equivalent representation of $w$. The desire for a uniform standard to rapidly test multiple systems without manual intervention is readily apparent.
@@ -554,7 +553,7 @@ The bijective function $\delta$ maps two sets $\delta:\;X \to Y$, where $X$ is t
   \end{tabular}
 \end{table}
 
-The bijective function $\zeta$ maps two sets $\zeta:\;A \to B$, where $A$ is the set of atomic literals $\phi \in A$ where $\phi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$.
+The bijective function $\zeta$ maps two sets $\zeta:\;A \to B$, where $A$ is the set of all atomic literals $\phi \in A$ where $\phi$ is an atomic literal used in $w$, and $B$ is the set of output atomic formulas $a_{j}$ where $j \in [1,\,|A|]$. One property of $\zeta$ is that the mapping need not to be linear, i.e., $\phi_1 \in A$ does not necessarily have to map to $a_1 \in B$; as long as the bijective property holds, any mapping is valid. In following examples, we assume that $A$ is finite, but for languages which allows a countably infinite number of atomic literals, e.g., $A = \{s_1,\,s_2,\,s_3, ...\}$, a solution is to map $A$ to a one-to-one set of positive integers (i.e., $s_n \in A \mapsto a_n \in B$ where $n \in \mathbb{Z}^+$). A slight alteration of this definition will also work if the literals in $A$ do not correspond proportionally to the positive integers.
 
 We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used to create a standardized notation for zeroth-order logic. This notation takes inspiration from the syntax of the programming language Scheme with its parenthesization of connectives and operands. For this, we must extend the definition of typical Extended Backus-Naur Form to account for multiple-arity connectives. Thus, we introduce the notation \textless{$x$---R\textgreater} to indicate that $x$ is a variable used in the EBNF rule R, and $\{\Lambda\}^{x}$ to denote exactly $x$ applications of $\Lambda$. In the grammar, $\alpha$ is the arity of a connective.
 \begin{grammar}
@@ -565,12 +564,14 @@ We can now define the Polish (Łukasiewicz), or prefix notation grammar $G$ used
 	<$\alpha$---wff> ::= <atomic> | (<connective> [` '] \{<wff>\}$^{\alpha}$)
 \end{grammar}
 
-We shall reiterate that our goal is to create a language pipeline that allows for easy conversion between one language $\mathcal{L}$, the gold standard $M(\mathcal{L},\, w)$, and another arbitrary language of the same class $\mathcal{L}'$. Symbolically, $\mathcal{L} \Leftrightarrow M(\mathcal{L},\,w) \Rightarrow \mathcal{L'}$. We will now make note of converting a gold-standard formula $w'$ to a language $\mathcal{L'}$ such that $Y'$, the connective set of $w'$ is disjoint from the connective set of $\mathcal{L}'$: $Y$ (that is, there exists an operator in the gold standard not supported by the target language $\mathcal{L}'$). In this scenario, $\mathcal{L}'$ must augment its definition with a pattern-matching replacement function $\mathcal{R}$. $\mathcal{R}$ should take a connective as input, and output an equivalent representation that satisfies the grammar of language $\mathcal{L}'$. As an example, suppose $w' = (B\;a_1\;a_2)$. When converting $w'$ to a target language not identical to the original source language (i.e., $L' \neq L$) that does not support the biconditional connective, we could define $\mathcal{R}(B) = (\phi \to \psi) \land (\psi \to \phi)$ where $\to$, $\land$ $\in Y$, and $\phi$, $\psi$ are arbitrary well-formed formulas in $\mathcal{L}'$. So, when we convert from the gold standard into a target language, any instance of the biconditional $B$ is replaced by $\mathcal{R}$ into a recognizable format. At a minimum, any set of connectives $Y$ for any zeroth-order logic language must be functionally complete to achieve this goal \cite{post}. One note regarding the expansion well-formed formulas via $\mathcal{R}$ is its growth rate consequence. Namely, if the transformed formula is reflective (i.e., $(A \to B) \land (B \to A)$), it expands exponentially. 
+We shall reiterate that our goal is to create a language pipeline that allows for easy conversion between one language $\mathcal{L}$, the gold standard $M(\mathcal{L},\, w)$, and another arbitrary language of the same class $\mathcal{L}'$. Symbolically, $\mathcal{L} \Leftrightarrow M(\mathcal{L},\,w) \Rightarrow \mathcal{L'}$. We will now make note of converting a gold-standard formula $w'$ to a language $\mathcal{L'}$ such that $Y'$, the connective set of $w'$ is disjoint from the connective set of $\mathcal{L}'$: $Y$ (that is, there exists an operator in the gold standard not supported by the target language $\mathcal{L}'$). In this scenario, $\mathcal{L}'$ must augment its definition with a pattern-matching replacement function $\mathcal{R}$. $\mathcal{R}$ should take a connective as input, and output an equivalent representation that satisfies the grammar of language $\mathcal{L}'$. As an example, suppose $w' = (B\;a_1\;a_2)$. When converting $w'$ to a target language not identical to the original source language (i.e., $L' \neq L$) that does not support the biconditional connective, we could define $\mathcal{R}(B) = (\phi \to \psi) \land (\psi \to \phi)$ where $\to$, $\land$ $\in Y$, and $\phi$, $\psi$ are arbitrary well-formed formulas in $\mathcal{L}'$. So, when we convert from the gold standard into a target language, any instance of the biconditional $B$ is replaced by $\mathcal{R}$ into a recognizable format. At a minimum, any set of connectives $Y$ for any zeroth-order logic language must be functionally complete to achieve this goal \cite{post}. One note regarding the expansion well-formed formulas via $\mathcal{R}$ is its growth rate consequence. Namely, if the transformed formula is reflective (i.e., $(A \to B) \land (B \to A)$), the size grows exponentially in the number of replacements. 
 
-\subsubsection{Zeroth-Order Logic Example 1} Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $\delta$ and $\zeta$ where
+\subsubsection{Zeroth-Order Logic Example 1}
+\label{zerothorderlogicexample1}
+Let us take a ``standard'' propositional logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ consists of two functions $\delta$ and $\zeta$ where
 \begin{align*}
 	  & \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	  & \zeta:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\}                                   
+	  & \zeta:\;\{A,\,B,\,C,\,...,\,Z\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,...,\,a_{26}\}                                   
 \end{align*}
 We will let $w = A \supset (B \leftrightarrow \lnot C)$. Thus, 
 \[
@@ -584,7 +585,7 @@ While prefix notation is not as readable as the infix $w$, it creates a uniform 
 Quine's syntax in \cite{methodsoflogic} for propositional logic is slightly different from modern variants. Specifically, his use of dots and colons removes superfluous parentheses when defining operator precedence. Largely, we will ignore this notation in favor of his parenthesized form. In addition, Quine uses an empty string $\varepsilon$ to represent conjunction (e.g., $S_{1}S_{2}$ represents a conjunction between two well-formed formulas $S_{1}$ and $S_{2}$). Finally, negations on a single atom $p$ are condensed with a vertical overbar $\overline{p}$. To compensate for the digital representation, we will keep the negation in front of the atom (e.g., $-S_1$ where $S_1$ is a well-formed formula). Now, we define $\mathcal{L}$ with functions $\delta$ and $\zeta$ where
 \begin{align*}
 	& \delta:\;\{\supset,\,\varepsilon,\,\lor,\,\equiv,\,-\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	& \zeta:\;\{p,\,q,\,r,\,s\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,a_{4}\}  
+	& \zeta:\;\{p,\,q,\,r,\,s,\,...,\,z\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,a_{4},\,...,\,a_{11}\}  
 \end{align*}
 We will let $w = -((p\lor q)(-r\lor s)) \supset (-(p\lor q)s)$. Thus,
 \begin{align*}
@@ -597,10 +598,8 @@ We assume the incoming formula is unambiguous according to its language grammar 
 
 Let $\Gamma$ be an injective function that maps the set of connectives $\delta$ to $\mathbb{N}$, namely $\delta \mapsto \mathbb{N}$. $\Gamma$ is designed to give connectives in $\delta$ a priority level, where the closer its mapped natural number is to zero, the higher its priority. We define priority as the precedence of a connective. When a system defines $\Gamma$, it implies that any ambiguous well-formed formula in its corresponding language is parsable without parenthesization. $\Gamma$, as an algorithm, automatically adds parentheses to disambiguate the formula.
 
-\subsubsection{Precedence Mapping Example} We will use the same functions $\delta$ and $\zeta$ from the first propositional logic example. We will also define $\Gamma$ as
+\subsubsection{Precedence Mapping Example} We will use the same functions $\delta$ and $\zeta$ from the first propositional logic example in section \ref{zerothorderlogicexample1}. We will also define $\Gamma$ as
 \begin{align*}
-	& \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	& \zeta:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\} \\
 	& \Gamma:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto\{3,\,1,\,2,\,4,\,0\}                              
 \end{align*}
 Now, suppose $w = A \to \lnot B \to C \land \lnot A$. The precedence function parenthesizes/disambiguates $w$ to $((A \to \lnot B) \to (C \land \lnot A))$, which is then converted into the gold standard as
@@ -614,7 +613,7 @@ Let $\gamma$ be a surjective function that maps the set of binary connectives $X
 \subsubsection{Associativity Mapping Example} We will use the same functions $\delta$ and $\zeta$ from the previous precedence mapping function example. In addition, we will define $\gamma$ as 
 \begin{align*}
 	& \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto \{I,\,C,\,D,\,B,\,N\} \\
-	& \zeta:\;\{A,\,B,\,C\} \mapsto \{a_{1},\,a_{2},\,a_{3}\} \\
+	& \zeta:\;\{A,\,B,\,C,\,...,\,Z\} \mapsto \{a_{1},\,a_{2},\,a_{3},\,...,\,a_{26}\} \\
 	& \gamma:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot\}\mapsto\{L,\,R\}
 \end{align*}
 Where $\forall{C}\in{X_B}$, $\gamma{(C)} = L$ (i.e., every binary connective is left-associative). Now, suppose $w = (A \to B \to C) \land (\lnot{A} \land \lnot{B})$. The associativity function disambiguates $w$ to $((A \to B) \to C) \land (\lnot{A} \land \lnot{B})$. This is converted into the gold standard as 
@@ -638,17 +637,14 @@ Where $\forall{C}\in{X_B}$, $\gamma{(C)} = L$ (i.e., every binary connective is 
 \end{grammar}
 The preceding grammar states that a premise is preceded by the letter $P$ standing for \textit{premise}, conclusions are preceded by $H$ for \textit{hence}, and a proof is a conclusion followed by zero or more premises (a proof with zero premises is a theorem).
 
+%-(a3 | a4), a4 <> (a5 or a6, -a1 > (a3 or a6)
 \subsubsection{Natural Deduction Example}
-Let us create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We must redefine $\zeta$ in $\mathcal{L}$ as follows:
-\[
-	\zeta:\;\{A,\,C,\,D,\,E,\,F\} \mapsto \{a_1,\,a_2,\,a_3,\,a_4,\,a_5\}
-\]
-\noindent Therefore, 
+Let us create a proof where $P = \{\lnot(C \lor D),\,D \leftrightarrow (E \lor F), \lnot A \supset (C \lor F)\}$, and $c = A$. We will, again, use $\zeta$ from section \ref{zerothorderlogicexample1}. Therefore, 
 \begin{align*}
 	N(\mathcal{L},\,P,\,c) & = ((H\;a_1)\;                    \\
-	                     & (P\;(N\;(D\;a_2\;a_3)))            \\
-	                     & (P\;(B\;a_3\;(D\;a_4\;a_5)))       \\
-	                     & (P\;(I\;(N\;a_1)\;(D\;a_2\;a_5))))
+	                     & (P\;(N\;(D\;a_3\;a_4)))            \\
+	                     & (P\;(B\;a_4\;(D\;a_5\;a_6)))       \\
+	                     & (P\;(I\;(N\;a_1)\;(D\;a_3\;a_6))))
 \end{align*}
 We read this as ``Hence $a_1$ if $P_1$ is true and $P_2$ is true and $P_3$ is true'', where $P_1$, $P_2$, and $P_3$ are the individual premises that comprise the argument. This style largely resembles the way we write Prolog (conditional) rules. 
 
@@ -679,6 +675,8 @@ The bijective function $\chi$ maps two sets $\chi:\;C \to D$, where $C$ is the s
 
 Lastly, the bijective function $\eta$ maps two sets $\eta:\;E \to F$, where $E$ is the set of variable letters $\rho \in E$ where $\rho$ is a variable identifier used in $w$ and $F$ is the set of output variable identifiers $v_{i}$ where $i \in [1, |E|]$.
 
+Like the atomic literal mapping function $\zeta$ from zeroth-order logic, $\varsigma$, $\chi$, and $\eta$ must define every predicate letter, constant letter, and variable letter respectively supported by their language to represent a valid mapping.
+
 Now, similar to zeroth-order logic, we will construct the gold standard Polish notation grammar $\mathcal{G}$ for first-order logic. Likewise, we will utilize the previously-defined notation \textless{$x$---R\textgreater} to eliminate ambiguity with operator arity. Two points to note are that, because identity is a special connective in first-order logic, we restrict its syntactic definition to only constants and variables. Additionally, quantifiers have a restriction in that they must have at least one variable following their declaration, as well as a bound well-formed formula.
 \begin{grammar}
 	<constant> ::= `c' (`1' | `2' | ...)
@@ -702,16 +700,16 @@ The above grammar states the following rules: constants use the prefix $c$ with 
 \subsubsection{First-Order Logic Example} We will, once again, use a ``standard'' first-order logic language $\mathcal{L}$ and a formula $w$. $\mathcal{L}$ is a quadruple of the four functions $\delta$, $\varsigma$, $\chi$, and $\eta$ where
 \begin{align*}
 	  & \delta:\;\{\supset,\,\land,\,\lor,\,\leftrightarrow,\,\lnot,\,\forall,\,\exists,\,=\}\mapsto \{I,\,C,\,D,\,B,\,N,\,Z,\,X,\,V\} \\
-	  & \varsigma:\;\{P,\,Q,\,R\} \mapsto \{L_{1},\,L_{2},\,L_{3}\}                                                                       \\
-	  & \chi:\;\{c,\,d\} \mapsto \{c_1,\,c_2\}                                                                                       \\
-	  & \eta:\;\{x,\,y,\,z\} \mapsto \{v_1,\,v_2,\,v_3\}                                                                             
+	  & \varsigma:\;\{P,\,Q,\,R,\,...,\,Z\} \mapsto \{L_{1},\,L_{2},\,L_{3},\,...,\,L_{11}\}                                                                       \\
+	  & \chi:\;\{a,\,b,\,...,\,t\} \mapsto \{c_1,\,c_2,\,...,\,c_{20}\}                                                                                       \\
+	  & \eta:\;\{u,\,v,\,...,\,z\} \mapsto \{v_1,\,v_2,\,...,\,v_6\}                                                                           
 \end{align*}
 Suppose $w = \forall{x}\forall{y}\lnot{Pxyc} \land (Qcd \lor \exists{z}Rz)$. Thus,
 \begin{align*}
-	\mathcal{M}(\mathcal{L},\,w) & = (C\;(Z\;v_1\;(Z\;v_2\;(N\;(L_1\;v_1\;v_2\;c_1)))) \\
-	                   & (D\;(L_2\;c_1\;c_2)\;(X\;v_3\;(L_3\;v_3))))         
+	\mathcal{M}(\mathcal{L},\,w) & = (C\;(Z\;v_4\;(Z\;v_5\;(N\;(L_1\;v_4\;v_5\;c_3)))) \\
+	                   & (D\;(L_2\;c_3\;c_4)\;(X\;v_6\;(L_3\;v_6))))         
 \end{align*}
-We read this as ``A conjunction of a universal quantifier that binds $v_1$, a universal quantifier binding $v_2$, bound to the negation of $L_1\,v_1\,v_2\,c_1$ and a disjunction of the following: $L_2\,c_1\,c_2$ and an existential quantifier which binds $v_3$, bound to $L_3\,v_3$.''
+We read this as ``A conjunction of a universal quantifier that binds $v_4$, a universal quantifier binding $v_5$, bound to the negation of $L_1\,v_4\,v_5\,c_3$ and a disjunction of the following: $L_2\,c_3\,c_4$ and an existential quantifier which binds $v_6$, bound to $L_3\,v_6$.''
 
 \chapter{Discussion and Future Direction}\label{chapter:4}
 In chapter \ref{chapter:3}, we detailed our methods of experimentation, including a survey-focused and student-driven methodology, a head-to-head comparison of publicly-available natural deduction proving software, and a gold standard syntax definition for both zeroth and first-order logics. In this chapter, we will discuss our general findings, and analyze future research potential.
@@ -719,7 +717,7 @@ In chapter \ref{chapter:3}, we detailed our methods of experimentation, includin
 \section{Experiment 1}
 Despite only receiving two submissions to our surveys for the proof interpretation study, we will still analyze their data. Both participants are computer science majors who have a background in formal logic (propositional and first-order), proofs, and otherwise discrete mathematics.
 
-Regarding survey 1 (premises and conclusion interpretation), we consistently saw the theme that larger conclusions (i.e., conclusions with more clauses) were said to appear more difficult than those with smaller conclusions. Additionally, premises and conclusions which had more negations and disjunctions compared to implications and biconditionals were viewed similarly (e.g., $P = \{A\to B,\,B \to C\}),\,c=A\to C$ versus $P=\{\not{A}\lor{B},\,\lnot{B}\lor{C}\},\,c=\lnot{A}\lor{C}\}$). We suspect this is due to easily-applicable axioms that involve implications such as modus ponens, modus tollens, hypothetical syllogism, and more. There was a disparity between the participants when choosing premises which were distributive opposites via DeMorgan's law, but we can only narrow this down to individual preference with such a low participant count.
+Regarding survey 1 (premises and conclusion interpretation), we consistently saw the theme that larger conclusions (i.e., conclusions with more clauses) were said to appear more difficult than those with smaller conclusions. Additionally, premises and conclusions which had more negations and disjunctions compared to implications and biconditionals were viewed similarly (e.g., $P = \{A\to B,\,B \to C\}),\,c=A\to C$ versus $P=\{\lnot{A}\lor{B},\,\lnot{B}\lor{C}\},\,c=\lnot{A}\lor{C}\}$). We suspect this is due to easily-applicable axioms that involve implications such as modus ponens, modus tollens, hypothetical syllogism, and more. There was a disparity between the participants when choosing premises which were distributive opposites via DeMorgan's law, but we can only narrow this down to individual preference with such a low participant count.
 
 Regarding survey 2 (proof interpretation), we observed an almost identical pattern as survey 1 showed---participants commonly noted that proofs with negated propositions and fewer implications appeared harder to understand. Also, as we predicted, longer proofs were considered more difficult than shorter proofs. We still are not sure if these decisions are out of interpreting the proofs or personal preference, but we hope to expand upon this study and the idea of computing a viable metric of difficulty for formal logic in future research.
 
@@ -728,9 +726,9 @@ As Tables \ref{table:allData}, \ref{table:propData}, \ref{table:predData}, \ref{
 
 While TeachingLogic's system has a greater percentage of solved proofs than FLAT, NaturalDeduction, and TAUTLogic, we found its user interface to be unintuitive particularly when entering a formula with unrecognizable syntax according to their language grammar. This odd requirement strongly deters those who wish to use a natural deduction proving software, but perhaps focus more time modifying their input to fit the system specifications than that spent understanding the generated proof(s). Moreover, its limited axiom base set upper-bounds the kinds of proofs it can generate---resulting in several nested subproofs and proofs by contradiction. Importantly, the generated proofs are syntactically and semantically correct, but to someone with little prior experience in formal logic or mathematical proofs, it may come across as overwhelming. 
 
-A severe problem with NaturalDeduction, as we previously mentioned, is its unnecessary inconsistency---the generated proofs range from perfect (in that they match the intended expert solution) to absolutely out of control nose dives into confusion. As an illustration, suppose we want to prove $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$. FLAT's solution, which we consider the optimal solution under our axiom set, has twelve lines including the premises and conclusion (see Figure \ref{fig:long-ass-proof}). NaturalDeduction, on the contrary, has 247 lines. The absurd length we discovered is not exclusive to this proof; we found several other sets of premises and conclusions which caused the system to generate unimaginably long and incomprehensible proofs. 
+A severe problem with NaturalDeduction, as we previously mentioned, is its unnecessary inconsistency---the generated proofs range from perfect (in that they match the intended expert solution) to absolutely out of control nose dives into confusion. As an illustration, suppose we want to prove $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$. FLAT's solution, which we consider the optimal solution under our axiom set (see table \ref{table:flataxioms}), has twelve lines including the premises and conclusion (see Figure \ref{fig:long-ass-proof}). NaturalDeduction, on the contrary, has 247 lines. The absurd length we discovered is not exclusive to this proof; we found several other sets of premises and conclusions which caused the system to generate unimaginably long and incomprehensible proofs. 
 \begin{figure}[!ht]
-	\caption{Proof of $P = \{(A \leftrightarrow B), (C \leftrightarrow B)\}$, $c = A\leftrightarrow C$}
+	\caption{Proof of $P = \{A \leftrightarrow B, C \leftrightarrow B\}$, $c = A\leftrightarrow C$}
 	\label{fig:long-ass-proof}
 	\begin{center}
 	\renewcommand*\linenumberstyle[1]{#1.}
@@ -738,8 +736,8 @@ A severe problem with NaturalDeduction, as we previously mentioned, is its unnec
 			{
 			close with={\ensuremath{\ast}},
 			}
-			[(A \leftrightarrow B), just=P
-				[(B \leftrightarrow C), just=P
+			[A \leftrightarrow B, just=P
+				[B \leftrightarrow C, just=P
 					[(A \to B) \land (B \to A), just=\text{1 BCB} %3
 						[A \to B, just=\text{3 $\land$E} %4
 							[B \to A, just=\text{3 $\land$E} %5
@@ -749,7 +747,7 @@ A severe problem with NaturalDeduction, as we previously mentioned, is its unnec
 											[A \to C, just=\text{4, 7 HS} %9
 												[C \to A, just=\text{3, 8 HS} %10
 													[(A \to C) \land (C \to A), just=\text{9, 10 $\land$I} %11
-														[(A \leftrightarrow C), just=\text{11 BCI}] %12
+														[A \leftrightarrow C, just=\text{11 BCI}] %12
 													]
 												]
 											]
@@ -766,7 +764,7 @@ A severe problem with NaturalDeduction, as we previously mentioned, is its unnec
 \end{figure}
 Furthermore, its input requirements are unreasonably restrictive: only allowing eight unique atoms and fourteen identical atoms combined via binary connectives e.g., $A\land A\land ... \land A$. We are unsure if these limitations are due to the proof generation system that NaturalDeduction uses, but because the instructions do not provide this information, we can, at best, only speculate. One additional problem we discovered is that NaturalDeduction omits premises that do not impact the final proof (i.e., premises that it deems are unnecessary), even if they were listed as premises in the original premise set $P$. We feel that this omission is problematic due to the relative importance of initial premises to an argument. Plus, this can lead to confusion and thoughts of ``What happened to premise X?'' from students.
 
-Moreover, while not a huge downside, neither NaturalDeduction or TeachingLogic support first-order predicate logic. Oddly enough, NaturalDeduction, instead, supports S5 Modal Logic. 
+Moreover, neither NaturalDeduction or TeachingLogic support first-order predicate logic. Oddly enough, NaturalDeduction, instead, supports S5 Modal Logic. 
 
 Lastly, TAUT-Logic was, as mentioned before, the only system that we tested which supports both zeroth and first-order logics. It too, though, comes with its share of cons. We provided an example of a logic system in section \ref{section:zerothorderlogic} which does not support the biconditional operator, requiring instead to write it as a conjunction of implications (see Table \ref{table:requiredsyntax}). Its performance is similar in that to FLAT, but we found it times out on both zeroth and first-order logic proofs for sometimes no apparent reason with an error stating that it simply could not solve the proof. 
 
@@ -796,7 +794,7 @@ In this thesis, we discussed FLAT: the Formal Logic Aiding Tutor, and ANDTaP (Au
 
 \chapter{Propositional Logic Natural Deduction Algorithm}
 
-This appendix describes the algorithm we used to find a natural deduction proof for propositional logic. The idea is to use a ``satisfiability'' algorithm (not to be confused with the Boolean satisfiability problem SAT... \textbf{is this needed? Probably not}). A wff $w$ is satisfied when it is used in the reduction or expansion of another well-formed formula $w'$. In essence, if $w$ is used to construct $w'$, then $w$ is satisfied. At a high level, we recursively compute goals for each premise, and if we can satisfy each goal, then the premise is satisfied. The procedure \textsc{Satisfy} uses rules for each axiom to determine if a premise can be either simplified or if, as a goal, it can be constructed using other premises. For example, suppose we have two premises $A$ and $B$ and we want to satisfy $A \land B$. \textsc{Satisfy} will recursively search through the well-formed formula (i.e., attempt to satisfy its operands from left-to-right) to determine if either have been previously satisfied. Given that $A$ and $B$ are already premises, and premises are, by default, satisfied, we can conlude that $A \land B$ is satisfiable. As another example, let us take the argument $P = \{A \supset (B \land \lnot C),\;\lnot (B \land \lnot C)\}$ and $c = \lnot A$. It is trivial to see that we can conclude $c$ from the premises in $P$ via a modus tollens rule. \textsc{Satisfy} works slightly different when this type of situation occurs. Because there is no way to individually solve intermediate formulas e.g., $B$, $\lnot C$, the algorithm searches for transformations and elimination rules e.g., modus ponens, modus tollens, disjunctive syllogism, transposition, material implication, etc., that may be applied to premises. In our provided example, we can apply modus tollens to the two premises and consequently satisfy $\lnot{A}$. $\lnot{A}$ is, therefore, added to $P$. The terminating condition is when $c$ is satisfied, or equivalently, $c \in P$. Because there are numerous transformations that may be applied to premises, we will omit their direct inclusion in favor of a broad description of behaviors. To prevent unnecessary premises, once a premise is satisfied, it can never be ``unsatisfied''. Moreover, if a premise was constructed, it cannot be redundantly destructed or vice versa. For instance, suppose we have premises $A$ and $B$. We can use a conjunction introduction $\land{I}$ rule to satisfy $A \land B$. The algorithm could, in theory, use a conjunction elimination $\land{E}$ rule to break $A \land B$ back down into its original components. Since such repeated applications blows up the size of $P$ (leading to a potentially infinitely long proof), we heuristically prevent its occurrence.
+This appendix describes the algorithm we used to find a natural deduction proof for propositional logic. The idea is to use a ``satisfiability'' algorithm (not to be confused with the Boolean satisfiability problem SAT). A wff $w$ is satisfied when it is used in the reduction or expansion of another well-formed formula $w'$. In essence, if $w$ is used to construct $w'$, then $w$ is satisfied. At a high level, we recursively compute goals for each premise, and if we can satisfy each goal, then the premise is satisfied. The procedure \textsc{Satisfy} uses rules for each axiom to determine if a premise can be either simplified or if, as a goal, it can be constructed using other premises. For example, suppose we have two premises $A$ and $B$ and we want to satisfy $A \land B$. \textsc{Satisfy} will recursively search through the well-formed formula (i.e., attempt to satisfy its operands from left-to-right) to determine if either have been previously satisfied. Given that $A$ and $B$ are already premises, and premises are, by default, satisfied, we can conlude that $A \land B$ is satisfiable. As another example, let us take the argument $P = \{A \supset (B \land \lnot C),\;\lnot (B \land \lnot C)\}$ and $c = \lnot A$. It is trivial to see that we can conclude $c$ from the premises in $P$ via a modus tollens rule. \textsc{Satisfy} works slightly different when this type of situation occurs. Because there is no way to individually solve intermediate formulas e.g., $B$, $\lnot C$, the algorithm searches for transformations and elimination rules e.g., modus ponens, modus tollens, disjunctive syllogism, transposition, material implication, etc., that may be applied to premises. In our provided example, we can apply modus tollens to the two premises and consequently satisfy $\lnot{A}$. $\lnot{A}$ is, therefore, added to $P$. The terminating condition is when $c$ is satisfied, or equivalently, $c \in P$. Because there are numerous transformations that may be applied to premises, we will omit their direct inclusion in favor of a broad description of behaviors. To prevent unnecessary premises, once a premise is satisfied, it can never be ``unsatisfied''. Moreover, if a premise was constructed, it cannot be redundantly destructed or vice versa. For instance, suppose we have premises $A$ and $B$. We can use a conjunction introduction $\land{I}$ rule to satisfy $A \land B$. The algorithm could, in theory, use a conjunction elimination $\land{E}$ rule to break $A \land B$ back down into its original components. Since such repeated applications blows up the size of $P$ (leading to a potentially infinitely long proof), we heuristically prevent its occurrence.
 
 \begin{algorithm}
 	\caption{Propositional Natural Deduction Satisfaction Algorithm}\label{euclid}
@@ -858,6 +856,21 @@ We have described how the algorithm generates a proof, but there lies the issue 
 	\caption{Predicate Logic Line Count}
 	\label{fig:predgraph}
 \end{figure} 
+
+\chapter{Reference URLs}
+
+The following is a list of URLs defined in footnotes from the thesis. We use TinyURL to shorten the links, but because they may not be permanent, the full links are provided below.
+
+\begin{enumerate}
+    \item Qualtrics Survey 1 Questions: \url{https://github.com/JoshuaCrotts/MastersThesis/blob/main/data/qualtrics_survey_1.txt}
+    
+    \item Qualtrics Survey 2 Questions:
+    \url{https://github.com/JoshuaCrotts/MastersThesis/blob/main/data/qualtrics_survey_2.txt}
+    
+    \item ANDTaP Questions:
+    \url{https://github.com/JoshuaCrotts/MastersThesis/blob/main/data/andtap_questions.txt}
+\end{enumerate}
+
 
 \backmatter
 \end{document}
