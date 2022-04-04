@@ -205,7 +205,7 @@
   \begin{minipage}[t]{\namewidth}
     \ifthenelse{\value{@chair}=1}{
       Approved by\\[\uncg@signatureheight]
-      \uncg@signatureline{Committee Chair}
+      \uncg@signatureline{\uncg@chair\\Committee Chair}
       }{
       Approved by\\[\uncg@signatureheight]
       \uncg@signatureline{Committee Co-Chair}\\[\uncg@signatureheight]
@@ -328,7 +328,11 @@ Committee Co-Chair &
 
 %%  Dedication page
 \newenvironment{dedication}
-{\setcounter{page}{2} ~\vfill \par \centering \sl}
+{
+  \begin{center}
+    DEDICATION
+  \end{center}  
+  \setcounter{page}{2} ~\vfill \par \centering \sl}
 { \vfill \par \clearpage}
 
 

@@ -4,6 +4,7 @@
 \usepackage[tableposition=above]{caption}
 \usepackage[colorlinks=false]{hyperref}
 \usepackage[noend]{algpseudocode}
+\hypersetup{hidelinks}
 % \usepackage{times}
 \makeatletter
 \def\MT@is@opt@char#1\iffontchar#2\char#3\else#4\fi\relax{%
@@ -60,6 +61,7 @@
 \pagestyle{plain} % Eliminates running headers 
 
 % Section styling.
+\doublespacing
 \DeclareMathSymbol{:}{\mathord}{operators}{"3A}
 \begin{document}
 \frontmatter      % required
@@ -68,10 +70,6 @@
 \end{abstract}
 
 \maketitlepage
-
-%% This page is required if you opt for a copyright.  Otherwise, don't
-% include it.  To omit, just comment out the line below.
-\makecopyrightpage
 
 \begin{dedication}
 	To my Viola.
@@ -99,7 +97,7 @@
 \listoffigures
 \listoftables
 \renewcommand{\addvspace}[1]{\origaddvspace{#1}}
-\doublespacing
+
 
 %%------------------------------------------------------------------%%
 %% This signifies that you are done with the frontmatter and ready to
